@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');     // importation package pour création e
 require('dotenv').config()               // importation dotenv pour sécuriser passwords
 const TokenKey = process.env.TOKENKEY;   // Récupération de la clé de cryptage des tokens via dotenv
 
+//CREATION D'UN COMPTE UTILISATEUR
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)    // On crypte le mot de passe (algorithme exécuté 10 fois) / asynchrone
         .then(hash => {                     // On récupère le hash
@@ -19,6 +20,7 @@ exports.signup = (req, res, next) => {
   };
 
 
+//CONNEXION AU COMPTE UTILISATEUR
 exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })   // On utilise le modèle mongoose User pour vérifier que l'email rentré ciorrespond à un email de la bas de données
       .then(user => {
