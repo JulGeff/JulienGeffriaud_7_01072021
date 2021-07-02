@@ -35,6 +35,14 @@ const [loginOpen, setLoginOpen] = useState(true);
                 <h1>Créez un compte</h1>
                 <form className="logform" onSubmit={handleSubmit}>
                 <label>
+                   Nom
+                    <input className="input" type="string" name="name" />
+                </label>
+                <label>
+                    Prénom
+                    <input className="input" type="sring" name="firstName" />
+                </label>   
+                <label>
                    email
                     <input className="input" type="email" name="email" />
                 </label>
