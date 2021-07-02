@@ -1,5 +1,5 @@
-import loginpic from "../../assets/login-image.png";
-import '../../styles/Login_signup.css'
+import loginpic from "../assets/login-image.png";
+import '../styles/Login_signup.css'
 import { useState } from 'react'
 
 

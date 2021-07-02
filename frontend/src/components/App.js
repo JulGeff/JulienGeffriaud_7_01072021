@@ -1,5 +1,5 @@
 import Banner from './Banner'
-import Login from './accountBox/Login'
+import Login from './Login'
 
 
 function App() {
