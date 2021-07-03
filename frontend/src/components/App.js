@@ -1,13 +1,15 @@
 import Banner from './Banner'
-import Login from './Login'
+import LoginSignup from './LoginSignup'
 
 
 function App() {
-    return <div>
-      <Banner />
-      <Login />
-  
-    </div>
+    return (
+      <div>
+        <Banner />
+        <LoginSignup />
+      </div>
+    ) 
+
 }
 
 

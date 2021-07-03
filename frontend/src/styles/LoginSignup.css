@@ -4,12 +4,15 @@
     align-items: center;
     border-radius: 15px;
     box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.56);
-    margin: 5% 40%;
+    margin:5% 30%;
+    
     padding: 2% 0;
+   
+
 }
 
 .loginpic {
-    max-width: 50%
+    max-width: 30%
 }
 
 .logform {
