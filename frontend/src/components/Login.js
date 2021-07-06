@@ -6,7 +6,36 @@ import {
   } from "react-router-dom";
 
 function handleLogin(e) {
-    e.preventDefault()
+    e.preventDefault();
+
+    let email = document.getElementById('email').value;
+    let password = document.getElementById('password').value;
+  
+    let user = {
+    email : email,
+    password : password,
+    }
+        
+        console.log(user);
+
+        let sendOptions = {
+            method: 'POST',
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+        }
+
+        fetch("http://localhost:3000/api/users", sendOptions)
+            .then((response) => response.json())
+            .then((json) => {
+                //???????????????????
+                }
+                
+            )
+            .catch(x => { // gestion des erreurs en cas de fail d'API
+                console.log(x);
+            })
 
 }
 
@@ -17,10 +46,10 @@ function Login() {
             <h1>Connectez-vous</h1>
             <form className="logform"  onSubmit={handleLogin}>
                 <label>email
-                    <input className="input" type="email" name="email" />
+                    <input id="email" className="input" type="email" name="email" autoComplete="username"/>
                 </label>
                 <label>mot de passe
-                    <input className="input" type="password" name="password" />
+                    <input id="password" className="input" type="password" name="password" autoComplete="current-password" />
                 </label>
                 <input  className="button" type="submit" value="Connexion" />
             </form>
