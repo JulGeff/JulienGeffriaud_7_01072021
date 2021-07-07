@@ -2,9 +2,9 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize(mysql, { // Connexion à la base de données mySQL
   dialect: 'mysql',
-  dialectOptions: {
+  /*dialectOptions: {
     // Your mysql2 options here
-  }
+  }*/
 })
 
 
