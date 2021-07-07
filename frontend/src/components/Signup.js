@@ -39,7 +39,7 @@ function Signup() {
                 });
 
         } else { // si email et mdp ne respecent pas les regex définies
-                alert("- Votre email doit être au format example@test.test\n- Votre mot de passe doit contenir au moins 8 caractères, 1 lettre, 1 chiffre et 1 caractère spécial");
+                alert("- Votre email doit être au format example@test.test\n- Votre mot de passe doit contenir au moins 8 caractères, 1 lettre, 1 chiffre et 1 caractère spécial @$!%*#?&");
         }}
 
     return (

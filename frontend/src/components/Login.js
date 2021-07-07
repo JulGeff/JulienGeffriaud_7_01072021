@@ -18,7 +18,7 @@ function Login() {
         if (/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(email)) { //regex : email au format example@test.test
         let loginForm = document.getElementById('loginForm');
         let loginFormData = new FormData(loginForm);
-        for (var value of loginFormData.values()) { // affiche les 2 valeurs (emai, password) du FormData créé dans la console
+        for (var value of loginFormData.values()) { // affiche les 2 valeurs (email, password) du FormData créé dans la console
             console.log(value);
          }
  
