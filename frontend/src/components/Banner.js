@@ -20,17 +20,17 @@ function Banner() {
                     </div>
                     <ul className='menu'>
                         <li><Link to="/" className = 'link'>Home</Link></li>
-                        <li><Link to="/login" className = 'link'>Se connecter</Link></li>
-                        <li><Link to="/signup" className = 'link'>Créer un compte</Link></li>
+                        <li><Link to="/auth/login" className = 'link'>Se connecter</Link></li>
+                        <li><Link to="/auth/signup" className = 'link'>Créer un compte</Link></li>
                     </ul>
                     <Switch>
                         <Route exact path="/">
                             <Login />
                         </Route>
-                        <Route path="/login">
+                        <Route path="/auth/login">
                             <Login />
                         </Route>
-                        <Route path="/signup">
+                        <Route path="/auth/signup">
                            <Signup />
                         </Route>
                     </Switch>

@@ -65,10 +65,10 @@ function handleSignup(e) {
                 },
             }
     
-            fetch("http://localhost:3000/api/users", sendOptions)
+            fetch("http://localhost:3000/api/auth/signup", sendOptions) 
                 .then((response) => response.json())
                 .then((json) => {
-                    //???????????????????
+                    console.log(json)
                     }
                     
                 )
@@ -88,21 +88,21 @@ function Signup() {
             <h1>Créez un compte</h1>
             <form className="logform" onSubmit={handleSignup}>
                 <label>Nom
-                    <input id='name' className="input" type="string" name="name" />
+                    <input id='name' className="input" type="string" name="name" required/>
                 </label>
                 <label>Prénom
-                    <input id='firstName' className="input" type="sring" name="firstName" />
+                    <input id='firstName' className="input" type="sring" name="firstName" required />
                 </label>   
                 <label>email
-                    <input id='email' className="input" type="email" name="email" />
+                    <input id='email' className="input" type="email" name="email" required />
                 </label>
                 <label>mot de passe
-                    <input id='password' className="input" type="password" name="password" />
+                    <input id='password' className="input" type="password" name="password" required />
                 </label>
                 <input className="button" type="submit" value="Je crée mon compte" />
             </form>
             <p>Vous avez déjà un compte ?</p>
-            <p className="changelog"><Link to="/login">Connectez-vous</Link></p>
+            <p className="changelog"><Link to="/auth/login">Connectez-vous</Link></p>
         </div>
     )
 }

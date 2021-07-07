@@ -26,10 +26,10 @@ function handleLogin(e) {
             },
         }
 
-        fetch("http://localhost:3000/api/users", sendOptions)
+        fetch("http://localhost:3000/api/auth/login", sendOptions)
             .then((response) => response.json())
             .then((json) => {
-                //???????????????????
+                console.log(json)
                 }
                 
             )
@@ -54,7 +54,7 @@ function Login() {
                 <input  className="button" type="submit" value="Connexion" />
             </form>
             <p>C'est votre première visite ?</p>
-            <p className="changelog"><Link to="/signup">Créez un compte</Link></p>
+            <p className="changelog"><Link to="/auth/signup">Créez un compte</Link></p>
         </div>        
         )
 }
