@@ -1,14 +1,18 @@
 const express = require('express');         // importation application Express
 require('dotenv').config()                  // importation dotenv pour sécuriser passwords
-const mysql = process.env.MYSQL;            // Sécurisation infos MySQL via dotenv
+const mysqlTable = process.env.MYSQLTABLE;
+const mysqlUsername = process.env.MYSQLUSERNAME;     
+const mysqlPassword = process.env.MYSQLPASSWORD; 
+
 const bodyParser = require('body-parser');  // importation fonction body parser pour extraction objet json de la demande
 const cors = require('cors');               // module CORS
 const { Sequelize } = require('sequelize'); // importation application Sequelize pour communiquer avec MySQL
+    
+const userRoutes = require('./routes/user');   // Importation routeur users
 
 
 
-
-const sequelize = new Sequelize(mysql, { // Connexion à la base de données mySQL
+const sequelize = new Sequelize(mysqlTable, mysqlUsername, mysqlPassword, { // Connexion à la base de données mySQL
     dialect: 'mysql',
     dialectOptions: {
       // Your mysql2 options here

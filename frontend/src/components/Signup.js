@@ -27,7 +27,7 @@ function Signup() {
 
             axios({
                 method: "post",
-                url: "http://localhost:3000/api/auth/signup",
+                url: "http://localhost:3000/api/signup",
                 data: signupFormData,
                 headers: { "Content-Type": "multipart/form-data" },// type de données envoyées = FormData
             })
@@ -62,7 +62,7 @@ function Signup() {
             <input className="button" type="submit" value="Je crée mon compte" />
         </form>
         <p>Vous avez déjà un compte ?</p>
-        <p className="changelog"><Link to="/auth/login">Connectez-vous</Link></p>
+        <p className="changelog"><Link to="/login">Connectez-vous</Link></p>
     </div>
     );
   }

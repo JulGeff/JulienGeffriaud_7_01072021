@@ -24,7 +24,7 @@ function Login() {
  
         axios({
             method: "post",
-            url: "http://localhost:3000/api/auth/signup",
+            url: "http://localhost:3000/api/login",
             data: loginFormData,
             headers: { "Content-Type": "multipart/form-data" },
           })
@@ -35,7 +35,7 @@ function Login() {
               console.log(response);
             });
 
-        } else {
+        } else { // si email ne respecte pas la regex définie
             alert ("Votre email n'est pas au bon format")
         }
     }
@@ -54,7 +54,7 @@ function Login() {
             <input  className="button" type="submit" value="Connexion" />
         </form>
         <p>C'est votre première visite ?</p>
-        <p className="changelog"><Link to="/auth/signup">Créez un compte</Link></p>
+        <p className="changelog"><Link to="/signup">Créez un compte</Link></p>
     </div>   
     );
   }

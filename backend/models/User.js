@@ -1,12 +1,13 @@
 
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize(mysql, { // Connexion à la base de données mySQL
-  dialect: 'mysql',
-  /*dialectOptions: {
-    // Your mysql2 options here
-  }*/
-})
+require('dotenv').config()            // importation dotenv pour sécuriser passwords
+const mysqlTable = process.env.MYSQLTABLE;
+const mysqlUsername = process.env.MYSQLUSERNAME;     
+const mysqlPassword = process.env.MYSQLPASSWORD;          
 
+const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = new Sequelize(mysqlTable, mysqlUsername, mysqlPassword, {
+  dialect: 'mysql'
+})
 
 const userSchema = sequelize.define('User', {
  
