@@ -5,6 +5,5 @@ const userCtrl = require('../controllers/user');
 
 router.post('/signup', userCtrl.signup);        // Création d'un compte user
 router.post('/login', userCtrl.login);          // Connexion à un compte user
-//router.delete('/delete', userCtrl.deleteUser);  // Suppression d'un user
 
 module.exports = router;  // export pour pouvoir utiliser dans app.js
