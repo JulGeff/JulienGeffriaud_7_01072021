@@ -1,10 +1,10 @@
 import loginpic from "../assets/login-image.png";
 import '../styles/LoginSignup.css'
 import React from "react";
-import axios from "axios";
 import {
     Link,
   } from "react-router-dom";
+import Api from './Api'
 
 
 function Login() {
@@ -16,22 +16,16 @@ function Login() {
 
 
         if (/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(email)) { //regex : email au format example@test.test
-        let loginForm = document.getElementById('loginForm');
-        let loginFormData = new FormData(loginForm);
-        for (var value of loginFormData.values()) { // affiche les 2 valeurs (email, password) du FormData créé dans la console
-            console.log(value);
-         }
+        let loginFormData = { email : email, password: password };
+        console.log(loginFormData);
+         
  
-        axios({
-            method: "post",
-            url: "http://localhost:3000/api/login",
-            data: loginFormData,
-            headers: { "Content-Type": "multipart/form-data" },
-          })
-            .then(function (response) {
+         Api.post('/login', loginFormData)  //requête POST via Axios
+
+            .then(function (response) { //Si Ok
               console.log(response);
             })
-            .catch(function (response) {
+            .catch(function (response) { //Si erreur
               console.log(response);
             });
 

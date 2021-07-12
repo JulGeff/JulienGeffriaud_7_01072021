@@ -1,10 +1,10 @@
 import loginpic from "../assets/login-image.png";
 import '../styles/LoginSignup.css'
 import React from "react";
-import axios from 'axios';
 import {
     Link,
   } from "react-router-dom";
+import Api from './Api'
 
 
 function Signup() {
@@ -19,18 +19,11 @@ function Signup() {
         if ((/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(email)) //regex : email au format example@test.test
         && (/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(password))) { //regex : le mot de passe doit contenir au moins 8 caractères, 1 lettre, 1 chiffre et 1 caractère spécial
 
-            let signupForm = document.getElementById('signupForm');
-            let signupFormData = new FormData(signupForm);
-            for (var value of signupFormData.values()) { // affiche les 4 valeurs du FormData créé dans la console
-                console.log(value);
-            }
+            let signupFormData = { name : name, firstName : firstName, email : email, password: password };
+            console.log(signupFormData);
 
-            axios({
-                method: "post",
-                url: "http://localhost:3000/api/signup",
-                data: signupFormData,
-                headers: { "Content-Type": "multipart/form-data" },// type de données envoyées = FormData
-            })
+            Api.post('/login', signupFormData) //requête POST via Axios
+
                 .then(function (response) {  //Si Ok
                 console.log(response);
                 })
