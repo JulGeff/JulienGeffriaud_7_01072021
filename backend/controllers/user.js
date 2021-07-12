@@ -1,34 +1,29 @@
 const bcrypt = require('bcrypt');        // importation du package de cryptage de mdp bcrypt
-const models = require('../models');        // importation des modèles sequelize
+const User = require('../models/user');        // importation des modèles sequelize
 const jwt = require('jsonwebtoken');     // importation package pour création et vérification des tokens
 require('dotenv').config()               // importation dotenv pour sécuriser passwords
 const TokenKey = process.env.TOKENKEY;   // Récupération de la clé de cryptage des tokens via dotenv
-
-
-
 
 
 //CREATION D'UN COMPTE UTILISATEUR
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)    // On crypte le mot de passe (algorithme exécuté 10 fois) / asynchrone
         .then(hash => {                     // On récupère le hash
-            models.User.create({           // modèle sequelize
+            User.create({           // modèle sequelize
                 email: req.body.email,
                 password: hash                  // On enregistre le mdp crypté plutôt que le mdp simple
                 })
 
-        
-        
         .then(() => res.status(201).json({ message: 'Utilisateur créé !' })) // Requête traitée avec succès et création d’un document
         .catch(error => res.status(400).json({ error })); // Bad Request
       })
     .catch(error => res.status(500).json({ error })); // Erreur interne du serveur
   };
-  ({ where: { title: 'My Title' } })
+
 
 //CONNEXION AU COMPTE UTILISATEUR
 exports.login = (req, res, next) => {
-    models.User.findOne ({ where: {  email: req.body.email } })   // On utilise le modèle sequelize User pour vérifier que l'email rentré correspond à un email de la bas de données
+    User.findOne ({ where: {  email: req.body.email } })   // On utilise le modèle sequelize User pour vérifier que l'email rentré correspond à un email de la bas de données
       .then(user => {
         if (!user) {
           return res.status(401).json({ error: 'Utilisateur non trouvé !' }); // Unauthorized	
