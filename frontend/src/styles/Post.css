@@ -1,43 +1,11 @@
-.loginsignup {
+#postForm {
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 15px;
     box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.56);
-    margin:2% 37%;
-    
+    margin: 2% 37%;
     padding: 2% 0;
-   
-
-}
-
-.loginpic {
-    max-width: 30%
-}
-
-.logform {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-
-p {
-    text-align: center;
-    margin: 0;
-}
-
-.changelog {
-    text-decoration: underline;
-}
-
-.changelog:hover {
-    cursor: pointer;
-}
-
-.input {
-    margin: .5rem 0 .5rem 1rem;
-    font-size: 1rem;
-    border-radius: 5px;
 }
 
 .button {
@@ -48,17 +16,13 @@ p {
     border: 1px solid #E02F04;
     border-radius: 15px;
     padding: .7rem;
-    margin : 2rem 0;
+    margin: 2rem 0;
     transition-duration: .4s;
+    cursor: pointer;
 }
 
 .button:hover {
     color: #E02F04;
     background-color: white;
     border: 1px solid #E02F04;
-}
-
-h1 {
-
-    font-size: 1.5rem;;
 }
