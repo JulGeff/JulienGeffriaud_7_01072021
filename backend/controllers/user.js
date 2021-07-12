@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');        // importation du package de cryptage de mdp bcrypt
-const User = require('../models');        // importation des modèles sequelize
+const models = require('../models');        // importation des modèles sequelize
 const jwt = require('jsonwebtoken');     // importation package pour création et vérification des tokens
 require('dotenv').config()               // importation dotenv pour sécuriser passwords
 const TokenKey = process.env.TOKENKEY;   // Récupération de la clé de cryptage des tokens via dotenv
@@ -16,17 +16,19 @@ exports.signup = (req, res, next) => {
                 email: req.body.email,
                 password: hash                  // On enregistre le mdp crypté plutôt que le mdp simple
                 })
+
+        
         
         .then(() => res.status(201).json({ message: 'Utilisateur créé !' })) // Requête traitée avec succès et création d’un document
         .catch(error => res.status(400).json({ error })); // Bad Request
       })
     .catch(error => res.status(500).json({ error })); // Erreur interne du serveur
   };
-
+  ({ where: { title: 'My Title' } })
 
 //CONNEXION AU COMPTE UTILISATEUR
 exports.login = (req, res, next) => {
-    models.User.findOne({ email: req.body.email })   // On utilise le modèle sequelize User pour vérifier que l'email rentré correspond à un email de la bas de données
+    models.User.findOne ({ where: {  email: req.body.email } })   // On utilise le modèle sequelize User pour vérifier que l'email rentré correspond à un email de la bas de données
       .then(user => {
         if (!user) {
           return res.status(401).json({ error: 'Utilisateur non trouvé !' }); // Unauthorized	
