@@ -3,7 +3,7 @@ require('dotenv').config()            // importation dotenv pour sécuriser pass
 const mysqlTable = process.env.DB_TABLE;
 const mysqlUsername = process.env.DB_USERNAME;     
 const mysqlPassword = process.env.DB_PASSWORD;          
-const { Sequelize } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 
 const sequelize = new Sequelize(mysqlTable, mysqlUsername, mysqlPassword, {
   host : 'localhost',

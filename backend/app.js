@@ -13,10 +13,8 @@ const userRoutes = require('./routes/user');   // Importation routeur users
 
 
 const sequelize = new Sequelize(mysqlTable, mysqlUsername, mysqlPassword, { // Connexion à la base de données mySQL
-    dialect: 'mysql',
-    dialectOptions: {
-      // Your mysql2 options here
-    }
+  host : 'localhost',
+  dialect: 'mysql'
   })
 
 
