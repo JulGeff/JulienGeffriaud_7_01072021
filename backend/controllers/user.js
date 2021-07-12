@@ -9,7 +9,7 @@ const TokenKey = process.env.TOKENKEY;   // Récupération de la clé de cryptag
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)    // On crypte le mot de passe (algorithme exécuté 10 fois) / asynchrone
         .then(hash => {                     // On récupère le hash
-            const user = User.create({           // modèle sequelize
+            User.create({           // modèle sequelize
                 email: req.body.email,
                 password: hash                  // On enregistre le mdp crypté plutôt que le mdp simple
                 })
