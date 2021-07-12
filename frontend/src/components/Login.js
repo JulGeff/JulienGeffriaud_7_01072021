@@ -20,7 +20,7 @@ function Login() {
         console.log(loginFormData);
          
  
-         Api.post('/login', loginFormData)  //requête POST via Axios
+         Api.post('/auth/login', loginFormData)  //requête POST via Axios
 
             .then(function (response) { //Si Ok
               console.log(response);

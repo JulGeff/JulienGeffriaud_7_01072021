@@ -1,8 +1,8 @@
 
 require('dotenv').config()            // importation dotenv pour sécuriser passwords
-const mysqlTable = process.env.MYSQLTABLE;
-const mysqlUsername = process.env.MYSQLUSERNAME;     
-const mysqlPassword = process.env.MYSQLPASSWORD;          
+const mysqlTable = process.env.DB_TABLE;
+const mysqlUsername = process.env.DB_USERNAME;     
+const mysqlPassword = process.env.DB_PASSWORD;          
 
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize(mysqlTable, mysqlUsername, mysqlPassword, {

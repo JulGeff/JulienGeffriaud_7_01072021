@@ -22,7 +22,7 @@ function Signup() {
             let signupFormData = { name : name, firstName : firstName, email : email, password: password };
             console.log(signupFormData);
 
-            Api.post('/login', signupFormData) //requête POST via Axios
+            Api.post('/auth/login', signupFormData) //requête POST via Axios
 
                 .then(function (response) {  //Si Ok
                 console.log(response);
