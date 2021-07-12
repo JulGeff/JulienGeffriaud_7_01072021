@@ -5,6 +5,9 @@ require('dotenv').config()               // importation dotenv pour sécuriser p
 const TokenKey = process.env.TOKENKEY;   // Récupération de la clé de cryptage des tokens via dotenv
 
 
+
+
+
 //CREATION D'UN COMPTE UTILISATEUR
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)    // On crypte le mot de passe (algorithme exécuté 10 fois) / asynchrone
@@ -23,7 +26,7 @@ exports.signup = (req, res, next) => {
 
 //CONNEXION AU COMPTE UTILISATEUR
 exports.login = (req, res, next) => {
-    User.findOne({ email: req.body.email })   // On utilise le modèle mongoose User pour vérifier que l'email rentré ciorrespond à un email de la bas de données
+    User.findOne({ email: req.body.email })   // On utilise le modèle sequelize User pour vérifier que l'email rentré correspond à un email de la bas de données
       .then(user => {
         if (!user) {
           return res.status(401).json({ error: 'Utilisateur non trouvé !' }); // Unauthorized	
