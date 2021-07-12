@@ -1,6 +1,6 @@
-const { Sequelize, DataTypes } = require('sequelize');
 
-const userSchema = sequelize.define('User', {
+module.exports = function(sequelize, DataTypes) {
+var User = sequelize.define('User', {
  
   email: {
     type: DataTypes.STRING,
@@ -18,7 +18,7 @@ const userSchema = sequelize.define('User', {
     defaultValue: 0
   },
 });
-
-
-module.exports = sequelize.models.userSchema; // Export du schéma en tant que modèle sequelize pour le rendre disponible pour notre application Express.
+  
+  return User;
+};
 
