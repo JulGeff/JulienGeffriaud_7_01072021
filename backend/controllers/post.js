@@ -42,7 +42,7 @@ exports.createPost = (req, res, next) => {
 
 // RECUPERATION D'UN POST
 exports.getOnepost = (req, res, next) => {
-    models.Post.findOne ({ where: { _id: req.params.id } }) // Renvoir le post unique ayant le même _id que le paramètre de la requêt
+    models.Post.findOne ({ where: { _id: req.params.id } }) // Renvoie le post unique ayant le même _id que le paramètre de la requête
         .then(post => res.status(200).json(post))   // post retourné dans une promise et envoyé au frontend
         .catch(error => res.status(404).json({        // Ressource non trouvée
             error

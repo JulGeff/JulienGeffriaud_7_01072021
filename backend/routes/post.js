@@ -7,7 +7,7 @@ const multer = require('../middleware/multer-config'); // importation middleware
 const postCtrl = require('../controllers/post')           // Appel des controllers
 
 // router.get('/',auth, postCtrl.getAllPosts);               // Récupèration tous les posts
-router.post('/', auth, multer, postCtrl.createPost);        // Création d'un post / avec requête multer pour gérer images
+// router.post('/', auth, multer, postCtrl.createPost);        // Création d'un post / avec requête multer pour gérer images
 // router.get('/:id',auth, postCtrl.getOnePost);             // Récupération d'un post
 // router.put('/:id', auth, multer, postCtrl.modifyPost);    // Modification d'un post / avec requête multer pour gérer images
 // router.delete('/:id', auth, postCtrl.deletePost);         // Suppression d'un post

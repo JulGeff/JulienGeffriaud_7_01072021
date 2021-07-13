@@ -9,7 +9,7 @@ const cors = require('cors');               // module CORS
 const { Sequelize } = require('sequelize'); // importation application Sequelize pour communiquer avec MySQL
     
 const userRoutes = require('./routes/user');   // Importation routeur users
-const postRoutes = require('./routes/posts');   // Importation routeur posts
+const postRoutes = require('./routes/post');   // Importation routeur posts
 
 
 const sequelize = new Sequelize(mysqlTable, mysqlUsername, mysqlPassword, { // Connexion à la base de données mySQL
@@ -32,5 +32,5 @@ app.use((req, res, next) => {  // Ajout headers pour résoudre les erreurs CORS
 
 
 app.use('/api/auth', userRoutes)      // Enregistrement routeur users
-app.use('/api/posts', postRoutes)      // Enregistrement routeur posts
+app.use('/api/post', postRoutes)      // Enregistrement routeur posts
 module.exports = app;

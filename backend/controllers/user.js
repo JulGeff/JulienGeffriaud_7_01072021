@@ -8,13 +8,16 @@ const TokenKey = process.env.TOKENKEY;   // Récupération de la clé de cryptag
 //CREATION D'UN COMPTE UTILISATEUR
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)    // On crypte le mot de passe (algorithme exécuté 10 fois) / asynchrone
-        .then(hash => {                     // On récupère le hash
-            User.create({           // modèle sequelize
-                email: req.body.email,
-                password: hash                  // On enregistre le mdp crypté plutôt que le mdp simple
-                })
 
-        .then(() => res.status(201).json({ message: 'Utilisateur créé !' })) // Requête traitée avec succès et création d’un document
+        .then(hash => {   
+            const newUser = User.create({           // modèle sequelize
+              name : req.body.name,
+              firstName : req.body.firstName,
+              email: req.body.email,
+              password: hash                  // On enregistre le mdp crypté plutôt que le mdp simple
+              })
+
+        .then(newUser => res.status(201).json({ message: 'Utilisateur créé !' })) // Requête traitée avec succès et création d’un document
         .catch(error => res.status(400).json({ error })); // Bad Request
       })
     .catch(error => res.status(500).json({ error })); // Erreur interne du serveur

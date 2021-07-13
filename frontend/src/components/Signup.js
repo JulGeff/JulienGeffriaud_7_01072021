@@ -47,10 +47,10 @@ function Signup() {
                 <input id='firstName' className="input" type="sring" name="firstName" value={firstName} onChange={e => setFirstName(e.target.value)} required />
             </label>   
             <label>email
-                <input id='email' className="input" type="email" name="email" value={email} onChange={e => setEmail(e.target.value)} required />
+                <input id='email' className="input" type="email" name="email" value={email} autoComplete="username" onChange={e => setEmail(e.target.value)} required />
             </label>
             <label>mot de passe
-                <input id='password' className="input" type="password" name="password" value={password} onChange={e => setPassword(e.target.value)} required />
+                <input id='password' className="input" type="password" name="password" value={password} autoComplete="current-password" onChange={e => setPassword(e.target.value)} required />
             </label>
             <input className="button" type="submit" value="Je crée mon compte" />
         </form>
