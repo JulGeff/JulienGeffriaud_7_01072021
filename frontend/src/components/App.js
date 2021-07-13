@@ -2,6 +2,7 @@ import Banner from './Banner'
 import Login from './Login'
 import Signup from './Signup'
 import Post from './Post'
+import Profile from './Profile'
 import {
   BrowserRouter as Router,
   Route,
@@ -26,6 +27,9 @@ function App() {
                         </Route>
                         <Route path="/post">
                            <Post />
+                        </Route>
+                        <Route path="/profile">
+                           <Profile />
                         </Route>
                     </Switch>
         </div>

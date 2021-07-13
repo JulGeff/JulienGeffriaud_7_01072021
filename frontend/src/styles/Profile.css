@@ -1,0 +1,17 @@
+.profile {
+    
+    border-radius: 15px;
+    box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.56);
+    margin: 2% 37%;
+    padding: 2% 0;
+}
+
+ul {
+    list-style-type: none;
+    line-height: 2rem;
+}
+
+h1 {
+
+    text-align: center;
+}

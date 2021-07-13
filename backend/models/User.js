@@ -1,10 +1,26 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   var User = sequelize.define("User", {
+
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      len: [2,40]
+    },
+
+    firstName : {
+      type: DataTypes.STRING,
+      allowNull: false,
+      len: [2,40]
+    },
+    
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      isEmail: true,
+      unique: true,
+      len: [2,40]
     },
+
     password: {
       type: DataTypes.STRING,
       allowNull: false
@@ -15,8 +31,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BOOLEAN,
       defaultValue: 0
     },
-   
   });
 
+  User.associate = function(models) {
+    models.User.hasMany(models.Post) // On sassocie les posts faits par le user
+  };
   return User;
-}
+};
+

@@ -6,34 +6,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-   
 }
 
-.logo
-{
-    width :20%
+.banner_welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-.menu {
-display: flex;
-list-style-type: none;
-justify-content: center;
-border-bottom: solid 1px black;
-background-color: #E02F04;
-margin: 0;
+.logo {
+    width: 30%
 }
 
-.link {
-    text-decoration: none;
-    color : white;
-    padding : 0 2rem;
-    font-size: 1rem;
-    font-weight: bold;
-    transition-duration: .8s;
-}
-
-.link:hover {
-
-    background-color: white;
-    color : #E02F04;
+svg {
+    height: 1.5rem;
+    margin-left: 2rem;
+    color: black;
 }

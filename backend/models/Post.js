@@ -1,16 +1,26 @@
-module.exports = function(sequelize, DataTypes) {
-    var Post = sequelize.define("Post", {
+module.exports = (sequelize, DataTypes) => {
+    const Post = sequelize.define("Post", {
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+
       text: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
       },
-      attachment: {
-        type: DataTypes.STRING,
-        allowNull: true
-      },
-     
-    });
+
+  
+  });
+      
+    Post.associate = function (models) { // On ajoute une foreign key liée au User Id
+    
+        models.Post.belongsTo(models.User, {
+          foreignKey: {
+            allowNull: false
+          }
+        });
+      };
   
     return Post;
   }
