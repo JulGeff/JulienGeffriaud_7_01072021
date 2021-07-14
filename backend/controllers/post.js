@@ -22,6 +22,7 @@ exports.createPost = (req, res, next) => {
 }
 
 
+
 //SUPPRESSION D'UN POST
   exports.deletePost = (req, res, next) => { 
      
@@ -32,10 +33,11 @@ exports.createPost = (req, res, next) => {
   };
 
 
+
 // RECUPERATION DE TOUS LES POSTS
 exports.getAllPosts = (req, res, next) => {
     Post.findAll({
-        order: ['createdAt', 'DESC']
+        order: [['createdAt', 'DESC']]
     })
 
     .then(        // renvoie un tableau contenant tous les posts dans notre base de données
@@ -55,10 +57,10 @@ exports.getAllPosts = (req, res, next) => {
 
 // RECUPERATION DES POSTS D'UN UTILISATEUR DONNE
 
-exports.findUserPosts = (req, res, next) => {
+exports.getUserPosts = (req, res, next) => {
     Post.findAll({
       where: {userId: req.params.id},
-      order: ['createdAt', 'DESC'],
+      order: [['createdAt', 'DESC']]
     })
 
     .then(posts => {
@@ -74,6 +76,7 @@ exports.findUserPosts = (req, res, next) => {
         }
     );
 };
+
 
 // MODIFICATION D'UN POST
 exports.modifyPost = (req, res, next) => {
@@ -93,15 +96,4 @@ exports.modifyPost = (req, res, next) => {
   .catch(error => res.status(400).json({ error }));
 };
 
-// SUPPRESSION D'UN POST
-exports.deletePost = (req, res, next) => {
-    Post.destroy({where: {articleId: req.params.id}})
-    .then(() => 
-      Comment.destroy({where: {articleId: req.params.id}})
-      .then(() => 
-        Article.destroy({ where: {id: req.params.id} })
-        .then(() => res.status(200).json({ message: 'Post supprimé !'}))
-      )
-      )
-    .catch(error => res.status(400).json({ error }));
-  };
+

@@ -32,5 +32,5 @@ app.use((req, res, next) => {  // Ajout headers pour résoudre les erreurs CORS
 
 
 app.use('/api/auth', userRoutes)      // Enregistrement routeur users
-app.use('/api/post', postRoutes)      // Enregistrement routeur posts
+app.use('/api/post', postRoutes)    // Enregistrement routeur posts
 module.exports = app;

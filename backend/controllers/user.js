@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt');        // importation du package de cryptage de mdp bcrypt
 const models = require('../models');        // importation des modèles sequelize
-const User = models.user,
-const Post = models.post
+const User = models.user;
 const jwt = require('jsonwebtoken');     // importation package pour création et vérification des tokens
 require('dotenv').config()               // importation dotenv pour sécuriser passwords
 const TokenKey = process.env.TOKENKEY;   // Récupération de la clé de cryptage des tokens via dotenv
