@@ -28,7 +28,7 @@ function Signup() {
                 console.log(response);
                 })
                 .catch(function (response) { // Si erreur
-                console.log(response);
+                console.log("erreur 500");
                 });
 
         } else { // si email et mdp ne respecent pas les regex définies

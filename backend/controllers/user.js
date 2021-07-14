@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');        // importation du package de cryptage de mdp bcrypt
-const models = require('../models');        // importation des modèles sequelize
+const models = require('../models');     // importation des modèles sequelize
 const User = models.user;
 const jwt = require('jsonwebtoken');     // importation package pour création et vérification des tokens
 require('dotenv').config()               // importation dotenv pour sécuriser passwords
@@ -8,8 +8,9 @@ const TokenKey = process.env.TOKENKEY;   // Récupération de la clé de cryptag
 
 //CREATION D'UN COMPTE UTILISATEUR
 exports.signup = (req, res, next) => {
-    bcrypt.hash(req.body.password, 10)    // On crypte le mot de passe (algorithme exécuté 10 fois) / asynchrone
-
+    
+  bcrypt.hash(req.body.password, 10)    // On crypte le mot de passe (algorithme exécuté 10 fois) / asynchrone
+  
         .then(hash => {   
             const newUser = User.create({           // modèle sequelize
               name : req.body.name,
@@ -17,11 +18,15 @@ exports.signup = (req, res, next) => {
               email: req.body.email,
               password: hash                  // On enregistre le mdp crypté plutôt que le mdp simple
               })
+              console.log(newUser)
 
         .then(newUser => res.status(201).json({ message: 'Utilisateur créé !' })) // Requête traitée avec succès et création d’un document
-        .catch(error => res.status(400).json({ error })); // Bad Request
+        .catch(error => res.status(400).json({ error })); // Bad Request*/
+        console.log(hash);
       })
-    .catch(error => res.status(500).json({ error })); // Erreur interne du serveur
+    .catch(error => { 
+      console.log("erreur 500")
+      res.status(500).json({ error })}); // Erreur interne du serveur
   };
 
 

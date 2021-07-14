@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.associate = function(models) {
-    models.User.hasMany(models.Post) // On sassocie les posts faits par le user
+    models.User.hasMany(models.Post) // On associe les posts faits par le user
   };
   return User;
 };

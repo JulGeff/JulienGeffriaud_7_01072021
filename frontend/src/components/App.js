@@ -42,3 +42,15 @@ function App() {
 export default App
 
 
+/*<Route path="/home" render={function () {
+                    let users = isLoggedIn();
+                    if (users) {
+                        return <Redirect push to={{
+                            pathname: '/home',
+                            state: { user : user }
+                        }}/>
+                    } else {
+                       return <Login />
+                    }
+                }}/>
+*/
