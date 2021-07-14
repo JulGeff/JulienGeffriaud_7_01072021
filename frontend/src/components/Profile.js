@@ -7,19 +7,25 @@ import Api from './Api'
 
 function Profile() {
 
+    function GetProfile() {
     Api.get('/') 
-    .then(function Profile(response) {  //Si Ok
-        const data = response.data;
-        return data;
-        })
-        .catch(function (response) { // Si erreur
-        console.log(response);
-        });
     
-        const name = Profile().name
-        const firstName = Profile().firstName
-        const email = Profile().email
-        const isAdmin = Profile().isAdmin
+        .then(function (response) {  //Si Ok
+            console.log(response.data);
+            return response.data;
+            })
+
+        .catch(function (response) { // Si erreur
+            console.log(response);
+        });
+    }    
+    
+    const data = GetProfile();  
+    const name = data.name;
+    const firstName = data.firstName;
+    const email = data.email;
+    const isAdmin = data.isAdmin;
+
    
     return (
         <div className='profile'>

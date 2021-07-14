@@ -12,7 +12,7 @@ function Post() {
         event.preventDefault(); 
         let postData = { content : content };
         console.log(postData);
-         Api.post('/auth/login', postData)  //requête POST via Axios
+         Api.post('/', postData)  //requête POST via Axios
 
             .then(function (response) { //Si Ok
               console.log(response);
