@@ -1,3 +1,5 @@
+'use strict'
+
 const multer = require('multer'); // On importe le package multer
 
 const MIME_TYPES = {  // dictionnaire MIME types

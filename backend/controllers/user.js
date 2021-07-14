@@ -1,3 +1,5 @@
+'use strict'
+
 const bcrypt = require('bcrypt');        // importation du package de cryptage de mdp bcrypt
 const models = require('../models');     // importation des modèles sequelize
 const User = models.user;
@@ -16,7 +18,8 @@ exports.signup = (req, res, next) => {
               name : req.body.name,
               firstName : req.body.firstName,
               email: req.body.email,
-              password: hash                  // On enregistre le mdp crypté plutôt que le mdp simple
+              password: hash,                  // On enregistre le mdp crypté plutôt que le mdp simple
+              
               })
               console.log(newUser)
 

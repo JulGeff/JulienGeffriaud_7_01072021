@@ -1,3 +1,4 @@
+'use strict'
 
 const models = require('../models');        // importation des modèles sequelize
 const Post = models.post;

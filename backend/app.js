@@ -1,3 +1,5 @@
+'use strict'
+
 const express = require('express');         // importation application Express
 require('dotenv').config()                  // importation dotenv pour sécuriser passwords
 const mysqlTable = process.env.MYSQLTABLE;
