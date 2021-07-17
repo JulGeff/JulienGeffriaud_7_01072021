@@ -4,7 +4,7 @@
     align-items: center;
     border-radius: 15px;
     box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.56);
-    margin:2% 37%;
+    margin:2% 32%;
     
     padding: 2% 0;
    
@@ -38,6 +38,7 @@ p {
     margin: .5rem 0 .5rem 1rem;
     font-size: 1rem;
     border-radius: 5px;
+    width: 120%;
 }
 
 .button {
@@ -50,6 +51,7 @@ p {
     padding: .7rem;
     margin : 2rem 0;
     transition-duration: .4s;
+   
 }
 
 .button:hover {

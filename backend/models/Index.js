@@ -4,28 +4,20 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
+require('dotenv').config()               // importation dotenv pour sécuriser passwords
 require('dotenv').config()            // importation dotenv pour sécuriser passwords
 const db = {};
 
 
-const mysqlTable = process.env.DB_TABLE;
-const mysqlUsername = process.env.DB_USERNAME;     
-const mysqlPassword = process.env.DB_PASSWORD;     
+let sequelize;
+  sequelize = new Sequelize(
+    process.env.DB_NAME, 
+    process.env.DB_USER, 
+    process.env.DB_PASSWORD,  {
 
-const sequelize = new Sequelize(mysqlTable, mysqlUsername, mysqlPassword, {
-    host : 'localhost',
-    dialect: 'mysql'
-  
-  })
-
-/*let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}*/
+      host: process.env.DB_HOST,
+    dialect: process.env.DB_DIALECT
+  });
 
 fs
   .readdirSync(__dirname)

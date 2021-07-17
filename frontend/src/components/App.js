@@ -6,51 +6,63 @@ import Profile from './Profile'
 import {
   BrowserRouter as Router,
   Route,
-  Switch
+  Switch,
+  Redirect
 } from "react-router-dom";
+import { Component } from 'react'
 
-function App() {
-    return (
-      <Router>
-        <div>
-        <Banner />
 
-          <Switch>
-          <Route exact path="/">
-                            <Login />
-                        </Route>
-                        <Route path="/login">
-                            <Login />
-                        </Route>
-                        <Route path="/signup">
-                           <Signup />
-                        </Route>
-                        <Route path="/home">
-                           <Post />
-                        </Route>
-                        <Route path="/profile">
-                           <Profile />
-                        </Route>
-                    </Switch>
-        </div>
-      </Router>
-      
+
+export default class App extends Component {
+
+      constructor() {
+        super();
+
+        this.state = {
+          loggedInStatus : "NOT_LOGGED_IN",
+          user: {}
+
+        }
+      }
+
+      render () {
+        return (
+          <div>
+            <Router>
+              <Banner />
+                <Switch>
+                <Route exact path="/">
+                                  <Login />
+                              </Route>
+                              <Route 
+                              path="/login">
+                                  <Login />
+                              </Route>
+                              <Route path="/signup">
+                                <Signup />
+                              </Route>
+
+                              <Route path="/home" 
+                              render={props => (
+                                <Post {... props} loggedInStatus={this.state.loggedInStatus} />
+                              )}
+                              />
+
+                              <Route path="/profile">
+                                <Profile />
+                              </Route>
+                          </Switch>
+                          </Router>
+              </div>
     ) 
-    
-}
-
-export default App
+    } 
+  }
 
 
-/*<Route path="/home" render={function () {
-                    let users = isLoggedIn();
-                    if (users) {
-                        return <Redirect push to={{
+
+/*
+<Redirect push to={{
                             pathname: '/home',
                             state: { user : user }
-                        }}/>
-                    } else {
-                       return <Login />
-                    }
-                }}/>
+                          }}/>
 */

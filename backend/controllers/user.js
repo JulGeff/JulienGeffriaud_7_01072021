@@ -15,16 +15,17 @@ exports.signup = (req, res, next) => {
   
         .then(hash => {   
             const newUser = User.create({           // modèle sequelize
-              name : req.body.name,
+              lastName : req.body.lastName,
               firstName : req.body.firstName,
               email: req.body.email,
               password: hash,                  // On enregistre le mdp crypté plutôt que le mdp simple
               
               })
-              console.log(newUser)
+              
 
-        .then(newUser => res.status(201).json({ message: 'Utilisateur créé !' })) // Requête traitée avec succès et création d’un document
-        .catch(error => res.status(400).json({ error })); // Bad Request*/
+        .then((newUser )=> res.status(201).json({ message: 'Utilisateur créé !' })) // Requête traitée avec succès et création d’un document
+        .catch(error => 
+          res.status(400).json({ error })); // Bad Request*/
         console.log(hash);
       })
     .catch(error => { 
@@ -35,6 +36,7 @@ exports.signup = (req, res, next) => {
 
 //CONNEXION AU COMPTE UTILISATEUR
 exports.login = (req, res, next) => {
+ 
     User.findOne ({ 
       where: {  email: req.body.email } })   // On utilise le modèle sequelize User pour vérifier que l'email rentré correspond à un email de la bas de données
       .then(user => {
@@ -47,11 +49,11 @@ exports.login = (req, res, next) => {
               return res.status(401).json({ error: 'Mot de passe incorrect !' }); // Unauthorized
             }
             res.status(200).json({ // Requête traitée avec succès / Renvoie le token au frontend
-              userId: user._id,     // On renvoie l'id
+              email: user.email,     // On renvoie l'id
               token: jwt.sign(      // On utilise la fonction sign de jsonwebtoken pour encoder un nouveau token
-                { userId: user._id },
+                { email: user.email },
                 TokenKey,            // récupère la chaîne secrète d'encodage de notre token via dotenv
-                { expiresIn: '24h' }    // A MODIFIER EXPIRATION QUAND LOGOUT
+                { expiresIn: '24h' }    // A MODIFIER EXPIRATION QUAND LOGOUT ??
               )
             });
           })
@@ -90,14 +92,15 @@ exports.getAllUsers = (req, res, next) => {
 exports.modifyUser = (req, res, next) => {
 
   const firstName = req.body.firstName;
-  const name =  req.body.name;
+  const lastName =  req.body.lastName;
 
   // vérification que tous les champs sont remplis
-  if(firstName === null || firstName === '' || name === null ||name === '') {
+  if(firstName === null || firstName === '' || lastName === null ||lastName === '') {
       return res.status(400).json({'error': "Les champs 'nom' et 'prénom' doivent être remplis "});
   } else {
 
-User.update({ ...userObject, id:  req.params.id}, { where: {id: req.params.id} })
+User.update({
+   ...userObject, id:  req.params.id}, { where: {id: req.params.id} })
 .then(() => res.status(200).json({ message: 'Utilisateur modifié !'}))
 .catch(error => res.status(400).json({ error }));
 }}

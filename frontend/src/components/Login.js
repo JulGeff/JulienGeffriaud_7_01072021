@@ -8,22 +8,22 @@ import Api from './Api'
 
 
 function Login() {
+    localStorage.clear();
     const [email, setEmail] = React.useState("");       //initialisation du state vide
     const [password, setPassword] = React.useState(""); //initialisation du state vide
   
     const handleLogin = (event) => {
         event.preventDefault();
-
-
         if (/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(email)) { //regex : email au format example@test.test
         let loginFormData = { email : email, password: password };
         console.log(loginFormData);
          
  
-         Api.post('/auth/login', loginFormData)  //requête POST via Axios
+         Api.post('/auth/login', loginFormData)  //requête POST via Axios (cf paramètres dans Api.js)
 
             .then(function (response) { //Si Ok
               console.log(response);
+              localStorage.setItem('userLogged', [response.data.email, response.data.token]); // On stocke un array avec email et token dans le local storage
             })
             .catch(function (response) { //Si erreur
               console.log(response);
