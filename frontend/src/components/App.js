@@ -1,6 +1,6 @@
 import Banner from './Banner'
-import Login from './Login'
-import Signup from './Signup'
+import Login from './auth/Login'
+import Signup from './auth/Signup'
 import Post from './Post'
 import Profile from './Profile'
 import {

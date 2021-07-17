@@ -8,42 +8,37 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      
-      firstName : {
+      firstName: {
         type: Sequelize.STRING,
         allowNull: false,
         len: [2,40]
-      },
 
+      },
       lastName: {
         type: Sequelize.STRING,
         allowNull: false,
         len: [2,40]
+
       },
-      
       email: {
         type: Sequelize.STRING,
         allowNull: false,
         isEmail: true,
         unique: true,
         len: [2,40]
+
       },
-      
       password: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      
-      isAdmin: 
-      {
+      isAdmin: {
         type: Sequelize.BOOLEAN,
         defaultValue: 0
       },
-
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
-        
       },
       updatedAt: {
         allowNull: false,
@@ -55,4 +50,3 @@ module.exports = {
     await queryInterface.dropTable('Users');
   }
 };
-

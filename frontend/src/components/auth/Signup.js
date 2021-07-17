@@ -1,10 +1,10 @@
-import loginpic from "../assets/login-image.png";
-import '../styles/LoginSignup.css'
+import loginpic from "../../assets/login-image.png";
+import '../../styles/LoginSignup.css'
 import React, { Component } from "react";
 import {
     Link,
   } from "react-router-dom";
-import Api from './Api'
+import Api from '../Api'
 
 
 export default class Signup extends Component {
