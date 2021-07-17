@@ -19,11 +19,11 @@ exports.signup = (req, res, next) => {
               firstName : req.body.firstName,
               email: req.body.email,
               password: hash,                  // On enregistre le mdp crypté plutôt que le mdp simple
-              
+             
               })
               
 
-        .then((newUser )=> res.status(201).json({ message: 'Utilisateur créé !' })) // Requête traitée avec succès et création d’un document
+        .then((newUser )=> res.status(201).json({ message: 'created' })) // Requête traitée avec succès et création d’un document
         .catch(error => 
           res.status(400).json({ error })); // Bad Request*/
         console.log(hash);
@@ -49,12 +49,14 @@ exports.login = (req, res, next) => {
               return res.status(401).json({ error: 'Mot de passe incorrect !' }); // Unauthorized
             }
             res.status(200).json({ // Requête traitée avec succès / Renvoie le token au frontend
+              id : user.id,
               email: user.email,     // On renvoie l'id
               token: jwt.sign(      // On utilise la fonction sign de jsonwebtoken pour encoder un nouveau token
                 { email: user.email },
                 TokenKey,            // récupère la chaîne secrète d'encodage de notre token via dotenv
                 { expiresIn: '24h' }    // A MODIFIER EXPIRATION QUAND LOGOUT ??
-              )
+              ),
+              logged_in : true,
             });
           })
           .catch(error => res.status(500).json({ error })); 	// Erreur interne du serveur

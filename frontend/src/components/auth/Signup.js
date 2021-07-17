@@ -55,7 +55,9 @@ export default class Signup extends Component {
             Api.post('/auth/signup', signupFormData) //requête POST via Axios
 
                 .then(function (response) {  //Si Ok
-                console.log(response);
+                    if (response.data.message === "created"){       // Si user créé
+                    this.props.handleSuccessfulAuth(response.data)     // On définiti la fonction ici
+                }
                 })
                 .catch(function (response) { // Si erreur
                 console.log(response);

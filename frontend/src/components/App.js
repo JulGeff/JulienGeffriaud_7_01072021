@@ -1,15 +1,13 @@
 import Banner from './Banner'
-import Login from './auth/Login'
-import Signup from './auth/Signup'
-import Post from './Post'
-import Profile from './Profile'
+import Home from './Home'
+import Dashboard from './Dashboard'
 import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect
+
 } from "react-router-dom";
-import { Component } from 'react'
+import React, { Component } from 'react'
 
 
 
@@ -22,47 +20,44 @@ export default class App extends Component {
           loggedInStatus : "NOT_LOGGED_IN",
           user: {}
 
-        }
+        };
+
+        this.handleLogin = this.handleLogin.bind(this); 
+      }
+
+      handleLogin(data) {
+        this.setState({
+          loggedInStatus : "LOGGED_IN",
+          user : data.user
+
+        })
+
       }
 
       render () {
         return (
           <div>
             <Router>
-              <Banner />
                 <Switch>
-                <Route exact path="/">
-                                  <Login />
-                              </Route>
-                              <Route 
-                              path="/login">
-                                  <Login />
-                              </Route>
-                              <Route path="/signup">
-                                <Signup />
-                              </Route>
+                  <Route 
+                    exact 
+                    path={"/"} 
+                    render={props => (
+                      <Home {... props} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus} />
+                    )} 
+                    />
+                
+                  <Route 
+                    exact 
+                    path={"/dashboard"} 
+                    render={props => (
+                      <Dashboard {... props} loggedInStatus={this.state.loggedInStatus} />
+                    )} 
+                    />  
 
-                              <Route path="/home" 
-                              render={props => (
-                                <Post {... props} loggedInStatus={this.state.loggedInStatus} />
-                              )}
-                              />
-
-                              <Route path="/profile">
-                                <Profile />
-                              </Route>
-                          </Switch>
-                          </Router>
-              </div>
+                </Switch>
+            </Router>
+          </div>
     ) 
     } 
   }
-
-
-
-/*
-<Redirect push to={{
-                            pathname: '/home',
-                            state: { user : user }
-                          }}/>
-*/

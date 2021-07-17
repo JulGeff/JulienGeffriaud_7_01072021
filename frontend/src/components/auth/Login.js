@@ -50,7 +50,10 @@ export default class Login extends Component {
             Api.post('/auth/login', loginFormData) //requête POST via Axios
 
                 .then(function (response) {  //Si Ok
-                console.log(response);
+                console.log(response.data);
+                if (response.data.logged_in){
+                    this.props.handleSuccessfulAuth(response.data)
+                }
                 })
                 .catch(function (response) { // Si erreur
                 console.log(response);

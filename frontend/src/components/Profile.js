@@ -1,6 +1,6 @@
 
 
-import '../styles/Profile.css'
+/*import '../styles/Profile.css'
 import React from "react";
 import Api from './Api'
 
@@ -46,3 +46,5 @@ function Profile() {
   }
   
 export default Profile
+
+*/
