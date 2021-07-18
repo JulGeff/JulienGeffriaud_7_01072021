@@ -3,9 +3,14 @@ import loginpic from "../../assets/login-image.png";
 import '../../styles/LoginSignup.css'
 import React from "react";
 import Api from '../Api'
+import { useHistory } from "react-router-dom"
 
 
 function Login() {
+
+        let history = useHistory();
+    localStorage.clear();
+
     const [email, setEmail] = React.useState(""); //initialisation du state vide
     const [password, setPassword] = React.useState(""); //initialisation du state vide
   
@@ -26,9 +31,13 @@ function Login() {
 
                 .then(function (response) {  //Si Ok
                 console.log(response);
+                history.push("/publication")
+                localStorage.setItem('userLoggedIn', JSON.stringify(response.data))
+                
                 })
                 .catch(function (response) { // Si erreur
                 console.log(response);
+                alert("Password incorrect ou email inexistant dans la base de données")
                 });
 
         } else { // si email ne respecte pas les regex définies

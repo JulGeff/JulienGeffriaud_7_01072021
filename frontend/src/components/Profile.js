@@ -1,17 +1,34 @@
-import React from "react";
 
-const Profile = props => {
+import React from "react";
+import Api from './Api'
+import { Redirect } from 'react-router-dom';
+
+function Profile({authorized})  {
+
+    if (!authorized) {
+        return <Redirect to="/"/>
+        }
+    
+       /* Api.get('/auth/users') //requête GET via Axios
+
+        .then(function (response) {  //Si Ok
+        console.log(response.data);
+        })
+        .catch(function (response) { // Si erreur
+        console.log("pb frontend", response.data);
+        });
+        */
+        
 
     return (
-        <div>
-       PROFILE
+        <div className='loginsignup'> 
+   
+        <h1>Votre profil</h1>
+        
+   
 
-        </div>
-
-
-    )
-
-}
-
-
-export default Profile;
+    </div>
+    );
+    }
+  
+export default Profile

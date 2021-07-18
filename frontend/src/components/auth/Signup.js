@@ -29,9 +29,11 @@ function Signup() {
 
                 .then(function (response) {  //Si Ok
                 console.log(response);
+                alert("Votre compte à bien été créé ! Connectez-vous pour accéder aux derniers échanges.")
                 })
                 .catch(function (response) { // Si erreur
                 console.log(response);
+                alert("Cet email est déjà lié à un compte.")
                 });
 
         } else { // si email et mdp ne respecent pas les regex définies

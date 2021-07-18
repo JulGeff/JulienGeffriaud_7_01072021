@@ -1,9 +1,13 @@
 
 import React from "react";
 import Api from './Api'
+import { Redirect } from 'react-router-dom';
 
-function Directory() {
-   
+function Directory({authorized})  {
+
+    if (!authorized) {
+        return <Redirect to="/"/>
+        }
     
         Api.get('/auth/users') //requête GET via Axios
 

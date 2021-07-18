@@ -25,15 +25,15 @@ function App() {
                   </Route>
 
                   <Route exact path={"/publication"} >
-                      <Publication />
+                      <Publication authorized={true}/>
                   </Route>
                 
                   <Route exact path={"/profile"} >
-                      <Profile />
+                      <Profile authorized={true}/>
                   </Route>
 
                   <Route exact path={"/directory"} >
-                      <Directory />
+                      <Directory authorized={true}/>
                   </Route>
 
                 </Switch>
