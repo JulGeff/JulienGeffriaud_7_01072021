@@ -84,7 +84,9 @@ exports.getOneUser = (req, res, next) => {
   // RECUPERATION DE TOUS LES PROFILS UTILSATEURS
 
 exports.getAllUsers = (req, res, next) => {
-  User.findAll()
+  User.findAll({
+    order: [['lastName', 'ASC']]
+})
   .then(users => {
       console.log(users);
       res.status(200).json({data: users});

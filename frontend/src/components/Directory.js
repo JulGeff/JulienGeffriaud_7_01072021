@@ -5,17 +5,15 @@ import Api from './Api'
 function Directory() {
    
     
-        Api.get('/') //requête GET via Axios
+        Api.get('/auth/users') //requête GET via Axios
 
         .then(function (response) {  //Si Ok
-        console.log(response);
+        console.log(response.data);
         })
         .catch(function (response) { // Si erreur
         console.log("pb frontend", response.data);
         });
         
-  
-
 
     return (
         <div className='loginsignup'> 
@@ -29,6 +27,3 @@ function Directory() {
     }
   
 export default Directory
-
-
-
