@@ -56,7 +56,9 @@ exports.login = (req, res, next) => {
                 TokenKey,            // récupère la chaîne secrète d'encodage de notre token via dotenv
                 { expiresIn: '24h' }    // A MODIFIER EXPIRATION QUAND LOGOUT ??
               ),
+              IsAdmin : user.isAdmin,
               logged_in : true,
+              
             });
           })
           .catch(error => res.status(500).json({ error })); 	// Erreur interne du serveur
