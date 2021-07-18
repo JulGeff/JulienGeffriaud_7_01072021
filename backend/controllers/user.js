@@ -56,8 +56,8 @@ exports.login = (req, res, next) => {
                 TokenKey,            // récupère la chaîne secrète d'encodage de notre token via dotenv
                 { expiresIn: '24h' }    // A MODIFIER EXPIRATION QUAND LOGOUT ??
               ),
-              IsAdmin : user.isAdmin,
-              logged_in : true,
+              isAdmin : user.isAdmin,
+              loggedIn : true,
               
             });
           })
@@ -111,19 +111,17 @@ User.update({
 
 // SUPPRESSION D'UN PROFIL UTILSATEUR
 exports.deleteUser = (req, res, next) => {
-  Post.destroy({                                      // Suppression de tous les posts liés au compte utilisateur
+  Publication.destroy({                                      // Suppression de tous les publications liés au compte utilisateur
     where: { email: req.body.email }})
         
         .then(() =>
         User.findOne({ 
           where: {  email: req.body.email }  })
           .then(user => {
-            const filename = user.imageUrl;
-            fs.unlink(`images/${filename}`, () => {   //Suppression de l'image liée au profil
               User.destroy({     
                 where: {  email: req.body.email }  }) }) // Suppression du user dans la base de données
               .then(() => res.status(200).json({ message: 'Utilisateur supprimé !'}))
-            })
+            
         )
           
   .catch(error => res.status(400).json({ error }));

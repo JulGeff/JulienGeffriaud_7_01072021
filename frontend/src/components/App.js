@@ -1,19 +1,18 @@
 import Banner from "./Banner";
 import Home from './Home'
 import Profile from './Profile'
-import Forum from './Profile'
+import Publication from './Publication'
+import Directory from './Directory'
 import {
   BrowserRouter as Router,
   Route,
   Switch,
 
 } from "react-router-dom";
-import React, { Component } from 'react'
-import Api from './Api'
+import React from 'react'
+
 
 function App() {
-
-     
         return (
           <div>
              
@@ -25,12 +24,16 @@ function App() {
                       <Home />
                   </Route>
 
-                  <Route exact path={"/forum"} >
-                      <Forum />
+                  <Route exact path={"/publication"} >
+                      <Publication />
                   </Route>
                 
                   <Route exact path={"/profile"} >
                       <Profile />
+                  </Route>
+
+                  <Route exact path={"/directory"} >
+                      <Directory />
                   </Route>
 
                 </Switch>

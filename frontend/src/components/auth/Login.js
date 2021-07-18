@@ -12,7 +12,7 @@ function Login() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(password)) { 
+        if (/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(email)) { 
 
             
             let loginFormData = { 
@@ -22,7 +22,7 @@ function Login() {
 
             console.log(loginFormData);
 
-            Api.post('/auth/signup', loginFormData) //requête POST via Axios
+            Api.post('/auth/login', loginFormData) //requête POST via Axios
 
                 .then(function (response) {  //Si Ok
                 console.log(response);
@@ -43,7 +43,7 @@ function Login() {
         <h1>Connectez-vous</h1>
         <form id ='loginForm' className="logform" onSubmit={handleSubmit}>
                 
-                <input  id='email' 
+                <input  
                         className="input" 
                         type="email" 
                         name="email" 
@@ -55,7 +55,7 @@ function Login() {
                         required 
                 />
 
-                <input  id='password' 
+                <input   
                         className="input" 
                         type="password" 
                         name="password" 

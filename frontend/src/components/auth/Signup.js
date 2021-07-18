@@ -3,7 +3,6 @@ import '../../styles/LoginSignup.css'
 import React from "react";
 import Api from '../Api'
 
-
 function Signup() {
     const [lastName, setLastName] = React.useState(""); //initialisation du state vide
     const [firstName, setFirstName] = React.useState(""); //initialisation du state vide
@@ -38,6 +37,8 @@ function Signup() {
         } else { // si email et mdp ne respecent pas les regex définies
                 alert("- Votre email doit être au format example@test.test\n- Votre mot de passe doit contenir au moins 8 caractères, 1 lettre, 1 chiffre et 1 caractère spécial @$!%*#?&");
         }}
+
+
 
     return (
         <div className='loginsignup'> 

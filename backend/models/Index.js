@@ -5,7 +5,6 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 require('dotenv').config()               // importation dotenv pour sécuriser passwords
-require('dotenv').config()            // importation dotenv pour sécuriser passwords
 const db = {};
 
 
@@ -39,6 +38,6 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 db.user = require("./user.js")(sequelize, Sequelize)
-db.post = require("./post.js")(sequelize, Sequelize)
+db.publication = require("./publication")(sequelize, Sequelize)
 
 module.exports = db
