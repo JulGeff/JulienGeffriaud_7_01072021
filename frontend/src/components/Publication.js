@@ -1,15 +1,21 @@
 import '../styles/LoginSignup.css'
 import React from "react";
+import { Redirect } from 'react-router-dom';
 import Api from './Api'
 
-function Publication() {
+function Publication({authorized}) {
    
     const [title, setTitle] = React.useState(""); //initialisation du state vide
     const [content, setContent] = React.useState(""); //initialisation du state vide
   
+    if (!authorized) {
+        return <Redirect to="/"/>
+        }
+        
     const handleSubmit = (event) => {
         event.preventDefault();
 
+       
        if(title === null || title === '' || content === null || content === '') {
                return event.status(400).json({'error': "Veuillez remplir les champs 'titre' et 'contenu' pour créer un article"});
 
