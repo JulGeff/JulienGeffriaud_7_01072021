@@ -16,7 +16,8 @@ function Login() {
 
         const [email, setEmail] = useState(""); //initialisation du state vide
         const [password, setPassword] = useState(""); //initialisation du state vide
-        const [UserLoggedIn, setUserLoggedIn] = useState(false)
+        const [LoggedIn, setLoggedIn] = useState(false); //initialisation du state vide
+        
 
         const handleSubmit = (event) => {
         event.preventDefault();
@@ -33,11 +34,11 @@ function Login() {
             Api.post('/auth/login', loginFormData) //requête POST via Axios
 
                 .then(function (response) {  //Si Ok
+                history.push("/forum")   
                 console.log(response);
                 localStorage.setItem('userLoggedIn', JSON.stringify(response.data))
-                setUserLoggedIn(true);
-                console.log(UserLoggedIn)
-                history.push("/forum")     
+                setLoggedIn(true);
+                console.log(LoggedIn)
 
                 })
                 

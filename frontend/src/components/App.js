@@ -15,10 +15,6 @@ import React from 'react'
 
 
 function App() {
-
-  //const loggedIn = localStorage.getItem('userLoggedIn');
-  
-  //console.log(JSON.parse(loggedIn))
   
         return (
           <div>
