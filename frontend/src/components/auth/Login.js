@@ -31,6 +31,7 @@ function Login() {
 
             console.log(loginFormData);
 
+            
             Api.post('/auth/login', loginFormData) //requête POST via Axios
 
                 .then(function (response) {  //Si Ok

@@ -67,14 +67,12 @@ exports.login = (req, res, next) => {
   };
 
 
-  // AJOUT MODIF URTILISATEUR ? IMAGE ?
-
   // RECUPERATION DU PROFIL D'UN UTILISATEUR
 
 exports.getOneUser = (req, res, next) => {
  
   User.findOne ({ 
-      where: {  email: req.body.email }   
+      where: {  id: req.body.id }   
   })
       .then(user => res.status(200).json(user))
       .catch(error => res.status(500).json(error))
