@@ -1,14 +1,30 @@
-#postForm {
+.forum {
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 15px;
     box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.56);
-    margin: 2% 32%;
-    padding-top: 2%;
+    margin: 2% 25%;
+    padding: 0 5% 2% 5%;
 }
 
-.button {
+.forum input, .forum textarea {
+
+margin : 5% 5% 0% 5%
+
+
+}
+.forum_global p {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.forum_global h1, .forum_global h2 {
+    text-align: center;
+}
+
+.forum .button {
+  
     align-self: center;
     color: white;
     font-weight: bold;
@@ -18,21 +34,11 @@
     padding: .7rem;
     transition-duration: .4s;
     cursor: pointer;
-    width : 30%
+    width: 20%
 }
 
 .button:hover {
     color: #E02F04;
     background-color: white;
     border: 1px solid #E02F04;
-}
-
-
-textarea {
-    width: 90%;
-    height: 100%; 
- 
-    resize: none;
-    border-radius: 15px;
-
 }

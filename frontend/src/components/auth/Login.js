@@ -1,25 +1,28 @@
 
 import loginpic from "../../assets/login-image.png";
 import '../../styles/LoginSignup.css'
-import React from "react";
+import React, { useState } from "react";
 import Api from '../Api'
-import { useHistory } from "react-router-dom"
+import {
+  useHistory,
+  Link,
+} from "react-router-dom";
 
 
 function Login() {
 
         let history = useHistory();
-    localStorage.clear();
+        localStorage.clear();
 
-    const [email, setEmail] = React.useState(""); //initialisation du state vide
-    const [password, setPassword] = React.useState(""); //initialisation du state vide
-  
-    const handleSubmit = (event) => {
+        const [email, setEmail] = useState(""); //initialisation du state vide
+        const [password, setPassword] = useState(""); //initialisation du state vide
+        const [UserLoggedIn, setUserLoggedIn] = useState(false)
+
+        const handleSubmit = (event) => {
         event.preventDefault();
 
         if (/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(email)) { 
 
-            
             let loginFormData = { 
                 email : email, 
                 password: password
@@ -31,10 +34,13 @@ function Login() {
 
                 .then(function (response) {  //Si Ok
                 console.log(response);
-                history.push("/publication")
                 localStorage.setItem('userLoggedIn', JSON.stringify(response.data))
-                
+                setUserLoggedIn(true);
+                console.log(UserLoggedIn)
+                history.push("/forum")     
+
                 })
+                
                 .catch(function (response) { // Si erreur
                 console.log(response);
                 alert("Password incorrect ou email inexistant dans la base de données")
@@ -43,6 +49,8 @@ function Login() {
         } else { // si email ne respecte pas les regex définies
                 alert("- Votre email n'est pas au bon format")
         }}
+
+  
 
     return (
         
@@ -70,7 +78,7 @@ function Login() {
                         name="password" 
                         maxLength="40"
                         autoComplete="current-password"
-                        placeholder="Choisissez un mot de passe" 
+                        placeholder="Mot de passe" 
                         value={password} 
                         onChange={e => setPassword(e.target.value)}
                         required
@@ -83,7 +91,7 @@ function Login() {
         </form>
 
         <p>C'est votre première visite ?</p>
-        <p>Créez un compte</p>
+        <p><Link to="/signup">Créez un compte</Link></p>
     </div>
     );
   }

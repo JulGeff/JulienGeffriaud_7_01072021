@@ -1,16 +1,18 @@
-import '../styles/LoginSignup.css'
+import '../styles/Forum.css'
 import React from "react";
 import { Redirect } from 'react-router-dom';
 import Api from './Api'
 
-function Publication({authorized}) {
+function Publication({loggedIn}) {
    
     const [title, setTitle] = React.useState(""); //initialisation du state vide
     const [content, setContent] = React.useState(""); //initialisation du state vide
   
-    if (!authorized) {
+  
+    if (!loggedIn) {
         return <Redirect to="/"/>
         }
+    
         
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -33,6 +35,9 @@ function Publication({authorized}) {
 
                 .then(function (response) {  //Si Ok
                 console.log(response);
+                setTitle('');
+                setContent('');
+                alert("Votre publication a bien été postée !")
                 })
                 .catch(function (response) { // Si erreur
                 console.log("pb frontend", response.data);
@@ -44,10 +49,10 @@ function Publication({authorized}) {
 
 
     return (
-        <div className='loginsignup'> 
+        <div className='forum_global'> 
    
         <h1>Partagez vos pensées avec vos collègues !</h1>
-        <form className="publicationForm" onSubmit={handleSubmit}>
+        <form className="forum" onSubmit={handleSubmit}>
        
                 <input  id='title' 
                         className="input" 

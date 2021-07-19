@@ -24,20 +24,6 @@ exports.createPublication = (req, res, next) => {
         }));
 }
 
-
-/*
-
-//SUPPRESSION D'UNE PUBLICATION
-  exports.deletePublication = (req, res, next) => { 
-     
-    Publication.destroy ({ where: { _id: req.params.id }}) // callback : Suppression de la publication avec l'id correspondant
-        
-        .then(() => res.status(200).json({ message: 'Publication supprimée !'})) // Requête traitée avec succès
-        .catch(error => res.status(500).json({ error })); // Internal Server Error	
-  };
-
-
-
 // RECUPERATION DE TOUTES LES PUBLICATIONS
 exports.getAllPublications = (req, res, next) => {
     Publication.findAll({
@@ -57,6 +43,21 @@ exports.getAllPublications = (req, res, next) => {
         }
     );
 };
+
+
+/*
+
+//SUPPRESSION D'UNE PUBLICATION
+  exports.deletePublication = (req, res, next) => { 
+     
+    Publication.destroy ({ where: { _id: req.params.id }}) // callback : Suppression de la publication avec l'id correspondant
+        
+        .then(() => res.status(200).json({ message: 'Publication supprimée !'})) // Requête traitée avec succès
+        .catch(error => res.status(500).json({ error })); // Internal Server Error	
+  };
+
+
+
 
 
 // RECUPERATION DES PUBLICATIONS D'UN UTILISATEUR DONNE

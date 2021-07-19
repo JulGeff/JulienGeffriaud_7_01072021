@@ -8,7 +8,7 @@ const publicationCtrl = require('../controllers/publication')           // Appel
 
 router.post('/', publicationCtrl.createPublication);               // Création d'une publication 
 //router.delete('/publication', publicationCtrl.deletePublication);         // Suppression d'une publication
-//router.get('/', publicationCtrl.getAllPublications);               // Récupèration toutes les publications
+router.get('/', publicationCtrl.getAllPublications);               // Récupèration toutes les publications
 //router.get('/', publicationCtrl.getUserPublications);             // Récupération d'une publication
 //router.put('/publication', publicationCtrl.modifyPublication);            // Modification d'une publication
 

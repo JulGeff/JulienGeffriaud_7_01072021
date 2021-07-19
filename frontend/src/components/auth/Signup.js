@@ -2,8 +2,11 @@ import loginpic from "../../assets/login-image.png";
 import '../../styles/LoginSignup.css'
 import React from "react";
 import Api from '../Api'
+import { Link, useHistory } from "react-router-dom";
 
 function Signup() {
+
+    let history = useHistory();    
     const [lastName, setLastName] = React.useState(""); //initialisation du state vide
     const [firstName, setFirstName] = React.useState(""); //initialisation du state vide
     const [email, setEmail] = React.useState(""); //initialisation du state vide
@@ -29,11 +32,15 @@ function Signup() {
 
                 .then(function (response) {  //Si Ok
                 console.log(response);
-                alert("Votre compte à bien été créé ! Connectez-vous pour accéder aux derniers échanges.")
+                history.push("/")
+                alert("Votre compte à bien été créé !\n- Connectez-vous pour accéder aux dernières publications de vos collègues.")
+              
+                
                 })
                 .catch(function (response) { // Si erreur
                 console.log(response);
                 alert("Cet email est déjà lié à un compte.")
+               
                 });
 
         } else { // si email et mdp ne respecent pas les regex définies
@@ -101,7 +108,7 @@ function Signup() {
         </form>
 
         <p>Vous avez déjà un compte ?</p>
-        <p>Connectez-vous</p>
+        <p><Link to="/">Connectez-vous</Link></p>
     </div>
     );
   }

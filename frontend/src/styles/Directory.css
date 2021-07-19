@@ -1,0 +1,31 @@
+.directory {
+
+    text-align: center;
+}
+
+table, td, thead {
+
+    border-collapse: collapse;
+    margin: auto;
+    text-align: left;
+}
+
+td {
+    width : 40%;
+    border-bottom: 1px solid #ddd;
+    padding-top: 1rem;
+    padding-right: 2rem;
+}
+
+thead {
+    font-weight: bold;
+
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+  .directory svg {
+      width : 1rem;
+  }

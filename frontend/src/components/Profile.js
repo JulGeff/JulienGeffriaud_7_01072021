@@ -1,11 +1,10 @@
 
 import React from "react";
-import Api from './Api'
 import { Redirect } from 'react-router-dom';
 
-function Profile({authorized})  {
+function Profile({loggedIn})  {
 
-    if (!authorized) {
+    if (!loggedIn) {
         return <Redirect to="/"/>
         }
     

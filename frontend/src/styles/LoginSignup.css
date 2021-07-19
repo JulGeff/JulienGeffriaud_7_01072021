@@ -21,7 +21,7 @@
     align-items: flex-end;
 }
 
-p {
+.loginsignup p {
     text-align: center;
     margin: 0;
 }
@@ -41,7 +41,7 @@ p {
     width: 120%;
 }
 
-.button {
+.loginsignup .button {
     align-self: center;
     color: white;
     font-weight: bold;

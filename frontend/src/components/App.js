@@ -1,8 +1,10 @@
 import Banner from "./Banner";
+import Signup from './auth/Signup'
 import Home from './Home'
 import Profile from './Profile'
 import Publication from './Publication'
 import Directory from './Directory'
+import Forum from './Forum'
 import {
   BrowserRouter as Router,
   Route,
@@ -13,29 +15,37 @@ import React from 'react'
 
 
 function App() {
+
+  //const loggedIn = localStorage.getItem('userLoggedIn');
+  
+  //console.log(JSON.parse(loggedIn))
+  
         return (
           <div>
              
             <Router>
             <Banner />
                 <Switch>
-                  <Route exact path={"/"} >
-                     
+                <Route exact path={"/signup"} >            
+                      <Signup />
+                  </Route>
+
+                  <Route exact path={"/"} >            
                       <Home />
                   </Route>
 
-                  <Route exact path={"/publication"} >
-                      <Publication authorized={true}/>
+                  <Route exact path={"/forum"} >
+                      <Publication loggedIn={true} />
+                      <Forum loggedIn={true} />
                   </Route>
                 
                   <Route exact path={"/profile"} >
-                      <Profile authorized={true}/>
+                      <Profile loggedIn={true}/>
                   </Route>
 
                   <Route exact path={"/directory"} >
-                      <Directory authorized={true}/>
+                      <Directory loggedIn={true}/>
                   </Route>
-
                 </Switch>
             </Router>
           </div>
