@@ -16,8 +16,8 @@ function Login() {
 
         const [email, setEmail] = useState(""); //initialisation du state vide
         const [password, setPassword] = useState(""); //initialisation du state vide
-        const [LoggedIn, setLoggedIn] = useState(false); //initialisation du state vide
         
+       // const [loggedIn, setLoggedIn] = useState(false); //initialisation du state vide
 
         const handleSubmit = (event) => {
         event.preventDefault();
@@ -37,11 +37,12 @@ function Login() {
                 .then(function (response) {  //Si Ok
                 history.push("/forum")   
                 console.log(response);
-                localStorage.setItem('userLoggedIn', JSON.stringify(response.data))
-                setLoggedIn(true);
-                console.log(LoggedIn)
-
-                })
+                localStorage.setItem('userId', response.data.id)
+                localStorage.setItem('token', response.data.token)
+                localStorage.setItem('loggedIn', response.data.loggedIn)
+               // const loggedIn = response.data.loggedIn;
+                //setLoggedIn(loggedIn)
+        })
                 
                 .catch(function (response) { // Si erreur
                 console.log(response);
@@ -52,7 +53,8 @@ function Login() {
                 alert("- Votre email n'est pas au bon format")
         }}
 
-  
+     // console.log("logged In", loggedIn)
+     
 
     return (
         
@@ -97,5 +99,5 @@ function Login() {
     </div>
     );
   }
-  
+
 export default Login

@@ -32,7 +32,6 @@ exports.getAllPublications = (req, res, next) => {
 
     .then(        // renvoie un tableau contenant toutes les publications dans notre base de données
         (publications) => {        
-            console.log(publications) 
             res.status(200).json(publications); // publications retournées dans une promise et envoyée au frontend
         }
     ).catch(

@@ -9,18 +9,26 @@ function Profile({loggedIn})  {
         return <Redirect to="/"/>
         }
         
-        localStorage.getItem('userLoggedIn')
-
-        let id = JSON.parse(localStorage.getItem('userLoggedIn')).id
-        console.log(id)
+      let userId = localStorage.getItem('userId')
+      let token = localStorage.getItem('token')
+      console.log( userId, token)
+     
        
-        Api.get('/auth/users/:{id]') 
-
+      Api.get('/auth/user/', {
+        
+            params: {
+              userId: userId
+            },
+          
+            headers: {
+                'Authorization': `${token}`
+            }
+          }) 
         .then(function (response) {  //Si Ok
         console.log(response.data);
         })
         .catch(function (response) { // Si erreur
-        console.log("pb frontend", response.data);
+        console.log("Erreur", response.data);
         });
         
         

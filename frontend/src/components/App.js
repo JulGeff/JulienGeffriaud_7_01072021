@@ -15,14 +15,14 @@ import React from 'react'
 
 
 function App() {
-  
+
         return (
           <div>
              
             <Router>
             <Banner />
                 <Switch>
-                <Route exact path={"/signup"} >            
+                <Route exact path={"/signup"} loggedIn={true} >            
                       <Signup />
                   </Route>
 

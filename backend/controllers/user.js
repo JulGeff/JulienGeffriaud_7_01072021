@@ -49,10 +49,10 @@ exports.login = (req, res, next) => {
               return res.status(401).json({ error: 'Mot de passe incorrect !' }); // Unauthorized
             }
             res.status(200).json({ // Requête traitée avec succès / Renvoie le token au frontend
-              id : user.id,
-              email: user.email,     // On renvoie l'id
+              id : user.id,           // On renvoie l'id
+              email: user.email,   
               token: jwt.sign(      // On utilise la fonction sign de jsonwebtoken pour encoder un nouveau token
-                { email: user.email },
+                { id: user.id },
                 TokenKey,            // récupère la chaîne secrète d'encodage de notre token via dotenv
                 { expiresIn: '24h' }    // A MODIFIER EXPIRATION QUAND LOGOUT ??
               ),
@@ -69,14 +69,15 @@ exports.login = (req, res, next) => {
 
   // RECUPERATION DU PROFIL D'UN UTILISATEUR
 
-exports.getOneUser = (req, res, next) => {
+
+  exports.getOneUser = (req, res, next) => {
  
-  User.findOne ({ 
-      where: {  id: req.body.id }   
-  })
-      .then(user => res.status(200).json(user))
-      .catch(error => res.status(500).json(error))
-};
+    User.findOne ({ 
+        where: {  id: req.body.id }   
+    })
+        .then(user => res.status(200).json(user))
+        .catch(error => res.status(500).json(error))
+  };
 
 
   // RECUPERATION DE TOUS LES PROFILS UTILSATEURS
@@ -86,7 +87,7 @@ exports.getAllUsers = (req, res, next) => {
     order: [['lastName', 'ASC']]
 })
   .then(users => {
-      console.log(users);
+     
       res.status(200).json({data: users});
   })
   .catch(error => res.status(400).json({ error }));

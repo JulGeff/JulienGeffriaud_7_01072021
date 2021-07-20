@@ -7,10 +7,14 @@ import { Redirect } from 'react-router-dom';
 function Directory({loggedIn}) {
 
     const [directory, setDirectory] = React.useState([]); //initialisation du state vide
-
+    let token = localStorage.getItem('token')
     useEffect(() => {
 
-        Api.get('/auth/users') //requête GET via Axios
+        Api.get('/auth/users',
+        {   headers: {
+            'Authorization': `${token}` // On sécurise la requête en incluant le token dnas les headers (cf middleware "auth")
+        }}
+        ) //requête GET via Axios
         .then(function (response)  {
             const directory = response.data.data;
             setDirectory(directory);
