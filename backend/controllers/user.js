@@ -26,7 +26,7 @@ exports.signup = (req, res, next) => {
         .then((newUser )=> res.status(201).json({ message: 'created' })) // Requête traitée avec succès et création d’un document
         .catch(error => 
           res.status(400).json({ error })); // Bad Request*/
-        console.log(hash);
+        
       })
     .catch(error => { 
       console.log("erreur 500")
@@ -67,21 +67,7 @@ exports.login = (req, res, next) => {
   };
 
 
-  // RECUPERATION DU PROFIL D'UN UTILISATEUR
-
-
-  exports.getOneUser = (req, res, next) => {
- 
-    User.findOne ({ 
-        where: {  id: req.body.id }   
-    })
-        .then(user => res.status(200).json(user))
-        .catch(error => res.status(500).json(error))
-  };
-
-
-  // RECUPERATION DE TOUS LES PROFILS UTILSATEURS
-
+// RECUPERATION DE TOUS LES PROFILS UTILSATEURS
 exports.getAllUsers = (req, res, next) => {
   User.findAll({
     order: [['lastName', 'ASC']]
@@ -93,7 +79,38 @@ exports.getAllUsers = (req, res, next) => {
   .catch(error => res.status(400).json({ error }));
 };
 
-// MODIFICATION DU PROFIL UTILISATEUR
+
+// RECUPERATION DU PROFIL D'UN UTILISATEUR
+exports.getOneUser = (req, res, next) => {
+  console.log(req.query.id)
+    User.findOne ({ 
+        where: {  id: req.query.id }   
+    })
+        .then(user => res.status(200).json(user))
+        .catch(error => res.status(500).json(error))
+  };
+
+// SUPPRESSION D'UN PROFIL UTILSATEUR
+exports.deleteUser = (req, res, next) => {
+//  Publication.destroy({                                      // Suppression de tous les publications liés au compte utilisateur
+//    where: { id: req.query.id }})
+        
+ //       .then(() =>
+   //     User.findOne({ 
+     //     where: {  id: req.query.id }  })
+       //   .then(user => {
+              User.destroy({     
+                where: {  id: req.query.id }  }) 
+               // Suppression du user dans la base de données
+              .then(() => res.status(200).json({ message: 'Utilisateur supprimé !'}))
+            
+        
+          
+  .catch(error => res.status(400).json({ error }));
+};
+
+
+/* MODIFICATION DU PROFIL UTILISATEUR
 exports.modifyUser = (req, res, next) => {
 
   const firstName = req.body.firstName;
@@ -109,21 +126,5 @@ User.update({
 .then(() => res.status(200).json({ message: 'Utilisateur modifié !'}))
 .catch(error => res.status(400).json({ error }));
 }}
+*/
 
-// SUPPRESSION D'UN PROFIL UTILSATEUR
-exports.deleteUser = (req, res, next) => {
-  Publication.destroy({                                      // Suppression de tous les publications liés au compte utilisateur
-    where: { email: req.body.email }})
-        
-        .then(() =>
-        User.findOne({ 
-          where: {  email: req.body.email }  })
-          .then(user => {
-              User.destroy({     
-                where: {  email: req.body.email }  }) }) // Suppression du user dans la base de données
-              .then(() => res.status(200).json({ message: 'Utilisateur supprimé !'}))
-            
-        )
-          
-  .catch(error => res.status(400).json({ error }));
-};

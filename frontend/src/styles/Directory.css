@@ -3,26 +3,26 @@
     text-align: center;
 }
 
-table, td, thead {
+.directory table, td, thead {
 
     border-collapse: collapse;
     margin: auto;
     text-align: left;
 }
 
-td {
+.directory td {
     width : 40%;
     border-bottom: 1px solid #ddd;
     padding-top: 1rem;
     padding-right: 2rem;
 }
 
-thead {
+.directory thead {
     font-weight: bold;
 
 }
 
-tr:nth-child(even) {
+.directory tr:nth-child(even) {
     background-color: #dddddd;
   }
 

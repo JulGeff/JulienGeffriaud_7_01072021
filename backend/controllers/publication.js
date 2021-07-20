@@ -63,7 +63,7 @@ exports.getAllPublications = (req, res, next) => {
 
 exports.getUserPublications = (req, res, next) => {
     Publication.findAll({
-      where: {userId: req.params.id},
+      where: {id: req.params.id},
       order: [['createdAt', 'DESC']]
     })
 

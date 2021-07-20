@@ -4,10 +4,12 @@ import Api from './Api'
 import '../styles/Directory.css'
 import { Redirect } from 'react-router-dom';
 
+let token = localStorage.getItem('token')
+
 function Directory({loggedIn}) {
 
     const [directory, setDirectory] = React.useState([]); //initialisation du state vide
-    let token = localStorage.getItem('token')
+    
     useEffect(() => {
 
         Api.get('/auth/users',
