@@ -3,14 +3,20 @@
 const models = require('../models');        // importation des modèles sequelize
 const Publication = models.publication;
 const fs = require('fs'); // importation du package file system de node, qui donne notamment accès aux fonctions permettant de supprimer les fichiers.
-
+const jwt = require('jsonwebtoken');  // importation package pour création et vérification des tokens
+require('dotenv').config()            // importation dotenv pour sécuriser passwords
+const TokenKey = process.env.TOKENKEY;// Récupération de la clé de cryptage des tokens via dotenv
 
 //CREATION D'UNE PUBLICATION
 exports.createPublication = (req, res, next) => { 
-    
+    const token = req.headers.authorization; // On extrait le token du header Authorization de la requête entrante. On récupère la partie située après 'Bearer '
+    console.log(token)
+    const decodedToken = jwt.verify(token, TokenKey); // On utilise la fonction verify de jsonwebtoken pour décoder notre token
+    const id = decodedToken.id; // on extrait le user id de notre token
+    console.log(id);
     const newPublication = 
         Publication.create({
-        
+            UserId : id,
             title : req.body.title,
             content : req.body.content
             //userID

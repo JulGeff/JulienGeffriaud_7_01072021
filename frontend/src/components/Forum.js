@@ -11,10 +11,12 @@ function Forum({loggedIn}) {
     const [title, setTitle] = useState(""); //initialisation du state vide
     const [content, setContent] = useState(""); //initialisation du state vide
     const [comment, setComment] = useState(""); //initialisation du state vide
-  
-    useEffect(() => {
-      let token = localStorage.getItem('token')
+    
 
+    useEffect(() => {
+      
+      let token = localStorage.getItem('token')
+      // RECUPERATION DES PUBLICATIONS STOCKEES DANS LA BDD
         Api.get('/publication', 
         {   headers: {
           'Authorization': `${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
@@ -37,7 +39,7 @@ function Forum({loggedIn}) {
         // PUBLICATION DES ARTICLES
         const handleSubmit = (event) => {  // Au clic sur le bouton "Publier !"
           event.preventDefault();
-    
+          let token = localStorage.getItem('token')
          
          if(title === null || title === '' || content === null || content === '') {  // On vérifie que les champs
                  return event.status(400).json({'error': "Veuillez remplir les champs 'titre' et 'contenu' pour créer un article"});
@@ -52,7 +54,13 @@ function Forum({loggedIn}) {
     
               console.log(publicationData);
     
-              Api.post('/publication', publicationData) //requête POST via Axios
+              Api.post(
+                  '/publication',  
+                  publicationData,
+                  {headers: {
+                    'Authorization': `${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
+                  }}
+             ) //requête POST via Axios
     
                   .then(function (response) {  //Si Ok
                   console.log(response);

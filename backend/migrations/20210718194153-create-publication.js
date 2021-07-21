@@ -8,7 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
@@ -17,24 +16,20 @@ module.exports = {
           key: 'id'
         }
       },
-
       title: {
         allowNull: false,
         type: Sequelize.STRING,
         len: [2,50]
       },
-
       content: {
         allowNull: false,
         type: Sequelize.STRING(1234),
         len: [2,500]
       },
-
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
