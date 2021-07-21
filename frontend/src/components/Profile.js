@@ -5,7 +5,6 @@ import Api from './Api'
 import '../styles/Profile.css'
 
      
-let id = localStorage.getItem('userId')
 let token = localStorage.getItem('token')
 
 
@@ -20,11 +19,7 @@ function Profile({loggedIn})  {
       Api.get('/auth/user', {          
             headers: {
                 'Authorization': `${token}`
-            },
-            params: {
-              id : id
-             },
-            }
+            },}
             , [])
          
         .then(function (response) {
@@ -45,9 +40,6 @@ function Profile({loggedIn})  {
             Api.delete('/auth/user', {          
               headers: {
                   'Authorization': `${token}` //On sécurise la requêyte avec le token
-              },
-              params: {
-                id : id         //La requête concerne l'id du user connecté
               },
             }) 
        

@@ -82,9 +82,12 @@ exports.getAllUsers = (req, res, next) => {
 
 // RECUPERATION DU PROFIL D'UN UTILISATEUR
 exports.getOneUser = (req, res, next) => {
-  console.log(req.query.id)
+
+  const token = req.headers.authorization; // On extrait le token du header Authorization de la requête entrante. 
+  const decodedToken = jwt.verify(token, TokenKey); // On utilise la fonction verify de jsonwebtoken pour décoder notre token
+  const id = decodedToken.id; // on extrait le user id de notre token
     User.findOne ({ 
-        where: {  id: req.query.id }   
+        where: {  id: id }   
     })
         .then(user => res.status(200).json(user))
         .catch(error => res.status(500).json(error))
@@ -99,8 +102,12 @@ exports.deleteUser = (req, res, next) => {
    //     User.findOne({ 
      //     where: {  id: req.query.id }  })
        //   .then(user => {
+        const token = req.headers.authorization; // On extrait le token du header Authorization de la requête entrante. 
+        const decodedToken = jwt.verify(token, TokenKey); // On utilise la fonction verify de jsonwebtoken pour décoder notre token
+        const id = decodedToken.id; // on extrait le user id de notre token
+        console.log(id);
               User.destroy({     
-                where: {  id: req.query.id }  }) 
+                where: {  id: id }  }) 
                // Suppression du user dans la base de données
               .then(() => res.status(200).json({ message: 'Utilisateur supprimé !'}))
             
