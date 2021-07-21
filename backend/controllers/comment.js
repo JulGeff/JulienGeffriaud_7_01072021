@@ -7,22 +7,21 @@ const jwt = require('jsonwebtoken');  // importation package pour création et v
 require('dotenv').config()            // importation dotenv pour sécuriser passwords
 const TokenKey = process.env.TOKENKEY;// Récupération de la clé de cryptage des tokens via dotenv
 
-//CREATION D'UNE PUBLICATION
-exports.createPublication = (req, res, next) => { 
+//CREATION D'UN COMMENTAIRE
+exports.createComment = (req, res, next) => { 
 
     const token = req.headers.authorization; // On extrait le token du header Authorization de la requête entrante. 
     const decodedToken = jwt.verify(token, TokenKey); // On utilise la fonction verify de jsonwebtoken pour décoder notre token
     const id = decodedToken.id; // on extrait le user id de notre token
-    const newPublication = 
-        Publication.create({
+    const newComment = 
+        Comment.create({
             userId : id,
-            title : req.body.title,
-            content : req.body.content
-            //userID
+            PublicationId : req.body.publicationId,
+            comment : req.body.comment
                 
     })
-        .then((newPublication) => res.status(201).json({
-            message: 'Publication enregistrée !' // Requête traitée avec succès et création d’un document.
+        .then((newComment) => res.status(201).json({
+            message: 'Commentaire enregistré !' // Requête traitée avec succès et création d’un document.
 
         }))
         .catch(error => res.status(400).json({  //Bad Request
@@ -30,6 +29,7 @@ exports.createPublication = (req, res, next) => {
         }));
 }
 
+/*
 // RECUPERATION DE TOUTES LES PUBLICATIONS
 exports.getAllPublications = (req, res, next) => {
     Publication.findAll({

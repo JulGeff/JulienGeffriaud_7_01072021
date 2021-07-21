@@ -11,7 +11,7 @@ function Forum({loggedIn}) {
     const [title, setTitle] = useState(""); //initialisation du state vide
     const [content, setContent] = useState(""); //initialisation du state vide
     const [comment, setComment] = useState(""); //initialisation du state vide
-    
+    const [commentList, setCommentlist] = useState([]); //initialisation du state vide
 
     useEffect(() => {
       
@@ -55,8 +55,7 @@ function Forum({loggedIn}) {
               console.log(publicationData);
     
               Api.post(
-                  '/publication',  
-                  publicationData,
+                  '/publication', publicationData,
                   {headers: {
                     'Authorization': `${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
                   }}
@@ -64,7 +63,7 @@ function Forum({loggedIn}) {
     
                   .then(function (response) {  //Si Ok
                   console.log(response);
-                  setForum(forum.push(publicationData));
+                  //setForum(forum.push(publicationData));
                   setTitle('');
                   setContent('');
                   alert("Votre publication a bien été postée !")
@@ -80,7 +79,38 @@ function Forum({loggedIn}) {
   // PUBLICATION DES COMMENTAIRES
     const handleCommentSubmit = (event) => {  // Au clic sur le bouton "Publier !"
       event.preventDefault();
-      console.log(comment)
+      let token = localStorage.getItem('token')
+     
+     if(comment === null || comment === '') {  // On vérifie que le commentaire n'est pas vide
+             return event.status(400).json({'error': "Veuillez écrire un commentaire"});
+
+      } else {
+        
+          let commentData = { 
+              comment : comment,
+         //     publicationId : publicationId
+          };
+
+          console.log(commentData);
+
+          Api.post(
+              '/comment', commentData,
+              {headers: {
+                'Authorization': `${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
+              }}
+         ) //requête POST via Axios
+
+              .then(function (response) {  //Si Ok
+              console.log(response);
+              //setCommentList(commentList.push(commentData));
+              setComment('');
+              alert("Votre commentaire a bien été posté !")
+              })
+              .catch(function (response) { // Si erreur
+              console.log("pb frontend", response.data);
+              });
+
+      }
 
     }
 
@@ -95,6 +125,7 @@ function Forum({loggedIn}) {
                       type="string" 
                       name="title" 
                       placeholder="Titre" 
+                      minLength="2"
                       maxLength="50" 
                       value={title} 
                       onChange={e => setTitle(e.target.value)} 
@@ -107,6 +138,7 @@ function Forum({loggedIn}) {
                       type="string" 
                       name="content" 
                       placeholder="Rédigez votre publication ici" 
+                      minLength="2"
                       maxLength="500" 
                       rows={10}
                       cols={5}
@@ -129,17 +161,20 @@ function Forum({loggedIn}) {
                             <div className="forum" key={i}>
                                 <h2>{item.title}</h2>
                                 <h3>Auteur·rice : A INTEGRER </h3>
+                                <p>PublicationId : {item.id}</p>
                                 <p>{item.content}</p>
 
-                                <div className = "comments"> 
+                            <div className = "comments"> 
+                              <h3>Commentaires</h3>
                               <form onSubmit={handleCommentSubmit}>
         
-                                  <textarea  id='comment' 
+                                <textarea id='comment' 
                                           className="input" 
                                           name="comment" 
                                           placeholder="Commentez cette publication..." 
+                                          minLength="2"
                                           maxLength="200" 
-                                          value={title} 
+                                          value={comment} 
                                           onChange={e => setComment(e.target.value)} 
                                           required 
                                   />
