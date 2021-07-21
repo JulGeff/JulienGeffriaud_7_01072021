@@ -88,6 +88,7 @@ function Forum({loggedIn}) {
         
           let commentData = { 
               comment : comment,
+              publicationId : 1
          //     publicationId : publicationId
           };
 
