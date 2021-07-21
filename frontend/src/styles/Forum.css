@@ -37,7 +37,7 @@ margin : 5% 5% 0% 5%
     width: 20%
 }
 
-.button:hover {
+.forum .button:hover {
     color: #E02F04;
     background-color: white;
     border: 1px solid #E02F04;

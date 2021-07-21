@@ -12,7 +12,7 @@ router.get('/', auth, publicationCtrl.getAllPublications);               // Réc
 //router.get('/', publicationCtrl.getUserPublications);             // Récupération d'une publication
 //router.put('/publication', publicationCtrl.modifyPublication);            // Modification d'une publication
 
-//AJOUTER module AUTH
+
 
 
 module.exports = router; // export pour pouvoir utiliser dans app.js
