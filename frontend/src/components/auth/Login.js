@@ -17,7 +17,6 @@ function Login() {
         const [email, setEmail] = useState(""); //initialisation du state vide
         const [password, setPassword] = useState(""); //initialisation du state vide
         
-       // const [loggedIn, setLoggedIn] = useState(false); //initialisation du state vide
 
         const handleSubmit = (event) => {
         event.preventDefault();
@@ -39,9 +38,8 @@ function Login() {
                 console.log(response);
                 localStorage.setItem('userId', response.data.id)
                 localStorage.setItem('token', response.data.token)
-                localStorage.setItem('loggedIn', response.data.loggedIn)
-               // const loggedIn = response.data.loggedIn;
-                //setLoggedIn(loggedIn)
+                
+               
         })
                 
                 .catch(function (response) { // Si erreur

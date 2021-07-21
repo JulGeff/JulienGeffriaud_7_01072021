@@ -13,6 +13,7 @@ exports.createPublication = (req, res, next) => {
         
             title : req.body.title,
             content : req.body.content
+            //userID
                 
     })
         .then((newPublication) => res.status(201).json({

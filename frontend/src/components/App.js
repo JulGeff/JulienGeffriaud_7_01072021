@@ -2,27 +2,41 @@ import Banner from "./Banner";
 import Signup from './auth/Signup'
 import Home from './Home'
 import Profile from './Profile'
-import Publication from './Publication'
 import Directory from './Directory'
 import Forum from './Forum'
+
+import React, { useEffect, useState } from 'react';
+
 import {
   BrowserRouter as Router,
   Route,
   Switch,
 
 } from "react-router-dom";
-import React from 'react'
 
 
 function App() {
 
+  /*
+const [loggedIn, setLoggedIn] = useState(""); //initialisation du state vide
+ const token = localStorage.getItem('token')
+  useEffect(() => {
+
+ setLoggedIn(typeof token !== 'undefined' && token !== null)
+  console.log("User logged in ?", loggedIn)
+
+}
+, [token, loggedIn])
+
+ */
+const loggedIn = true
         return (
           <div>
              
             <Router>
             <Banner />
                 <Switch>
-                <Route exact path={"/signup"} loggedIn={true} >            
+                <Route exact path={"/signup"} loggedIn={loggedIn} >            
                       <Signup />
                   </Route>
 
@@ -31,16 +45,15 @@ function App() {
                   </Route>
 
                   <Route exact path={"/forum"} >
-                      <Publication loggedIn={true} />
-                      <Forum loggedIn={true} />
+                      <Forum loggedIn={loggedIn} />
                   </Route>
                 
                   <Route exact path={"/profile"} >
-                      <Profile loggedIn={true}/>
+                      <Profile loggedIn={loggedIn}/>
                   </Route>
 
                   <Route exact path={"/directory"} >
-                      <Directory loggedIn={true}/>
+                      <Directory loggedIn={loggedIn}/>
                   </Route>
                 </Switch>
             </Router>

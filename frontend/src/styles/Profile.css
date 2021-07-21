@@ -8,6 +8,7 @@
 .profile ul {
     list-style-type: none;
     line-height: 2rem;
+    text-align: center;
 }
 
 .profile h1 {
@@ -15,7 +16,6 @@
 }
 
 .delete {
-
     color: white;
     font-weight: bold;
     font-size: .8rem;
@@ -26,7 +26,7 @@
     transition-duration: .4s;
     width: 30%;
     text-align: center;
-    padding : 1%;
+    padding: 1%;
     cursor: pointer;
 }
 

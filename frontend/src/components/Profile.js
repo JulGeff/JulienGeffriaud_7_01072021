@@ -10,11 +10,10 @@ let token = localStorage.getItem('token')
 
 
 function Profile({loggedIn})  {
-
+      const [isLoading, setLoading] = useState(true);
       let history = useHistory();  
-     
       const [profileInfo, setProfileInfo] = useState([]);
- 
+      
 
       useEffect(() => {
 
@@ -25,11 +24,13 @@ function Profile({loggedIn})  {
             params: {
               id : id
              },
-          }) 
+            }
+            , [])
          
         .then(function (response) {
+          console.log(response.data)
           setProfileInfo(response.data);
-          
+          setLoading(false);
           
      
         })
@@ -66,6 +67,9 @@ function Profile({loggedIn})  {
           return <Redirect to="/"/>
           }
 
+        if (isLoading) {
+          return <div className="App">Loading...</div>;
+        }
        
     return (
         <div className='profile'> 
@@ -76,7 +80,7 @@ function Profile({loggedIn})  {
               <li>Prénom : {profileInfo.firstName}</li>
               <li>Nom : {profileInfo.lastName}</li>
               <li>email : {profileInfo.email}</li>
-              <li>Date de création du profil : {profileInfo.email}</li>
+             
             </ul>
             
             <p className = "delete" onClick = { handleDelete }>Supprimer mon profil</p>
