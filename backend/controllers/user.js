@@ -3,6 +3,8 @@
 const bcrypt = require('bcrypt');        // importation du package de cryptage de mdp bcrypt
 const models = require('../models');     // importation des modèles sequelize
 const User = models.user;
+const Publication = models.publication;
+const Comment = models.comment;
 const jwt = require('jsonwebtoken');     // importation package pour création et vérification des tokens
 require('dotenv').config()               // importation dotenv pour sécuriser passwords
 const TokenKey = process.env.TOKENKEY;   // Récupération de la clé de cryptage des tokens via dotenv
@@ -94,27 +96,44 @@ exports.getOneUser = (req, res, next) => {
   };
 
 // SUPPRESSION D'UN PROFIL UTILSATEUR
-exports.deleteUser = (req, res, next) => {
-//  Publication.destroy({                                      // Suppression de tous les publications liés au compte utilisateur
-//    where: { id: req.query.id }})
-        
- //       .then(() =>
-   //     User.findOne({ 
-     //     where: {  id: req.query.id }  })
-       //   .then(user => {
-        const token = req.headers.authorization; // On extrait le token du header Authorization de la requête entrante. 
-        const decodedToken = jwt.verify(token, TokenKey); // On utilise la fonction verify de jsonwebtoken pour décoder notre token
-        const id = decodedToken.id; // on extrait le user id de notre token
-        console.log(id);
-              User.destroy({     
-                where: {  id: id }  }) 
-               // Suppression du user dans la base de données
-              .then(() => res.status(200).json({ message: 'Utilisateur supprimé !'}))
-            
-        
+/*exports.deleteUser = (req, res, next) => {
+  
+  const token = req.headers.authorization; // On extrait le token du header Authorization de la requête entrante. 
+  const decodedToken = jwt.verify(token, TokenKey); // On utilise la fonction verify de jsonwebtoken pour décoder notre token
+  const id = decodedToken.id; // on extrait le user id de notre token
+    User.destroy ({ 
+        where: {  id: id }   
+    })
+        .then(user => res.status(200).json(user))
+        .catch(error => res.status(500).json(error))
+  };
+              */
           
-  .catch(error => res.status(400).json({ error }));
-};
+  exports.deleteUser = (req, res, next) => {
+    const token = req.headers.authorization; // On extrait le token du header Authorization de la requête entrante. 
+    const decodedToken = jwt.verify(token, TokenKey); // On utilise la fonction verify de jsonwebtoken pour décoder notre token
+    const id = decodedToken.id; // on extrait le user id de notre token
+
+      Comment.destroy({where: {userId: id}})
+      .then(() => 
+        Publication.findAll({where: {userId: id}})
+          .then(
+            (publications) => {
+              publications.forEach(
+                (publication) => {
+                  Comment.destroy({where: {publicationId: publication.id}})
+                 Publication.destroy({where: {id: publication.id}})
+                }
+              )
+            }
+          )
+          .then(() =>
+          User.destroy ({ 
+            where: {  id: id }   
+        })
+            .then(user => res.status(200).json(user))
+            .catch(error => res.status(500).json(error))
+          ))}
 
 
 /* MODIFICATION DU PROFIL UTILISATEUR

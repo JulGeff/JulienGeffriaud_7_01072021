@@ -4,7 +4,7 @@ import Home from './Home'
 import Profile from './Profile'
 import Directory from './Directory'
 import Forum from './Forum'
-
+import SelectedPublication from './SelectedPublication'
 import React, { useEffect, useState } from 'react';
 
 import {
@@ -46,6 +46,10 @@ const loggedIn = true
 
                   <Route exact path={"/forum"} >
                       <Forum loggedIn={loggedIn} />
+                  </Route>
+
+                  <Route path={"/forum/publication"} >
+                      <SelectedPublication loggedIn={loggedIn}/>
                   </Route>
                 
                   <Route exact path={"/profile"} >
