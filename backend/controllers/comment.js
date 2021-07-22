@@ -30,10 +30,16 @@ exports.createComment = (req, res, next) => {
         }));
 }
 
-/*
-// RECUPERATION DE TOUS LES COMMENTAIRES
+
+// RECUPERATION DE TOUS LES COMMENTAIRES LIES A UNE PUBLICATION
 exports.getAllComments = (req, res, next) => {
-    Comment.findAll({
+    const publicationId = req.query.publicationId
+    console.log(publicationId)
+    Comment.findAll(
+        
+        {where: {
+            publicationId: publicationId
+          },
         order: [['createdAt', 'DESC']]
     })
 

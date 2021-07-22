@@ -11,11 +11,12 @@ function Forum({loggedIn}) {
     const [title, setTitle] = useState(""); //initialisation du state vide
     const [content, setContent] = useState(""); //initialisation du state vide
 
+     // RECUPERATION DES PUBLICATIONS STOCKEES DANS LA BDD
 
     useEffect(() => {
       
       let token = localStorage.getItem('token')
-      // RECUPERATION DES PUBLICATIONS STOCKEES DANS LA BDD
+     
         Api.get('/publication', 
         {   headers: {
           'Authorization': `${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
@@ -118,19 +119,16 @@ function Forum({loggedIn}) {
             <h1>Publications du forum les plus récentes</h1>
            
             <div >
-                        {forum.map((item,i) => 
-                        <Link to={"./forum/publication?id=" + item.id} key={i}>
-                            <div className="forum" key={i}>
-                                <h2>{item.title}</h2>
-                                <h3>Auteur·rice : A INTEGRER </h3>
+              {forum.map((item,i) => 
+                  <Link to={"./forum/publication?id=" + item.id} key={i}>
+                      <div className="forum" key={i}>
+                          <h2>{item.title}</h2>
+                          <h3>Auteur·rice : A INTEGRER </h3>
 
-                                <p>{item.content}</p>
-
-                        
-                            </div>
-                            </Link>
-                            )}
-                         
+                          <p>{item.content}</p>
+                      </div>
+                  </Link>
+                  )}  
             </div>    
          </div>
         

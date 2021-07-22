@@ -7,12 +7,11 @@ const publicationCtrl = require('../controllers/publication')           // Appel
 
 
 router.post('/', auth, publicationCtrl.createPublication);               // Création d'une publication 
-//router.delete('/publication', publicationCtrl.deletePublication);         // Suppression d'une publication
+router.delete('/', publicationCtrl.deletePublication);                  // Suppression d'une publication
 router.get('/', auth, publicationCtrl.getAllPublications);               // Récupèration toutes les publications
-//router.get('/', publicationCtrl.getUserPublications);             // Récupération d'une publication
+router.get('/selected', auth, publicationCtrl.getOnePublication);             // Récupération d'une publication
+router.get('/user', auth, publicationCtrl.getUserPublications);             // Récupération de toutes le spublications d'un user donné
 //router.put('/publication', publicationCtrl.modifyPublication);            // Modification d'une publication
-
-
 
 
 module.exports = router; // export pour pouvoir utiliser dans app.js

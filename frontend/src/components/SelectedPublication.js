@@ -2,22 +2,23 @@
 import React, { useEffect, useState } from 'react';
 import Api from './Api'
 import '../styles/SelectedPublication.css'
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 
 function SelectedPublication({loggedIn}) {
 
-    const PublicationId = window.location.href.split('=')[1];
-    console.log(PublicationId)
+  const PublicationId = window.location.href.split('=')[1];
     const [selectedPublication, setSelectedPublication] = useState(""); //initialisation du state vide   
     const [comment, setComment] = useState(""); //initialisation du state vide
     const [commentList, setCommentlist] = useState([]); //initialisation du state vide
 
-    useEffect(() => {
-      
-      let token = localStorage.getItem('token')
+
       // RECUPERATION DE LA PUBLICATION SELECTIONNEE DEPUIS LA BDD
-        Api.get('/publication',    //requête GET via Axios
+    useEffect(() => {
+      const PublicationId = window.location.href.split('=')[1];
+      let token = localStorage.getItem('token')
+    
+        Api.get('/publication/selected',    //requête GET via Axios
         {   headers: {
           'Authorization': `${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
         },
@@ -25,8 +26,9 @@ function SelectedPublication({loggedIn}) {
 
       })
         .then(function (response)  {
-          
-            console.log(response)
+          const publi = response.data;
+          setSelectedPublication(publi);          
+           
           })
           .catch(function (response) { // Si erreur
             console.log("pb frontend", response.data);
@@ -34,7 +36,29 @@ function SelectedPublication({loggedIn}) {
             }
       , [])
 
-
+      // RECUPERATION DE TOUS LES COMMENTAIRES ASSOCIES A LA PUBLICATION
+      useEffect(() => {
+       const PublicationId = window.location.href.split('=')[1];
+        let token = localStorage.getItem('token')
+       
+          Api.get('/comment', 
+          {   headers: {
+            'Authorization': `${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
+          },
+          params : {publicationId : PublicationId} 
+        
+        
+        }) //requête GET via Axios
+          .then(function (response)  {
+              const commentList = response.data;
+              setCommentlist(commentList);
+              console.log(commentList[0])
+            })
+            .catch(function (response) { // Si erreur
+              console.log("pb frontend", response.data);
+              });
+              }
+        , [])
 
       if (!loggedIn) {
         return <Redirect to="/"/>
@@ -76,45 +100,53 @@ function SelectedPublication({loggedIn}) {
               .catch(function (response) { // Si erreur
               console.log("pb frontend", response.data);
               });
-
       }
-
     }
 
     return (
-      <div className='forum_global'> 
+      <div className='forum_global'>          
+        <h2>{ selectedPublication.title }</h2>
+        <h3>Auteur·rice : ID = { selectedPublication.userId } </h3>
+        <Link to={"./userpublications?id=" + selectedPublication.userId}>
+          <h3>Voir toutes les publications de { selectedPublication.userId }</h3>
+        </Link>
+        <p>{ selectedPublication.content }</p>
+
+        <div className = "comments__create"> 
+          <h3>Commentaires</h3>
+          <form onSubmit={handleSubmit}>
+
+            <textarea id='comment' 
+                      className="input" 
+                      name="comment" 
+                      placeholder="Commentez cette publication..."
+                      minLength="2"
+                      maxLength="200" 
+                      value={comment} 
+                      onChange={e => setComment(e.target.value)} 
+                      required 
+              />
+
+              <input  className="button" 
+                      type="submit" 
+                      value="Publier !" 
+              />
+          </form>
+      </div>
+      <div className = "comments__display">
+      {commentList.map((item,i) => 
       
-        
-                     
-                        
-                         
-                                <h2>TITRE A INTEGRER</h2>
-                                <h3>Auteur·rice : A INTEGRER </h3>
-                                <p>PublicationId : A INTEGRER</p>
-                                <p>A INTEGRER</p>
+                      <div className="commentList" key={i}>
+                          <h3>Commentaire publié par : "User ID = {commentList[i].userId}" le {commentList[i].createdAt.slice(9,10).padStart(2, '0')}/{commentList[i].createdAt.slice(6,7).padStart(2, '0')}/{commentList[i].createdAt.slice(0,4)} à {commentList[i].createdAt.slice(11,16)}           
+                          </h3>
+                          <h2>{commentList[i].comment}</h2>
 
-                            <div className = "comments"> 
-                              <h3>Commentaires</h3>
-                              <form onSubmit={handleSubmit}>
-        
-                                <textarea id='comment' 
-                                          className="input" 
-                                          name="comment" 
-                                          placeholder="Commentez cette publication..." 
-                                          minLength="2"
-                                          maxLength="200" 
-                                          value={comment} 
-                                          onChange={e => setComment(e.target.value)} 
-                                          required 
-                                  />
 
-                                  <input  className="button" 
-                                          type="submit" 
-                                          value="Publier !" 
-                                  />
-                              </form>
-                          </div>
-                            </div>
+                      </div>
+                  )}  
+      </div>
+
+    </div>
                             
                          
         

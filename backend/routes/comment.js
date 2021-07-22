@@ -7,8 +7,9 @@ const publicationCtrl = require('../controllers/comment')           // Appel des
 
 
 router.post('/', auth, publicationCtrl.createComment);               // Création d'un commentaire
+router.get('/', auth, publicationCtrl.getAllComments);               // Récupèration toutes les publications
 //router.delete('/publication', publicationCtrl.deletePublication);         // Suppression d'une publication
-//router.get('/', auth, publicationCtrl.getAllPublications);               // Récupèration toutes les publications
+
 //router.get('/', publicationCtrl.getUserPublications);             // Récupération d'une publication
 //router.put('/publication', publicationCtrl.modifyPublication);            // Modification d'une publication
 

@@ -18,7 +18,7 @@ exports.createPublication = (req, res, next) => {
             userId : id,
             title : req.body.title,
             content : req.body.content
-            //userID
+         
                 
     })
         .then((newPublication) => res.status(201).json({
@@ -50,31 +50,32 @@ exports.getAllPublications = (req, res, next) => {
 };
 
 
-/*
 
-//SUPPRESSION D'UNE PUBLICATION
-  exports.deletePublication = (req, res, next) => { 
-     
-    Publication.destroy ({ where: { _id: req.params.id }}) // callback : Suppression de la publication avec l'id correspondant
-        
-        .then(() => res.status(200).json({ message: 'Publication supprimée !'})) // Requête traitée avec succès
-        .catch(error => res.status(500).json({ error })); // Internal Server Error	
-  };
+// RECUPERATION D'UNE PUBLICATION DONNEE
+exports.getOnePublication = (req, res, next) => {
+
+   const publicationId = req.query.publicationId;
+      Publication.findOne ({ 
+          where: {  id: publicationId }   
+      })
+          .then(publication => res.status(200).json(publication))
+          .catch(error => res.status(500).json(error))
+    };
+  
 
 
 
 
 
-// RECUPERATION DES PUBLICATIONS D'UN UTILISATEUR DONNE
-
+// RECUPERATION DES UBLICATIONS D'UN USER DONNE
 exports.getUserPublications = (req, res, next) => {
+const userId = req.query.userId
     Publication.findAll({
-      where: {id: req.params.id},
+      where: {userId: userId},
       order: [['createdAt', 'DESC']]
     })
 
     .then(publications => {
-        console.log(publications);
         res.status(200).json(publications);
     })
     
@@ -87,6 +88,22 @@ exports.getUserPublications = (req, res, next) => {
     );
 };
 
+
+
+//SUPPRESSION D'UNE PUBLICATION
+ exports.deletePublication = (req, res, next) => { 
+    Comment.destroy({where: {publicationId: req.params.id}})
+    .then(() => 
+      Publication.destroy({ where: {id: req.params.id} })
+      .then(() => res.status(200).json({ message: 'Article supprimé !'}))
+    )
+    
+  .catch(error => res.status(400).json({ error }));
+};
+
+
+
+/*
 
 // MODIFICATION D'UNE PUBLICATION
 exports.modifyPublication = (req, res, next) => {

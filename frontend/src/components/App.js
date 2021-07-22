@@ -5,6 +5,7 @@ import Profile from './Profile'
 import Directory from './Directory'
 import Forum from './Forum'
 import SelectedPublication from './SelectedPublication'
+import UserPublications from './UserPublications'
 import React, { useEffect, useState } from 'react';
 
 import {
@@ -50,6 +51,10 @@ const loggedIn = true
 
                   <Route path={"/forum/publication"} >
                       <SelectedPublication loggedIn={loggedIn}/>
+                  </Route>
+
+                  <Route path={"/forum/userpublications"} >
+                      <UserPublications loggedIn={loggedIn}/>
                   </Route>
                 
                   <Route exact path={"/profile"} >
