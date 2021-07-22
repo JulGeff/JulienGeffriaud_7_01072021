@@ -7,6 +7,8 @@ import { Redirect } from 'react-router-dom';
 
 function SelectedPublication({loggedIn}) {
 
+    const PublicationId = window.location.href.split('=')[1];
+    console.log(PublicationId)
     const [selectedPublication, setSelectedPublication] = useState(""); //initialisation du state vide   
     const [comment, setComment] = useState(""); //initialisation du state vide
     const [commentList, setCommentlist] = useState([]); //initialisation du state vide
@@ -19,7 +21,7 @@ function SelectedPublication({loggedIn}) {
         {   headers: {
           'Authorization': `${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
         },
-            params : {publicationId : 3} //
+            params : {publicationId : PublicationId} //
 
       })
         .then(function (response)  {
@@ -52,7 +54,7 @@ function SelectedPublication({loggedIn}) {
         
           let commentData = { 
               comment : comment,
-              publicationId : 1
+              publicationId : PublicationId
  
           };
 
