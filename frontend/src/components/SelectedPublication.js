@@ -106,9 +106,9 @@ function SelectedPublication({loggedIn}) {
     return (
       <div className='forum_global'>          
         <h2>{ selectedPublication.title }</h2>
-        <h3>Auteur·rice : ID = { selectedPublication.userId } </h3>
+        <h3>Publié par numéro { selectedPublication.userId } le { selectedPublication.createdAt.slice(9,10).padStart(2, '0')}/{ selectedPublication.createdAt.slice(6,7).padStart(2, '0')}/{ selectedPublication.createdAt.slice(0,4) } à { selectedPublication.createdAt.slice(11,16)}</h3>
         <Link to={"./userpublications?id=" + selectedPublication.userId}>
-          <h3>Voir toutes les publications de { selectedPublication.userId }</h3>
+          <h3>Voir toutes les publications de numéro { selectedPublication.userId }</h3>
         </Link>
         <p>{ selectedPublication.content }</p>
 
@@ -137,7 +137,7 @@ function SelectedPublication({loggedIn}) {
       {commentList.map((item,i) => 
       
                       <div className="commentList" key={i}>
-                          <h3>Commentaire publié par : "User ID = {commentList[i].userId}" le {commentList[i].createdAt.slice(9,10).padStart(2, '0')}/{commentList[i].createdAt.slice(6,7).padStart(2, '0')}/{commentList[i].createdAt.slice(0,4)} à {commentList[i].createdAt.slice(11,16)}           
+                          <h3>Commentaire publié par numéro {commentList[i].userId} le {commentList[i].createdAt.slice(9,10).padStart(2, '0')}/{commentList[i].createdAt.slice(6,7).padStart(2, '0')}/{commentList[i].createdAt.slice(0,4)} à {commentList[i].createdAt.slice(11,16)}           
                           </h3>
                           <h2>{commentList[i].comment}</h2>
 
