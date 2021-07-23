@@ -7,8 +7,7 @@ const TokenKey = process.env.TOKENKEY;// Récupération de la clé de cryptage d
 
 module.exports = (req, res, next) => {
   try {
-    const token = req.headers.authorization; // On extrait le token du header Authorization de la requête entrante. On récupère la partie située après 'Bearer '
-    console.log(token)
+    const token = req.headers.authorization; // On extrait le token du header Authorization de la requête entrante. 
     const decodedToken = jwt.verify(token, TokenKey); // On utilise la fonction verify de jsonwebtoken pour décoder notre token
     const id = decodedToken.id; // on extrait le user id de notre token
     if (req.body.id && req.body.id !== id) { // On compare le user ID de la demande avec celui du token décodé

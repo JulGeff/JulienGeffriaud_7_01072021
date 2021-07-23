@@ -16,7 +16,7 @@ function Login() {
 
         const [email, setEmail] = useState(""); //initialisation du state vide
         const [password, setPassword] = useState(""); //initialisation du state vide
-        
+        const [isAdmin, setIsAdmin] = useState(""); //initialisation du state vide
 
         const handleSubmit = (event) => {
         event.preventDefault();
@@ -36,7 +36,10 @@ function Login() {
                 .then(function (response) {  //Si Ok
                 history.push("/forum")   
                 console.log(response);
-                localStorage.setItem('token', response.data.token)
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('id', response.data.id)
+                setIsAdmin(response.data.isAdmin);
+                console.log(isAdmin)
                 
                
         })
@@ -92,7 +95,7 @@ function Login() {
         </form>
 
         <p>C'est votre première visite ?</p>
-        <p><Link to="/signup">Créez un compte</Link></p>
+        <p><Link to="/signup"><strong>Créez un compte</strong></Link></p>
     </div>
     );
   }

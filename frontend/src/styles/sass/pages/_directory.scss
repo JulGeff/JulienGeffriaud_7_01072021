@@ -1,31 +1,32 @@
 .directory {
+    h1 {
+        text-align: center;
+    }
 
-    text-align: center;
+    table,
+    td,
+    thead {
+        border-collapse: collapse;
+        margin: auto;
+        text-align: left;
+    }
+
+    td {
+     
+        border-bottom: 1px solid #ddd;
+        padding-top: 1rem;
+        padding-right: 2rem;
+    }
+
+    thead {
+        font-weight: bold;
+    }
+
+    svg {
+        width: 1rem;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
 }
-
-.directory table, td, thead {
-
-    border-collapse: collapse;
-    margin: auto;
-    text-align: left;
-}
-
-.directory td {
-    width : 40%;
-    border-bottom: 1px solid #ddd;
-    padding-top: 1rem;
-    padding-right: 2rem;
-}
-
-.directory thead {
-    font-weight: bold;
-
-}
-
-.directory tr:nth-child(even) {
-    background-color: #dddddd;
-  }
-
-  .directory svg {
-      width : 1rem;
-  }

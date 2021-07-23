@@ -2,6 +2,7 @@
 
 const models = require('../models');        // importation des modèles sequelize
 const Publication = models.publication;
+const Comment = models.comment;
 const fs = require('fs'); // importation du package file system de node, qui donne notamment accès aux fonctions permettant de supprimer les fichiers.
 const jwt = require('jsonwebtoken');  // importation package pour création et vérification des tokens
 require('dotenv').config()            // importation dotenv pour sécuriser passwords
@@ -18,8 +19,7 @@ exports.createPublication = (req, res, next) => {
             userId : id,
             title : req.body.title,
             content : req.body.content
-         
-                
+            
     })
         .then((newPublication) => res.status(201).json({
             message: 'Publication enregistrée !' // Requête traitée avec succès et création d’un document.
@@ -50,7 +50,6 @@ exports.getAllPublications = (req, res, next) => {
 };
 
 
-
 // RECUPERATION D'UNE PUBLICATION DONNEE
 exports.getOnePublication = (req, res, next) => {
 
@@ -61,13 +60,9 @@ exports.getOnePublication = (req, res, next) => {
           .then(publication => res.status(200).json(publication))
           .catch(error => res.status(500).json(error))
     };
-  
 
 
-
-
-
-// RECUPERATION DES UBLICATIONS D'UN USER DONNE
+// RECUPERATION DES PUBLICATIONS D'UN USER DONNE
 exports.getUserPublications = (req, res, next) => {
 const userId = req.query.userId
     Publication.findAll({
@@ -89,15 +84,13 @@ const userId = req.query.userId
 };
 
 
-
 //SUPPRESSION D'UNE PUBLICATION
  exports.deletePublication = (req, res, next) => { 
-    Comment.destroy({where: {publicationId: req.params.id}})
+    Comment.destroy({where: {publicationId: req.query.id}})
     .then(() => 
-      Publication.destroy({ where: {id: req.params.id} })
+      Publication.destroy({ where: {id: req.query.id} })
       .then(() => res.status(200).json({ message: 'Article supprimé !'}))
     )
-    
   .catch(error => res.status(400).json({ error }));
 };
 

@@ -1,0 +1,19 @@
+@mixin button {
+
+margin : auto;
+    color: white;
+    font-weight: bold;
+    background-color: $color-primary;
+    border: 1px solid $color-primary;
+    border-radius: $radius;
+    transition-duration: 0.4s;
+    display: inline-block;
+    padding : 0 1%;
+
+    &:hover {
+        color: $color-primary;
+        background-color: white;
+        border: 1px solid $color-primary;
+       
+    }
+}

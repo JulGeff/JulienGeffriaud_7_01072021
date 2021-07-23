@@ -13,7 +13,6 @@ exports.createComment = (req, res, next) => {
     const token = req.headers.authorization; // On extrait le token du header Authorization de la requête entrante. 
     const decodedToken = jwt.verify(token, TokenKey); // On utilise la fonction verify de jsonwebtoken pour décoder notre token
     const id = decodedToken.id; // on extrait le user id de notre token
-    console.log(req.body.comment)
     const newComment = 
         Comment.create({
             userId : id,
@@ -68,11 +67,6 @@ exports.getAllComments = (req, res, next) => {
         .catch(error => res.status(500).json({ error })); // Internal Server Error	
   };
 
-
-
-
-
-/
 
 // MODIFICATION D'UN COMMENTAIRE
 exports.modifyPublication = (req, res, next) => {

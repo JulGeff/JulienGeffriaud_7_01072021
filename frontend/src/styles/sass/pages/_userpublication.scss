@@ -1,0 +1,38 @@
+.userpublications {
+    margin: 0 25%;
+
+    h1 {
+        text-align: center;
+    }
+
+    &__display {
+        border: 1px solid black;
+        border-radius: $radius;
+        padding: 0 5% 5% 5%;
+        margin: 5% 0;
+
+        &__link {
+            text-decoration: none;
+            color: black;
+
+            &__content {
+                h2 {
+                    text-align: center;
+                }
+                &__subtitle {
+                    font-style: italic;
+                    text-align: center;
+                 
+                }
+
+                &__delete {
+                    @include button;
+                    cursor: pointer;
+                    display: block;
+                    text-align: center;
+                    
+                }
+            }
+        }
+    }
+}

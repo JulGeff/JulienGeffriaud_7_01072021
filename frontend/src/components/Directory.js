@@ -2,7 +2,7 @@
 import React, { useEffect, } from 'react';
 import Api from './Api'
 import '../styles/style.css'
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 let token = localStorage.getItem('token')
 
@@ -38,9 +38,10 @@ function Directory({loggedIn}) {
             <table>
                 <thead>
                     <tr>
-                    <td>Nom</td>
-                    <td>Prénom</td>
-                    <td> </td>
+                        <td>Nom</td>
+                        <td>Prénom</td>
+                        <td>Contact</td>
+                        <td>Publications</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,6 +50,10 @@ function Directory({loggedIn}) {
                             <td>{item.lastName}</td>
                             <td>{item.firstName}</td>
                             <td><a href={"mailto:" + item.email}> <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="envelope" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#E02F04" d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z"></path></svg></a></td>
+                            <td><Link to={"/forum/userpublications?id=" + item.id}>
+                               <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="book" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#E02F04" d="M448 360V24c0-13.3-10.7-24-24-24H96C43 0 0 43 0 96v320c0 53 43 96 96 96h328c13.3 0 24-10.7 24-24v-16c0-7.5-3.5-14.3-8.9-18.7-4.2-15.4-4.2-59.3 0-74.7 5.4-4.3 8.9-11.1 8.9-18.6zM128 134c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm0 64c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm253.4 250H96c-17.7 0-32-14.3-32-32 0-17.6 14.4-32 32-32h285.4c-1.9 17.1-1.9 46.9 0 64z"></path></svg>
+                            </Link>  
+                            </td>  
                         </tr>)}
                 </tbody>
             </table>

@@ -1,0 +1,71 @@
+.loginsignup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: $radius;
+    border: solid black 1px;
+    margin:2% 32%;
+    
+    padding: 2% 0;
+   
+
+}
+
+.loginpic {
+    max-width: 30%
+}
+
+.logform {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.loginsignup p {
+    text-align: center;
+    margin: 0;
+}
+
+.changelog {
+    text-decoration: underline;
+}
+
+.changelog:hover {
+    cursor: pointer;
+}
+
+.input {
+    margin: .5rem 0 .5rem 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    width: 120%;
+}
+
+.loginsignup .button {
+    align-self: center;
+    color: white;
+    font-weight: bold;
+    background-color: $color-primary;
+    border: 1px solid $color-primary;
+    border-radius: $radius;
+    padding: .7rem;
+    margin : 2rem 0;
+    transition-duration: .4s;
+   
+}
+
+.loginsignup .button:hover {
+    color: $color-primary;
+    background-color: white;
+    border: 1px solid $color-primary;
+}
+
+h1 {
+
+    font-size: 1.5rem;;
+}
+
+textarea {
+
+    resize: none;
+}

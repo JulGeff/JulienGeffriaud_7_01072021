@@ -52,7 +52,7 @@ function SelectedPublication({loggedIn}) {
           .then(function (response)  {
               const commentList = response.data;
               setCommentlist(commentList);
-              console.log(commentList[0])
+    
             })
             .catch(function (response) { // Si erreur
               console.log("pb frontend", response.data);
@@ -104,48 +104,45 @@ function SelectedPublication({loggedIn}) {
     }
 
     return (
-      <div className='forum_global'>          
-        <h2>{ selectedPublication.title }</h2>
-        <h3>Publié par numéro { selectedPublication.userId } le { selectedPublication.createdAt.slice(9,10).padStart(2, '0')}/{ selectedPublication.createdAt.slice(6,7).padStart(2, '0')}/{ selectedPublication.createdAt.slice(0,4) } à { selectedPublication.createdAt.slice(11,16)}</h3>
-        <Link to={"./userpublications?id=" + selectedPublication.userId}>
-          <h3>Voir toutes les publications de numéro { selectedPublication.userId }</h3>
+      <div className='publication'>          
+        <h1 >{ selectedPublication.title }</h1>
+        <p className='publication__subtitle'>Publié par numéro { selectedPublication.userId } le INTEGRER DATES </p>
+        <Link to={"./userpublications?id=" + selectedPublication.userId} className='publication__link'>
+          <p className='publication__link__user'>Voir toutes les publications de numéro { selectedPublication.userId }</p>
         </Link>
-        <p>{ selectedPublication.content }</p>
+        <p className = 'publication__content'>{ selectedPublication.content }</p>
 
-        <div className = "comments__create"> 
-          <h3>Commentaires</h3>
-          <form onSubmit={handleSubmit}>
-
+        <div className = "publication__comments"> 
+          <form className = "publication__comments__form" onSubmit={handleSubmit}>
             <textarea id='comment' 
-                      className="input" 
+                      className ="publication__comments__form__box" 
                       name="comment" 
                       placeholder="Commentez cette publication..."
                       minLength="2"
                       maxLength="200" 
+                      rows={3}
                       value={comment} 
                       onChange={e => setComment(e.target.value)} 
                       required 
               />
 
-              <input  className="button" 
+              <input  className="publication__comments__form__button" 
                       type="submit" 
                       value="Publier !" 
               />
           </form>
       </div>
-      <div className = "comments__display">
-      {commentList.map((item,i) => 
-      
-                      <div className="commentList" key={i}>
-                          <h3>Commentaire publié par numéro {commentList[i].userId} le {commentList[i].createdAt.slice(9,10).padStart(2, '0')}/{commentList[i].createdAt.slice(6,7).padStart(2, '0')}/{commentList[i].createdAt.slice(0,4)} à {commentList[i].createdAt.slice(11,16)}           
-                          </h3>
-                          <h2>{commentList[i].comment}</h2>
+      <div className = "publication__displaycomments">
+        <h2>Commentaires</h2>
+        {commentList.map((item,i) => 
+          <div className="publication__displaycomments__list" key={i}>
 
-
-                      </div>
-                  )}  
+              <h3><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#E02F04" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path></svg> 
+              {commentList[i].comment}</h3>
+              <p>publié par numéro <strong>{commentList[i].userId}</strong> le {commentList[i].createdAt.substring(9,10).padStart(2, '0')}/{commentList[i].createdAt.substring(6,7).padStart(2, '0')}/{commentList[i].createdAt.substring(0,4)} à {commentList[i].createdAt.substring(11,16)}</p>
+          </div>
+              )}  
       </div>
-
     </div>
                             
                          

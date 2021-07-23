@@ -1,37 +1,26 @@
 .profile {
     border-radius: 15px;
-    box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.56);
+    border: solid black 1px;
     margin: 2% 27%;
     padding: 2% 0;
-}
 
-.profile ul {
-    list-style-type: none;
-    line-height: 2rem;
-    text-align: center;
-}
+    h1 {
+        text-align: center;
+    }
 
-.profile h1 {
-    text-align: center;
-}
+    ul {
+        list-style-type: none;
+        line-height: 2rem;
+        text-align: center;
+    }
+    &__buttons {
+        text-align: center;
 
-.delete {
-    color: white;
-    font-weight: bold;
-    font-size: .8rem;
-    background-color: $color-primary;
-    border: 1px solid $color-primary;
-    border-radius: 15px;
-    margin: auto;
-    transition-duration: .4s;
-    width: 30%;
-    text-align: center;
-    padding: 1%;
-    cursor: pointer;
-}
-
-.delete:hover {
-    color: $color-primary;
-    background-color: white;
-    border: 1px solid $color-primary;
+        &__publications,
+        &__delete {
+            @include button;
+            margin : 0 1rem;
+            cursor: pointer;
+        }
+    }
 }

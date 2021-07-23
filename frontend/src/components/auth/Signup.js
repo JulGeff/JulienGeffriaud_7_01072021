@@ -109,7 +109,7 @@ function Signup() {
         </form>
 
         <p>Vous avez déjà un compte ?</p>
-        <p><Link to="/">Connectez-vous</Link></p>
+        <p><Link to="/"><strong>Connectez-vous</strong></Link></p>
     </div>
     );
   }
