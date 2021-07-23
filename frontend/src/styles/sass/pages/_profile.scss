@@ -19,8 +19,8 @@
     color: white;
     font-weight: bold;
     font-size: .8rem;
-    background-color: #E02F04;
-    border: 1px solid #E02F04;
+    background-color: $color-primary;
+    border: 1px solid $color-primary;
     border-radius: 15px;
     margin: auto;
     transition-duration: .4s;
@@ -31,7 +31,7 @@
 }
 
 .delete:hover {
-    color: #E02F04;
+    color: $color-primary;
     background-color: white;
-    border: 1px solid #E02F04;
+    border: 1px solid $color-primary;
 }

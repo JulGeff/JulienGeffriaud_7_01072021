@@ -30,8 +30,8 @@ margin : 5% 5% 0% 5%
     align-self: center;
     color: white;
     font-weight: bold;
-    background-color: #E02F04;
-    border: 1px solid #E02F04;
+    background-color: $color-primary;
+    border: 1px solid $color-primary;
     border-radius: 15px;
     padding: .7rem;
     transition-duration: .4s;
@@ -40,9 +40,9 @@ margin : 5% 5% 0% 5%
 }
 
 .forum .button:hover {
-    color: #E02F04;
+    color: $color-primary;
     background-color: white;
-    border: 1px solid #E02F04;
+    border: 1px solid $color-primary;
 }
 
 .forum_global Link {
