@@ -51,13 +51,13 @@ function Signup() {
 
 
     return (
-        <div className='loginsignup'> 
-        <img src={loginpic} alt='Groupomania' className='loginpic' />
+        <div className='signup'> 
+        <img src={loginpic} alt='Groupomania' className='signup__pic' />
         <h1>Créez un compte</h1>
-        <form id ='signupForm' className="logform" onSubmit={handleSubmit}>
+        <form className="signup__form" onSubmit={handleSubmit}>
        
                 <input  id='firstName' 
-                        className="input" 
+                        className="signup__form__input" 
                         type="string" 
                         name="firstName" 
                         placeholder="Prénom" 
@@ -68,7 +68,7 @@ function Signup() {
                 />
 
                 <input  id='lastName' 
-                        className="input" 
+                        className="signup__form__input" 
                         type="string" 
                         name="lastName" 
                         placeholder="Nom" 
@@ -79,7 +79,7 @@ function Signup() {
                 />
 
                 <input  id='email' 
-                        className="input" 
+                        className="signup__form__input" 
                         type="email" 
                         name="email" 
                         placeholder="Email" 
@@ -91,7 +91,7 @@ function Signup() {
                 />
 
                 <input  id='password' 
-                        className="input" 
+                        className="signup__form__input" 
                         type="password" 
                         name="password" 
                         maxLength="40"
@@ -102,7 +102,7 @@ function Signup() {
                         required
                 />
 
-                <input  className="button" 
+                <input  className="signup__form__button" 
                         type="submit" 
                         value="Je crée mon compte" 
                 />

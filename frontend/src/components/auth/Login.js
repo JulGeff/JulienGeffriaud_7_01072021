@@ -58,14 +58,14 @@ function Login() {
 
     return (
         
-        <div className='loginsignup'>
+        <div className='login'>
             
-        <img src={loginpic} alt='Groupomania' className='loginpic' />
+        <img src={loginpic} alt='Groupomania' className='login__pic' />
         <h1>Connectez-vous</h1>
-        <form id ='loginForm' className="logform" onSubmit={handleSubmit}>
+        <form className="login__form" onSubmit={handleSubmit}>
                 
                 <input  
-                        className="input" 
+                        className="login__form__input" 
                         type="email" 
                         name="email" 
                         placeholder="Email" 
@@ -77,7 +77,7 @@ function Login() {
                 />
 
                 <input   
-                        className="input" 
+                        className="login__form__input" 
                         type="password" 
                         name="password" 
                         maxLength="40"
@@ -88,7 +88,7 @@ function Login() {
                         required
                 />
 
-                <input  className="button" 
+                <input  className="login__form__button" 
                         type="submit" 
                         value="Je me connecte" 
                 />
