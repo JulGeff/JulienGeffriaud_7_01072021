@@ -1,5 +1,6 @@
 import loginpic from "../../assets/login-image.png";
-import '../../styles/LoginSignup.css'
+import '../../styles/style.css'
+
 import React from "react";
 import Api from '../Api'
 import { Link, useHistory } from "react-router-dom";

@@ -1,6 +1,6 @@
 
 import loginpic from "../../assets/login-image.png";
-import '../../styles/LoginSignup.css'
+import '../../styles/style.css'
 import React, { useState } from "react";
 import Api from '../Api'
 import {

@@ -1,0 +1,27 @@
+.banner {
+    color: black;
+    text-align: right;
+    padding: 32px;
+    border-bottom: solid 1px black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__welcome {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        &__logo {
+            width: 30%;
+        }
+    }
+
+    &__icons {
+        svg {
+            height: 1.5rem;
+            margin-left: 2rem;
+            color: black;
+        }
+    }
+}

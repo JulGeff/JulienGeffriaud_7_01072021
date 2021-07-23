@@ -1,7 +1,7 @@
 
 import React, { useEffect, } from 'react';
 import Api from './Api'
-import '../styles/Directory.css'
+import '../styles/style.css'
 import { Redirect } from 'react-router-dom';
 
 let token = localStorage.getItem('token')

@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Api from './Api'
-import '../styles/SelectedPublication.css'
+import '../styles/style.css'
 import { Redirect, Link } from 'react-router-dom';
 
 
