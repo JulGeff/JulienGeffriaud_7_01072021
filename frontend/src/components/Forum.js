@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Api from './Api'
 import '../styles/style.css'
 import { Redirect, Link } from 'react-router-dom';
@@ -10,9 +10,10 @@ function Forum({loggedIn}) {
     const [forum, setForum] = useState([]); //initialisation du state vide   
     const [title, setTitle] = useState(""); //initialisation du state vide
     const [content, setContent] = useState(""); //initialisation du state vide
-    let userId = localStorage.getItem("id") 
-    console.log(userId)
+    let userId = JSON.parse(localStorage.getItem("id")) 
     let token = localStorage.getItem('token')
+    let isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
+  
 
      // RECUPERATION DES PUBLICATIONS STOCKEES DANS LA BDD
 
@@ -68,7 +69,7 @@ function Forum({loggedIn}) {
           event.preventDefault();
           let token = localStorage.getItem('token')
          
-         if(title === null || title === '' || content === null || content === '') {  // On vérifie que les champs
+         if(title === null || title === '' || content === null || content === '') {  // On vérifie que les champs ne sont pas nuls
                  return event.status(400).json({'error': "Veuillez remplir les champs 'titre' et 'contenu' pour créer un article"});
     
           } else {
@@ -152,24 +153,27 @@ function Forum({loggedIn}) {
                   <div >
                     {forum.map((item,i) => 
                    
-                    <div key={i}>
-                        <Link to={"./forum/publication?id=" + item.id}  className = "forum__displayposts__link">
-                            <div className = "forum__displayposts__link__content">
+                    <div key={i} className = "forum__displayposts__content">
+                        <Link to={"./forum/publication?id=" + item.id}  className = "forum__displayposts__content__link">
+                            <div>
                                 <h2>{item.title}</h2>
-                                <p className='forum__displayposts__link__content__subtitle'> Publié par <strong>{item.userId}</strong> le {item.createdAt.substring(9,10).padStart(2, '0')}/{item.createdAt.substring(6,7).padStart(2, '0')}/{item.createdAt.substring(0,4)} à {item.createdAt.substring(11,16)}   </p>
-                                <p className='forum__displayposts__link__content__text'>{item.content}</p>
-                            </div>
+                                <p className='forum__displayposts__content__link__subtitle'> Publié par <strong>{item.userId}</strong> le {item.createdAt.substring(9,10).padStart(2, '0')}/{item.createdAt.substring(6,7).padStart(2, '0')}/{item.createdAt.substring(0,4)} à {item.createdAt.substring(11,16)}   </p>
+                                <p className='forum__displayposts__content__link__text'>{item.content}</p>
+                            </div>                     
                         </Link>
-                       
-                        {item.userId===userId 
+                      
+                        {/* si user connecté est l'auteur de la publication, on affiche un lien pour la supprimer*/}           
+                        {item.userId===userId || isAdmin   
                         ? (
-                        <div><p className = "userpublications__display__link__content__delete" onClick = {e => handleDelete(e, item.id)} >Supprimer ma publication</p></div>) 
+                          <div className = "forum__displayposts__content__link__delete" onClick = {e => handleDelete(e, item.id)} >       
+                              <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#E02F04" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg>
+                          </div>) 
                         : ('')}
 
-                        </div>   
+                        </div >   
                         )}  
                   </div>   
-                 ) : ( // Si array des publications vide
+                 ) : ( // Si base de données retourne un array de publications vide
                     <p className='forum__displayposts__empty'>
                       Il n'y a pas publications pour le moment.<br/>
                       Rédigez le premier article du forum !</p>

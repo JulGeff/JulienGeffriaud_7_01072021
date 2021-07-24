@@ -1,5 +1,10 @@
 .userpublications {
     margin: 0 25%;
+    @media screen and (max-width: map-get($breakpoints, tablet)) {
+        margin: 2rem 4%;
+    }
+
+    
 
     &__none {
         text-align: center;

@@ -55,19 +55,17 @@ exports.getAllComments = (req, res, next) => {
     );
 };
 
-
-/*
-
 //SUPPRESSION D'UN COMMENTAIRE
   exports.deleteComment = (req, res, next) => { 
      
-    Comment.destroy ({ where: { id: req.params.id }}) // callback : Suppression de la publication avec l'id correspondant
+    Comment.destroy ({ where: { id: req.query.id }}) // callback : Suppression de la publication avec l'id correspondant
         
         .then(() => res.status(200).json({ message: 'Publication supprimée !'})) // Requête traitée avec succès
         .catch(error => res.status(500).json({ error })); // Internal Server Error	
   };
 
 
+/*
 // MODIFICATION D'UN COMMENTAIRE
 exports.modifyPublication = (req, res, next) => {
     // éléments de la requète

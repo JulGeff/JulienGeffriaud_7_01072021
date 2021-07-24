@@ -64,7 +64,12 @@ function Profile({loggedIn})  {
     return (
         <div className='profile'> 
    
-            <h1>Votre profil</h1> 
+            <h1>Bonjour {profileInfo.firstName} !</h1> 
+            <div className = "profile__buttons">
+                <Link to={"./forum/userpublications?id=" + profileInfo.id} className = 'profile__buttons__link'>
+                  <p className = "profile__buttons__publications" >Voir mes publications</p>
+                </Link>
+              </div>
         
             <ul>
               <li>Prénom : {profileInfo.firstName}</li>
@@ -76,12 +81,8 @@ function Profile({loggedIn})  {
             </ul>
 
             <div className = "profile__buttons">
-                <Link to={"./forum/userpublications?id=" + profileInfo.id} className = 'profile__link'>
-                  <p className = "profile__buttons__publications" >Voir mes publications</p>
-                </Link>
-              
                 <p className = "profile__buttons__delete" onClick = { handleDelete }>Supprimer mon profil</p>
-              </div>
+            </div>
         </div>
     );
     }

@@ -1,5 +1,8 @@
 .publication {
     margin: 5rem 25%;
+    @media screen and (max-width: map-get($breakpoints, tablet)) {
+        margin: 2rem 4%;
+    }
 
     h1 {
         text-align: center;
@@ -42,13 +45,7 @@
             }
         }
     }
-    &__delete {
-        @include button;
-        cursor: pointer;
-        font-size: .8rem;
-        margin-bottom: 5rem;
-      
-    }
+
     &__displaycomments {
         h2 {
             font-size: 1.2rem;
@@ -65,9 +62,13 @@
 
         &__list {
             border-bottom: black solid 1px;
-            svg {
+            &__head {
                 width: 0.8rem;
                 padding-right: 1rem;
+            }
+            &__delete {
+                width: 0.8rem;
+                cursor: pointer;
             }
         }
     }

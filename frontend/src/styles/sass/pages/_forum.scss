@@ -1,5 +1,8 @@
 .forum {
     margin: 3rem 25%;
+    @media screen and (max-width: map-get($breakpoints, tablet)) {
+        margin: 3rem 4%;
+    }
 
     h1 {
         font-size: 1.5rem;
@@ -14,22 +17,18 @@
         form {
             display: flex;
             flex-direction: column;
-            margin : 1rem 2rem;
+            margin: 1rem 2rem;
         }
 
         &__title {
             border-radius: 5px;
             margin-bottom: 1rem;
-          
         }
 
         &__content {
             resize: none;
             border-radius: 5px;
             margin-bottom: 1rem;
-
-          
-            
         }
 
         &__button {
@@ -48,27 +47,34 @@
             text-align: center;
         }
 
-        &__link {
+        &__content {
+            border: 1px solid black;
+            border-radius: $radius;
+            padding: 0 5% 5% 5%;
+            margin: 5% 0;
             text-decoration: none;
-            color: black;
 
-            &__content {
-                border: 1px solid black;
-                border-radius: $radius;
-                padding: 0 5% 5% 5%;
-                margin: 5% 0;
+            &__link {
+                text-decoration: none;
+                color: black;
 
                 &__text {
                     text-align: justify;
                     overflow-wrap: break-word;
                 }
                 &__subtitle {
-                  
                     font-style: italic;
                 }
-            }
 
-          
+                &__delete {
+
+                    svg {
+                        width : .8rem;
+                        float: right;
+                        cursor: pointer;
+                    }
+                }
+            }
         }
     }
 }

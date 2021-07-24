@@ -3,6 +3,11 @@
     border: solid black 1px;
     margin: 2% 27%;
     padding: 2% 0;
+    @media screen and (max-width: map-get($breakpoints, tablet)) {
+        margin: 2rem 4%;
+    }
+
+   
 
     h1 {
         text-align: center;
@@ -13,14 +18,18 @@
         list-style-type: none;
         line-height: 2rem;
         text-align: center;
+        margin-left: 0;
+        padding-left: 0;
     }
+
     &__buttons {
         text-align: center;
 
         &__publications,
         &__delete {
             @include button;
-            margin : 0 1rem;
+            font-size: .8rem;
+            margin: 0 1rem;
             cursor: pointer;
         }
     }

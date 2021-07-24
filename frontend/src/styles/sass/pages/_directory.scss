@@ -1,5 +1,8 @@
 .directory {
     margin-bottom: 3rem;
+    @media screen and (max-width: map-get($breakpoints, tablet)) {
+        margin: 3%;
+    }
     h1 {
         text-align: center;
         font-size: 1.5rem;
@@ -17,6 +20,9 @@
         border-bottom: 1px solid #ddd;
         padding-top: 1rem;
         padding-right: 2rem;
+        @media screen and (max-width: map-get($breakpoints, tablet)) {
+            padding-right: 1rem;
+        }
     }
 
     thead {

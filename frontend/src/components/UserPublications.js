@@ -11,6 +11,7 @@ function UserPublications({loggedIn}) {
 
   const userId = window.location.href.split('=')[1];
   const [userPublications, setUserPublications] = useState([]); //initialisation du state vide   
+  let isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
 
 
 // RECUPERATION DES PUBLICATIONS DU USER STOCKEES DANS LA BDD
@@ -50,10 +51,11 @@ function UserPublications({loggedIn}) {
           }) 
      
           .then(function (response) {
+            alert ('Votre publication a bien été supprimée')
             console.log("Publication supprimée", response)  
             setUserPublications(RemovebyAttr.removeByAttr(userPublications, 'id', id))      
             console.log(userPublications)    
-            alert ('Votre publication a bien été supprimée')
+            
       
           })
           .catch(function (response) { // Si erreur
@@ -84,8 +86,8 @@ function UserPublications({loggedIn}) {
                     </div>
                 </Link>
 
-                { userId===localStorage.getItem("id") 
-                ? (<p className = "userpublications__display__link__content__delete" onClick = {e => handleDelete(e, item.id)} >Supprimer ma publication</p>) 
+                { userId===localStorage.getItem("id") || isAdmin
+                ? (<p className = "userpublications__display__link__content__delete" onClick = {e => handleDelete(e, item.id)} >Supprimer la publication</p>) 
                 : ('')}
               </div>
                 )} 

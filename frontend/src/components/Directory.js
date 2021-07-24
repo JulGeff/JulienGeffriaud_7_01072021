@@ -28,6 +28,11 @@ function Directory({loggedIn}) {
             }
       , [])
 
+      function userInfo (id) {
+
+
+      }
+
       if (!loggedIn) {
         return <Redirect to="/"/>
         }
