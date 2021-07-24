@@ -53,6 +53,7 @@ function UserPublications({loggedIn}) {
             console.log("Publication supprimée", response)  
             setUserPublications(RemovebyAttr.removeByAttr(userPublications, 'id', id))      
             console.log(userPublications)    
+            alert ('Votre publication a bien été supprimée')
       
           })
           .catch(function (response) { // Si erreur
@@ -90,9 +91,9 @@ function UserPublications({loggedIn}) {
                 )} 
             </div> 
             ) : (
-              <div>
+              <div className = "userpublications__none">
             <p>Numéro { userId } n'a encore rien publié !</p>
-            <Link to={"../directory"}><p>Revenir à l'annuaire</p></Link>
+            <Link to={"./"} className = "userpublications__none__link"><p>Aller au forum</p></Link>
             </div>
             
           )}

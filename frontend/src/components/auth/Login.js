@@ -38,6 +38,7 @@ function Login() {
                 console.log(response);
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('id', response.data.id)
+                localStorage.setItem('isAdmin', response.data.isAdmin)
                 setIsAdmin(response.data.isAdmin);
                 console.log(isAdmin)
                 

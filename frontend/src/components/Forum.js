@@ -109,8 +109,7 @@ function Forum({loggedIn}) {
           <h1>Partagez vos pensées avec vos collègues !</h1>
           <form onSubmit={handleSubmit} >
         
-                  <input  id='title' 
-                          className="input" 
+                  <input  className="forum__createpost__title"  
                           type="string" 
                           name="title" 
                           placeholder="Titre" 
@@ -122,13 +121,12 @@ function Forum({loggedIn}) {
                   />
 
                   <textarea  
-                          id='content' 
-                          className="input" 
+                          
                           type="string" 
-                          name="content" 
+                          className="forum__createpost__content"  
                           placeholder="Rédigez votre publication ici" 
                           minLength="2"
-                          maxLength="500" 
+                          maxLength="1000" 
                           rows={10}
                           cols={5}
                           value={content} 
@@ -137,7 +135,7 @@ function Forum({loggedIn}) {
                   />
 
 
-                  <input  className="button" 
+                  <input  className="forum__createpost__button" 
                           type="submit" 
                           value="Publier !" 
                   />
@@ -159,7 +157,7 @@ function Forum({loggedIn}) {
                             <div className = "forum__displayposts__link__content">
                                 <h2>{item.title}</h2>
                                 <p className='forum__displayposts__link__content__subtitle'> Publié par <strong>{item.userId}</strong> le {item.createdAt.substring(9,10).padStart(2, '0')}/{item.createdAt.substring(6,7).padStart(2, '0')}/{item.createdAt.substring(0,4)} à {item.createdAt.substring(11,16)}   </p>
-                                <p>{item.content}</p>
+                                <p className='forum__displayposts__link__content__text'>{item.content}</p>
                             </div>
                         </Link>
                        
@@ -172,7 +170,9 @@ function Forum({loggedIn}) {
                         )}  
                   </div>   
                  ) : ( // Si array des publications vide
-                    <p>Il n'y a pas publications. Rédigez le premier article du forum !</p>
+                    <p className='forum__displayposts__empty'>
+                      Il n'y a pas publications pour le moment.<br/>
+                      Rédigez le premier article du forum !</p>
                 )} 
         </div>
   </div>

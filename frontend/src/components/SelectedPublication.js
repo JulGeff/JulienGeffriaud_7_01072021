@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Api from './Api'
 import '../styles/style.css'
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect, Link, useHistory } from 'react-router-dom';
 
 
 function SelectedPublication({loggedIn}) {
@@ -11,7 +11,8 @@ function SelectedPublication({loggedIn}) {
     const [selectedPublication, setSelectedPublication] = useState(""); //initialisation du state vide   
     const [comment, setComment] = useState(""); //initialisation du state vide
     const [commentList, setCommentlist] = useState([]); //initialisation du state vide
-
+    let token = localStorage.getItem('token')
+    let history = useHistory();
 
       // RECUPERATION DE LA PUBLICATION SELECTIONNEE DEPUIS LA BDD
     useEffect(() => {
@@ -60,6 +61,29 @@ function SelectedPublication({loggedIn}) {
               }
         , [])
 
+
+        const handleDelete = (e, id) => { //Quand on clique sur "Supprimer ma publication"
+          e.preventDefault();
+ 
+          Api.delete('/publication', {                  
+            headers: {
+                'Authorization': `${token}` //On sécurise la requête avec le token
+            },
+            params: { // On envoie l'id de la publication dans les paramètres de la requête
+              id : id
+             },
+          }) 
+     
+          .then(function (response) {
+          
+            alert ('Votre publication a bien été supprimée')
+            history.push("/forum")
+          })
+          .catch(function (response) { // Si erreur
+          console.log("Erreur", response);
+          });
+          }
+
       if (!loggedIn) {
         return <Redirect to="/"/>
         }
@@ -106,16 +130,20 @@ function SelectedPublication({loggedIn}) {
     return (
       <div className='publication'>          
         <h1 >{ selectedPublication.title }</h1>
-        <p className='publication__subtitle'>Publié par numéro { selectedPublication.userId } le INTEGRER DATES </p>
+        {selectedPublication? (
+        <p className='publication__subtitle'>Publié par numéro { selectedPublication.userId } le {selectedPublication.createdAt.substring(9,10).padStart(2, '0')}/{selectedPublication.createdAt.substring(6,7).padStart(2, '0')}/{selectedPublication.createdAt.substring(0,4)} à {selectedPublication.createdAt.substring(11,16)}</p>)
+        :( <p className='publication__subtitle'>Publié par numéro { selectedPublication.userId }</p>)}
         <Link to={"./userpublications?id=" + selectedPublication.userId} className='publication__link'>
           <p className='publication__link__user'>Voir toutes les publications de numéro { selectedPublication.userId }</p>
         </Link>
         <p className = 'publication__content'>{ selectedPublication.content }</p>
+        {selectedPublication.userId!==localStorage.getItem('id') 
+                ? (<p className = "publication__delete" onClick = {e => handleDelete(e, selectedPublication.id)} >Supprimer ma publication</p>) 
+                : ('')}
 
         <div className = "publication__comments"> 
           <form className = "publication__comments__form" onSubmit={handleSubmit}>
             <textarea id='comment' 
-                      className ="publication__comments__form__box" 
                       name="comment" 
                       placeholder="Commentez cette publication..."
                       minLength="2"
@@ -144,11 +172,6 @@ function SelectedPublication({loggedIn}) {
               )}  
       </div>
     </div>
-                            
-                         
-        
-        
-        
     );
   };
   

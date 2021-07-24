@@ -1,12 +1,50 @@
 .forum {
-    margin: 0 25%;
+    margin: 3rem 25%;
 
     h1 {
+        font-size: 1.5rem;
         text-align: center;
+        padding-top: 1rem;
+    }
+
+    &__createpost {
+        margin-top: 1rem;
+        border: 1px solid black;
+        border-radius: $radius;
+        form {
+            display: flex;
+            flex-direction: column;
+            margin : 1rem 2rem;
+        }
+
+        &__title {
+            border-radius: 5px;
+            margin-bottom: 1rem;
+          
+        }
+
+        &__content {
+            resize: none;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+
+          
+            
+        }
+
+        &__button {
+            @include button;
+            padding: 0.5rem 1rem;
+        }
     }
 
     &__displayposts {
         h2 {
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        &__empty {
             text-align: center;
         }
 
@@ -19,12 +57,18 @@
                 border-radius: $radius;
                 padding: 0 5% 5% 5%;
                 margin: 5% 0;
-            }
 
+                &__text {
+                    text-align: justify;
+                    overflow-wrap: break-word;
+                }
                 &__subtitle {
-                    text-align: center;
+                  
                     font-style: italic;
                 }
+            }
+
+          
         }
     }
 }
