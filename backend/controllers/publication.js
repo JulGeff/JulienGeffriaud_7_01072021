@@ -15,7 +15,6 @@ exports.createPublication = (req, res, next) => {
     const token = req.headers.authorization; // On extrait le token du header Authorization de la requête entrante. 
     const decodedToken = jwt.verify(token, TokenKey); // On utilise la fonction verify de jsonwebtoken pour décoder notre token
     const id = decodedToken.id; // on extrait le user id de notre token
-    console.log(req)
     const newPublication = 
         Publication.create({
             userId : id,
@@ -35,11 +34,9 @@ exports.createPublication = (req, res, next) => {
 // RECUPERATION DE TOUTES LES PUBLICATIONS
 exports.getAllPublications = (req, res, next) => {
     Publication.findAll({
-          include: [{
-	            model: models.User,
-	            attributes: ['username']
-	        }],
-	        order: [['createdAt', 'DESC']]
+    //    include    : [{ model: User, attributes:['firstName', 'lastName']}],
+
+        order: [['createdAt', 'DESC']]
     })
 
     .then(        // renvoie un tableau contenant toutes les publications dans notre base de données
