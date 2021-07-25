@@ -5,6 +5,11 @@ require('dotenv').config()                  // importation dotenv pour sécurise
 const mysqlTable = process.env.MYSQLTABLE;
 const mysqlUsername = process.env.MYSQLUSERNAME;     
 const mysqlPassword = process.env.MYSQLPASSWORD; 
+const rateLimit = require("express-rate-limit");
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
+});
 
 const bodyParser = require('body-parser');  // importation fonction body parser pour extraction objet json de la demande
 const cors = require('cors');               // module CORS
@@ -20,10 +25,10 @@ const sequelize = new Sequelize(mysqlTable, mysqlUsername, mysqlPassword, { // C
   })
 
 
-
 const app = express();      // application Express
 app.use(bodyParser.json()); // Enregistrement body parser
 app.use(cors());            // module CORS
+app.use(limiter);           // rate limit
 
 app.use((req, res, next) => {  // Ajout headers pour résoudre les erreurs CORS
     res.setHeader('Access-Control-Allow-Origin', '*'); // accéder à notre API depuis n'importe quelle origine

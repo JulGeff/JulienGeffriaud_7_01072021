@@ -17,7 +17,7 @@ function Directory({loggedIn}) {
     useEffect(() => {
       let token = localStorage.getItem('token')
 
-        Api.get('/auth/users',
+        Api.getPost('/auth/users',
         {   headers: {
             'Authorization': `${token}` // On sécurise la requête en incluant le token dnas les headers (cf middleware "auth")
         }}

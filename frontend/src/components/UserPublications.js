@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Api from './Api'
 import '../styles/style.css'
 import { Redirect, Link } from 'react-router-dom';
-import RemovebyAttr from './utils/RemoveByAttr'
+
 
 let token = localStorage.getItem('token')
 
@@ -53,7 +53,7 @@ function UserPublications({loggedIn}) {
           .then(function (response) {
             alert ('Votre publication a bien été supprimée')
             console.log("Publication supprimée", response)  
-            setUserPublications(RemovebyAttr.removeByAttr(userPublications, 'id', id))      
+           // setUserPublications(RemovebyAttr.removeByAttr(userPublications, 'id', id))      
             console.log(userPublications)    
             
       
