@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       models.Publication.belongsTo(models.User, {
         foreignKey: {
-          field: 'userId',
+      
           allowNull: false,
         }
         });
