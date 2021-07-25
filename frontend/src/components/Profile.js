@@ -4,17 +4,15 @@ import { Redirect, useHistory, Link } from 'react-router-dom';
 import Api from './Api'
 import '../styles/style.css'
 
-     
-let token = localStorage.getItem('token')
-
-
 function Profile({loggedIn})  {
+
       const [isLoading, setIsLoading] = useState(true); 
       const [profileInfo, setProfileInfo] = useState([]);
       let history = useHistory(); 
-
+      let token = localStorage.getItem('token')
+      let isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
       useEffect(() => {
-
+      let token = localStorage.getItem('token')
       Api.get('/auth/user', {          
             headers: {
                 'Authorization': `${token}`
@@ -33,24 +31,26 @@ function Profile({loggedIn})  {
       }
       , [])
 
-      const handleDelete = (id) => { //Quand on clique sur "Supprimer mon profil"
-            Api.delete('/auth/user', {          
-              headers: {
-                  'Authorization': `${token}` //On sécurise la requêyte avec le token
-              },
-              params : { id : id} 
-            }) 
-       
-            .then(function (response) {
-              console.log("Utilisateur supprimé", response)
-              localStorage.clear(); 
-              history.push("/signup")
-                
-            })
-            .catch(function (response) { // Si erreur
-            console.log("Erreur", response.data);
-            });
-            }
+      const handleDelete = (event,id) => { //Quand on clique sur "Supprimer"
+        event.preventDefault();
+        Api.delete('/auth/user', {          
+          headers: {
+              'Authorization': `${token}` //On sécurise la requêyte avec le token
+          },
+          params: {id : id}
+        }) 
+   
+        .then(function (response) {
+          history.push("/signup")
+          localStorage.clear();
+          
+             
+            
+        })
+        .catch(function (response) { // Si erreur
+        console.log("Erreur", response.data);
+        });
+        }
 
   //redirection vers pages de login si quelqu'un essaie d'accéder directement à la page Profil          
         if (!loggedIn) {
@@ -82,10 +82,12 @@ function Profile({loggedIn})  {
             </ul>
 
             <div className = "profile__buttons">
-                <p className = "profile__buttons__delete" onClick = { handleDelete(profileInfo.id) }>Supprimer mon profil</p>
+            {!isAdmin
+                ? ( <p className = "profile__buttons__delete" onClick = {e => handleDelete(e, profileInfo.id)}>Supprimer mon profil</p>) 
+                : (' ')} 
             </div>
         </div>
     );
     }
-  
+ 
 export default Profile

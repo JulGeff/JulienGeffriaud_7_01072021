@@ -34,6 +34,8 @@ exports.createPublication = (req, res, next) => {
 // RECUPERATION DE TOUTES LES PUBLICATIONS
 exports.getAllPublications = (req, res, next) => {
     Publication.findAll({
+    //    include    : [{ model: User, attributes:['firstName', 'lastName']}],
+
         order: [['createdAt', 'DESC']]
     })
 
@@ -56,7 +58,9 @@ exports.getOnePublication = (req, res, next) => {
 
    const publicationId = req.query.publicationId;
       Publication.findOne ({ 
+     
           where: {  id: publicationId },   
+        
          // include: {
          //   model: User,
           //  attributes: ["lastName", "firstName"]}
@@ -71,6 +75,7 @@ exports.getUserPublications = (req, res, next) => {
 const userId = req.query.userId
     Publication.findAll({
       where: {userId: userId},
+    
       order: [['createdAt', 'DESC']]
     })
 

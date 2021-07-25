@@ -6,8 +6,10 @@ module.exports = (sequelize, DataTypes) => {
   class Publication extends Model {
     static associate(models) {
       models.Publication.belongsTo(models.User, {
-              foreignKey: 'userId'
-  
+        foreignKey: {
+          field: 'userId',
+          allowNull: false,
+        }
         });
     }
   };

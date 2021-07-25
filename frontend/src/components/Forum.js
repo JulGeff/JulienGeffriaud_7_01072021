@@ -28,6 +28,7 @@ function Forum({loggedIn}) {
         .then(function (response)  {
             const forum = response.data;
             setForum(forum);
+            console.log(response)
             console.log(forum);
           })
           .catch(function (response) { // Si erreur

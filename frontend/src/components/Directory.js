@@ -4,16 +4,18 @@ import Api from './Api'
 import '../styles/style.css'
 import { Redirect, Link } from 'react-router-dom';
 
-let token = localStorage.getItem('token')
-let isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
-let userId = JSON.parse(localStorage.getItem("id"))
+
+
 
 
 function Directory({loggedIn}) {
 
     const [directory, setDirectory] = React.useState([]); //initialisation du state vide
-    
+    let token = localStorage.getItem('token')
+    let isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
+
     useEffect(() => {
+      let token = localStorage.getItem('token')
 
         Api.get('/auth/users',
         {   headers: {
@@ -81,7 +83,7 @@ function Directory({loggedIn}) {
                             <td>
                             {isAdmin && !item.isAdmin
                               ? (<svg onClick = {e => handleDelete(e, item.id)} className="directory__userdelete" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#E02F04" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg>) 
-                              : (<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="lock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"></path></svg>)}           
+                              : (' ')}           
                             </td>
           
                         </tr>)}

@@ -45,10 +45,9 @@
                 }
 
                 &__delete {
-                    @include button;
                     cursor: pointer;
                     float: right;
-                    font-size: .8rem;
+                width : 1rem;
                 }
             }
         }
