@@ -1,7 +1,7 @@
 
 import loginpic from "../../assets/login-image.png";
 import '../../styles/style.css'
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Api from '../Api'
 import {
   useHistory,
@@ -13,10 +13,11 @@ function Login() {
 
         let history = useHistory();
         localStorage.clear();
-
+        
         const [email, setEmail] = useState(""); //initialisation du state vide
         const [password, setPassword] = useState(""); //initialisation du state vide
         const [isAdmin, setIsAdmin] = useState(""); //initialisation du state vide
+        const [isLoggedIn, setIsLoggedIn] = useState(""); //initialisation du state vide
 
         const handleSubmit = (event) => {
         event.preventDefault();
@@ -27,11 +28,12 @@ function Login() {
                 email : email, 
                 password: password
             };
-
+         
+      
             console.log(loginFormData);
 
-            
-            Api.post('/auth/login', loginFormData) //requête POST via Axios
+         
+         Api.post('/auth/login', loginFormData) //requête POST via Axios
 
                 .then(function (response) {  //Si Ok
                 history.push("/forum")   
@@ -40,7 +42,9 @@ function Login() {
                 localStorage.setItem('id', response.data.id)
                 localStorage.setItem('isAdmin', response.data.isAdmin)
                 setIsAdmin(response.data.isAdmin);
+                setIsLoggedIn(true);
                 console.log(isAdmin)
+                console.log(isLoggedIn)
                 
                
         })
@@ -49,13 +53,14 @@ function Login() {
                 console.log(response);
                 alert("Password incorrect ou email inexistant dans la base de données")
                 });
+                  
+   
 
         } else { // si email ne respecte pas les regex définies
                 alert("- Votre email n'est pas au bon format")
         }}
 
-     // console.log("logged In", loggedIn)
-     
+
 
     return (
         

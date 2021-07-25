@@ -11,13 +11,14 @@ function Profile({loggedIn})  {
       let history = useHistory(); 
       let token = localStorage.getItem('token')
       let isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
+      
       useEffect(() => {
       let token = localStorage.getItem('token')
       Api.get('/auth/user', {          
             headers: {
                 'Authorization': `${token}`
             },}
-            , [])
+          )
          
         .then(function (response) {
           console.log(response.data)
