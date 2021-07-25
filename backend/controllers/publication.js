@@ -2,6 +2,7 @@
 
 const models = require('../models');        // importation des modèles sequelize
 const Publication = models.publication;
+const User = models.user;
 const Comment = models.comment;
 const fs = require('fs'); // importation du package file system de node, qui donne notamment accès aux fonctions permettant de supprimer les fichiers.
 const jwt = require('jsonwebtoken');  // importation package pour création et vérification des tokens
@@ -55,7 +56,10 @@ exports.getOnePublication = (req, res, next) => {
 
    const publicationId = req.query.publicationId;
       Publication.findOne ({ 
-          where: {  id: publicationId }   
+          where: {  id: publicationId },   
+         // include: {
+         //   model: User,
+          //  attributes: ["lastName", "firstName"]}
       })
           .then(publication => res.status(200).json(publication))
           .catch(error => res.status(500).json(error))

@@ -162,7 +162,7 @@ function Forum({loggedIn}) {
                             </div>                     
                         </Link>
                       
-                        {/* si user connecté est l'auteur de la publication, on affiche un lien pour la supprimer*/}           
+                        {/* si user connecté est l'auteur de la publication ou admin, on affiche un lien pour la supprimer*/}           
                         {item.userId===userId || isAdmin   
                         ? (
                           <div className = "forum__displayposts__content__link__delete" onClick = {e => handleDelete(e, item.id)} >       

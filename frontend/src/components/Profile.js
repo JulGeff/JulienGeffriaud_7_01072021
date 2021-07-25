@@ -33,11 +33,12 @@ function Profile({loggedIn})  {
       }
       , [])
 
-      const handleDelete = () => { //Quand on clique sur "Supprimer mon profil"
+      const handleDelete = (id) => { //Quand on clique sur "Supprimer mon profil"
             Api.delete('/auth/user', {          
               headers: {
                   'Authorization': `${token}` //On sécurise la requêyte avec le token
               },
+              params : { id : id} 
             }) 
        
             .then(function (response) {
@@ -81,7 +82,7 @@ function Profile({loggedIn})  {
             </ul>
 
             <div className = "profile__buttons">
-                <p className = "profile__buttons__delete" onClick = { handleDelete }>Supprimer mon profil</p>
+                <p className = "profile__buttons__delete" onClick = { handleDelete(profileInfo.id) }>Supprimer mon profil</p>
             </div>
         </div>
     );

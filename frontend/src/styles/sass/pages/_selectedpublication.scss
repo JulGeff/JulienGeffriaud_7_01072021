@@ -25,6 +25,17 @@
         text-align: justify;
         padding-bottom: 1rem;
         overflow-wrap: break-word;
+        white-space: pre-wrap;
+    }
+
+    &__delete {
+
+        svg {
+            width : 1rem;
+            cursor: pointer;
+            padding-bottom: 2rem;
+            
+        }
     }
 
     &__comments {
@@ -53,6 +64,7 @@
 
         h3 {
             font-size: 1rem;
+            font-weight: normal;
         }
 
         p {
@@ -62,9 +74,32 @@
 
         &__list {
             border-bottom: black solid 1px;
-            &__head {
-                width: 0.8rem;
-                padding-right: 1rem;
+
+            &__text {
+                padding-top: 1.5rem;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: flex-start;
+                white-space: pre-wrap;
+                svg {
+                    width: 0.8rem;
+                    padding-right: 1rem;
+                    padding-top: 1.3rem;
+                  
+                }
+
+                h3 {
+                    padding-right: 1rem;
+                }
+            }
+
+            &__info {
+
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
             }
             &__delete {
                 width: 0.8rem;
