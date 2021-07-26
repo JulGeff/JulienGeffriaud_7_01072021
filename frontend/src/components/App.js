@@ -20,18 +20,7 @@ import {
 
 function App() {
 
-  /*
-const [loggedIn, setLoggedIn] = useState(""); //initialisation du state vide
- const token = localStorage.getItem('token')
-  useEffect(() => {
 
- setLoggedIn(typeof token !== 'undefined' && token !== null)
-  console.log("User logged in ?", loggedIn)
-
-}
-, [token, loggedIn])
-
- */
 const loggedIn = true
         return (
           <div>
