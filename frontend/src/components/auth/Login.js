@@ -1,7 +1,7 @@
 
 import loginpic from "../../assets/login-image.png";
 import '../../styles/style.css'
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Api from '../Api'
 import {
   useHistory,
@@ -12,13 +12,11 @@ import {
 function Login() {
 
         let history = useHistory();
-        localStorage.clear();
+  
         
         const [email, setEmail] = useState(""); //initialisation du state vide
         const [password, setPassword] = useState(""); //initialisation du state vide
-        const [isAdmin, setIsAdmin] = useState(""); //initialisation du state vide
-        const [isLoggedIn, setIsLoggedIn] = useState(""); //initialisation du state vide
-
+              
         const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -36,15 +34,16 @@ function Login() {
          Api.post('/auth/login', loginFormData) //requête POST via Axios
 
                 .then(function (response) {  //Si Ok
-                history.push("/forum")   
-                console.log(response);
-                localStorage.setItem('token', response.data.token);
-                localStorage.setItem('id', response.data.id)
-                localStorage.setItem('isAdmin', response.data.isAdmin)
-                setIsAdmin(response.data.isAdmin);
-                setIsLoggedIn(true);
-                console.log(isAdmin)
-                console.log(isLoggedIn)
+                        localStorage.setItem('token', response.data.token);
+                        localStorage.setItem('id', response.data.id)
+                        localStorage.setItem('isAdmin', response.data.isAdmin)
+                        localStorage.setItem('loggedIn', response.data.loggedIn)
+                
+                        history.push("/forum")   
+                        console.log(response);
+                
+              
+               
                 
                
         })

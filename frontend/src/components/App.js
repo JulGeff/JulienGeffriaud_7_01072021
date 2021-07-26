@@ -19,9 +19,11 @@ import {
 
 
 function App() {
+  
+
+let loggedIn = localStorage.getItem('loggedIn')
 
 
-const loggedIn = true
         return (
           <div>
              

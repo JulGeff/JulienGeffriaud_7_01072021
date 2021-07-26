@@ -43,6 +43,7 @@
             height: 1.5rem;
             margin-left: 2rem;
             color: black;
+            cursor: pointer;
             @media screen and (max-width: map-get($breakpoints, tablet)) {
                 margin-left: 1.5rem;
                 margin-right : 1.5rem;
