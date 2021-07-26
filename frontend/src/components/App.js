@@ -6,8 +6,8 @@ import Directory from './Directory'
 import Forum from './Forum'
 import SelectedPublication from './SelectedPublication'
 import UserPublications from './UserPublications'
-import React from 'react';
-//{ useEffect, useState } 
+import React, { useEffect, useState } from 'react';
+// 
 
 
 import {
@@ -21,7 +21,19 @@ import {
 function App() {
   
 
-let loggedIn = localStorage.getItem('loggedIn')
+/*let loggedIn = localStorage.getItem('loggedIn')
+const [loggedIn, setLoggedIn] = React.useState([]);
+useEffect(() => {
+
+
+setLoggedIn(localStorage.getItem('loggedIn'))
+return loggedIn
+
+}
+, [])
+*/
+
+let loggedIn=false;
 
 
         return (
