@@ -5,13 +5,17 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Publication extends Model {
     static associate(models) {
-      models.Publication.belongsTo(models.User, {
-        foreignKey: {
-      
-          allowNull: false,
-        }
-        });
+      models.Publication.belongsTo(models.User, 
+        { foreignKey: 'userId',
+        onDelete: 'CASCADE', });
+
+      models.Publication.hasMany(models.Comment, {
+          foreignKey: 'publicationId',
+       
+        });   
     }
+
+    
   };
   
   Publication.init({

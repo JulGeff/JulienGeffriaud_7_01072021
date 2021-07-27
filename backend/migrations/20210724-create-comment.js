@@ -12,15 +12,21 @@ module.exports = {
       publicationId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: {
+          model: "Publications",
+          key: "id",
+          as: "publicationId"
+        }
       },
 
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Users',
-          key: 'id'
-      }},
+          model: "Users",
+          key: "id",
+          as: "userId"
+        }},
 
       comment: {
         allowNull: false,

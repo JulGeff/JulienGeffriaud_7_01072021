@@ -37,9 +37,8 @@ exports.createPublication = (req, res, next) => {
 // RECUPERATION DE TOUTES LES PUBLICATIONS
 exports.getAllPublications = (req, res, next) => {
     Publication.findAll({
-    //    include    : [{ model: User, attributes:['firstName', 'lastName']}],
-
-        order: [['createdAt', 'DESC']]
+        order: [['createdAt', 'DESC']],
+       
     })
 
     .then(        // renvoie un tableau contenant toutes les publications dans notre base de données
@@ -56,22 +55,16 @@ exports.getAllPublications = (req, res, next) => {
 };
 
 
+
 // RECUPERATION D'UNE PUBLICATION DONNEE
-exports.getOnePublication = (req, res, next) => {
 
-   const publicationId = req.query.publicationId;
-      Publication.findOne ({ 
-     
-          where: {  id: publicationId },   
-        
-         // include: {
-         //   model: User,
-          //  attributes: ["lastName", "firstName"]}
-      })
-          .then(publication => res.status(200).json(publication))
-          .catch(error => res.status(500).json(error))
-    };
 
+    exports.getOnePublication = (req, res, next) => {
+    Publication.findByPk( req.query.publicationId)
+    .then(publication => res.status(200).json(publication))
+    .catch(error => res.status(500).json(error))
+    
+};
 
 // RECUPERATION DES PUBLICATIONS D'UN USER DONNE
 exports.getUserPublications = (req, res, next) => {
