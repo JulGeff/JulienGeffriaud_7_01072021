@@ -12,6 +12,7 @@ function UserPublications({loggedIn}) {
   const userId = window.location.href.split('=')[1];
   const [userPublications, setUserPublications] = useState([]); //initialisation du state vide   
   let isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
+  const [firstName, setFirstName] = useState("")
 
 
 // RECUPERATION DES PUBLICATIONS DU USER STOCKEES DANS LA BDD
@@ -30,7 +31,8 @@ function UserPublications({loggedIn}) {
         .then(function (response)  {
             const userPublications = response.data;
             setUserPublications(userPublications);
-            console.log(userPublications)
+            setFirstName(userPublications[0].user.firstName)
+
           })
           .catch(function (response) { // Si erreur
             console.log("pb frontend", response.data);
@@ -70,10 +72,11 @@ function UserPublications({loggedIn}) {
 
     return (
       <div className = "userpublications">
-          <h1>Dernières publications de numéro { userId }</h1>
+         
 
           {userPublications.length? (
             <div >
+               <h1>Dernières publications de {firstName}</h1>
               {userPublications.map((item,i) => 
               <div className = "userpublications__display" key={i}>
                <Link to={"./publication?id=" + item.id}  className='userpublications__display__link'>
@@ -95,7 +98,7 @@ function UserPublications({loggedIn}) {
             </div> 
             ) : (
               <div className = "userpublications__none">
-            <p>Numéro { userId } n'a encore rien publié !</p>
+            <p>Aucune publication !</p>
             <Link to={"./"} className = "userpublications__none__link"><p>Aller au forum</p></Link>
             </div>
             

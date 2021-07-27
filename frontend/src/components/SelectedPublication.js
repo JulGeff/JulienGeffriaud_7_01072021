@@ -8,6 +8,8 @@ import { Redirect, Link, useHistory } from 'react-router-dom';
 function SelectedPublication({loggedIn}) {
 
   const PublicationId = window.location.href.split('=')[1];
+    const [isLoading1, setIsLoading1] = useState(true); 
+    const [isLoading2, setIsLoading2] = useState(true); 
     const [selectedPublication, setSelectedPublication] = useState(""); //initialisation du state vide   
     const [comment, setComment] = useState(""); //initialisation du state vide
     const [commentList, setCommentlist] = useState([]); //initialisation du state vide
@@ -31,7 +33,7 @@ function SelectedPublication({loggedIn}) {
         .then(function (response)  {
           const publi = response.data;
           setSelectedPublication(publi);          
-           
+          setIsLoading1(false);
           })
           .catch(function (response) { // Si erreur
             console.log("pb frontend", response.data);
@@ -55,7 +57,8 @@ function SelectedPublication({loggedIn}) {
           .then(function (response)  {
               const commentList = response.data;
               setCommentlist(commentList);
-    
+              console.log(commentList)
+              setIsLoading2(false);
             })
             .catch(function (response) { // Si erreur
               console.log("pb frontend", response.data);
@@ -90,7 +93,10 @@ function SelectedPublication({loggedIn}) {
         return <Redirect to="/"/>
         }
 
-        
+       //Message d'attente en attendnat la fin de la requête axios    
+       if (isLoading1 || isLoading2) {
+        return <div className="App">Loading...</div>;
+      } 
       
   // PUBLICATION DES COMMENTAIRES
     const handleSubmit = (event) => {  // Au clic sur le bouton "Publier !"
@@ -155,10 +161,10 @@ function SelectedPublication({loggedIn}) {
       <div className='publication'>          
         <h1 >{ selectedPublication.title }</h1>
         {selectedPublication? (
-        <p className='publication__subtitle'>Publié par numéro { selectedPublication.userId } le {selectedPublication.createdAt.substring(9,10).padStart(2, '0')}/{selectedPublication.createdAt.substring(6,7).padStart(2, '0')}/{selectedPublication.createdAt.substring(0,4)} à {selectedPublication.createdAt.substring(11,16)}</p>)
-        :( <p className='publication__subtitle'>Publié par numéro { selectedPublication.userId }</p>)}
+        <p className='publication__subtitle'>Publié par <strong>{selectedPublication.user.firstName} {selectedPublication.user.lastName}</strong> le {selectedPublication.createdAt.substring(9,10).padStart(2, '0')}/{selectedPublication.createdAt.substring(6,7).padStart(2, '0')}/{selectedPublication.createdAt.substring(0,4)} à {selectedPublication.createdAt.substring(11,16)}</p>)
+        :( <p className='publication__subtitle'>Publié par ---</p>)}
         <Link to={"./userpublications?id=" + selectedPublication.userId} className='publication__link'>
-          <p className='publication__link__user'>Voir toutes les publications de numéro { selectedPublication.userId }</p>
+          <p className='publication__link__user'> Voir toutes ses publications </p>
         </Link>
         <p className = 'publication__content'>{ selectedPublication.content }</p>
         {selectedPublication.userId===userId || isAdmin
@@ -192,7 +198,7 @@ function SelectedPublication({loggedIn}) {
           <div className="publication__displaycomments__list" key={i}>
             <div className="publication__displaycomments__list__text" >
               <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#E02F04" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path></svg> 
-              <h3><strong>{item.userId}</strong> dit :</h3>
+              <h3><strong>{item.user.firstName} {item.user.lastName}</strong> dit :</h3>
               <h3>{item.comment}</h3>
             </div>  
             <div className="publication__displaycomments__list__info" >

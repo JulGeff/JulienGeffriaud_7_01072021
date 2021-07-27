@@ -72,6 +72,7 @@ exports.login = (req, res, next) => {
 // RECUPERATION DE TOUS LES PROFILS UTILSATEURS
 exports.getAllUsers = (req, res, next) => {
   User.findAll({
+    attributes: ['firstName', 'lastName', 'email', 'createdAt','id'],
     order: [['lastName', 'ASC']]
 })
   .then(users => {
@@ -89,6 +90,7 @@ exports.getOneUser = (req, res, next) => {
   const decodedToken = jwt.verify(token, TokenKey); // On utilise la fonction verify de jsonwebtoken pour décoder notre token
   const id = decodedToken.id; // on extrait le user id de notre token
     User.findOne ({ 
+        attributes: ['firstName', 'lastName', 'email', 'createdAt', 'id'],
         where: {  id: id }   
     })
         .then(user => res.status(200).json(user))

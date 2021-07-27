@@ -156,7 +156,7 @@ function Forum({loggedIn}) {
                     {forum.map((item,i) => 
                    
                     <div key={i} className = "forum__displayposts__content">
-                        <Link to={"./forum/publication?id=" + item.id}  className = "forum__displayposts__content__link">
+                        <Link to={"/forum/publication?id=" + item.id}  className = "forum__displayposts__content__link">
                             <div>
                                 <h2>{item.title}</h2>
                                 <p className='forum__displayposts__content__link__subtitle'> Publié par <strong>{item.user.firstName} {item.user.lastName}</strong> le {item.createdAt.substring(9,10).padStart(2, '0')}/{item.createdAt.substring(6,7).padStart(2, '0')}/{item.createdAt.substring(0,4)} à {item.createdAt.substring(11,16)}   </p>

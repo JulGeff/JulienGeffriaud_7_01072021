@@ -17,9 +17,12 @@ const commentRoutes = require('./routes/comment');   // Importation routeur post
 
 const User = require('./models/user');
 const Publication = require('./models/publication');
-
-Publication.belongsTo(User, { Constraints: true, onDelete: 'CASCADE'});
+const Comment = require('./models/comment');
+Publication.belongsTo(User, { Constraints: true, onDelete: 'CASCADE'}); // Si on supprime un user, on supprime ses message //
 User.hasMany(Publication);
+Comment.belongsTo(User, { Constraints: true, onDelete: 'CASCADE'});
+Comment.belongsTo(Publication, { Constraints: true, onDelete: 'CASCADE'}); // Si on supprime un message, on supprime ses réponses //
+
 
 const app = express();      // application Express
 app.use(bodyParser.json()); // Enregistrement body parser
@@ -34,7 +37,7 @@ app.use((req, res, next) => {  // Ajout headers pour résoudre les erreurs CORS
   });
 
   sequelize
-  .sync(false) // run it just in the first time after changing the database, this command will re-draw the database
+  .sync(true) // run it just in the first time after changing the database, this command will re-draw the database
   // .sync()
   .then(() => app.listen(8080))
   .catch(err => console.log(err));

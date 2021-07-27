@@ -35,15 +35,15 @@ exports.createPublication = (req, res, next) => {
 // RECUPERATION DE TOUTES LES PUBLICATIONS
 exports.getAllPublications = (req, res, next) => {
     Publication.findAll({
+        attributes: ['title', 'content', 'createdAt','id'],
         include: {
             model: User,
-       
-          },
+            attributes:['firstName', 'lastName']
+        },
         order: [['createdAt', 'DESC']],
-       
+        
     })
-
-    .then(        // renvoie un tableau contenant toutes les publications dans notre base de données
+    .then(       // renvoie un tableau contenant toutes les publications dans notre base de données
         (publications) => {        
             res.status(200).json(publications); // publications retournées dans une promise et envoyée au frontend
         }
@@ -57,21 +57,17 @@ exports.getAllPublications = (req, res, next) => {
 };
 
 
-
-// RECUPERATION D'UNE PUBLICATION DONNEE
-
-
 // RECUPERATION D'UNE PUBLICATION DONNEE
 exports.getOnePublication = (req, res, next) => {
 
    const publicationId = req.query.publicationId;
       Publication.findOne ({ 
-     
+               
           where: {  id: publicationId },   
-        
-         // include: {
-         //   model: User,
-          //  attributes: ["lastName", "firstName"]}
+          include: {
+            model: User,
+       
+          },
       })
           .then(publication => res.status(200).json(publication))
           .catch(error => res.status(500).json(error))
@@ -83,7 +79,10 @@ exports.getUserPublications = (req, res, next) => {
 const userId = req.query.userId
     Publication.findAll({
       where: {userId: userId},
-    
+      include: {
+        model: User,
+   
+      },
       order: [['createdAt', 'DESC']]
     })
 

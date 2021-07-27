@@ -36,11 +36,15 @@ exports.createComment = (req, res, next) => {
 exports.getAllComments = (req, res, next) => {
     const publicationId = req.query.publicationId
     console.log(publicationId)
-    Comment.findAll(
-        
-        {where: {
+    Comment.findAll({
+        attributes: ['comment', 'createdAt'],
+        where: {
             publicationId: publicationId
           },
+        include: {
+            model: User,
+            attributes:['firstName', 'lastName']
+        },
         order: [['createdAt', 'DESC']]
     })
 
