@@ -119,7 +119,7 @@ function SelectedPublication({loggedIn}) {
 
               .then(function (response) {  //Si Ok
               console.log(response);
-              //setCommentList(commentList.push(commentData));
+              window.location.reload(false)  
               setComment('');
               alert("Votre commentaire a bien été posté !")
               })
