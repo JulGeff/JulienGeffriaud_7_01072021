@@ -1,0 +1,42 @@
+.editprofile {
+    border-radius: 15px;
+    border: solid black 1px;
+    margin: 2% 27%;
+    padding: 2% 0;
+    @media screen and (max-width: map-get($breakpoints, tablet)) {
+        margin: 2rem 4%;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    &__back {
+        color: black;
+        width: 1.5rem;
+        float: right;
+        padding-right: 1rem;
+    }
+    &__form {
+        display: flex;
+        flex-direction: column;
+
+        &__input {
+            margin: 2% 10%;
+            font-size: 1rem;
+            border-radius: 5px;
+            @media screen and (max-width: map-get($breakpoints, tablet)) {
+                font-size: 1.5rem;
+            }
+        }
+
+        &__button {
+            @include button;
+            font-size: 0.8rem;
+            margin: 1rem 2rem;
+            padding: 0.6rem 0;
+            cursor: pointer;
+        }
+    }
+}

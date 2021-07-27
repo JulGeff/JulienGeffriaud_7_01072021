@@ -15,7 +15,7 @@ function Banner() {
         e.preventDefault();
         localStorage.clear();
         history.push("/")
-        window.location.reload(false)
+       
        
         
     

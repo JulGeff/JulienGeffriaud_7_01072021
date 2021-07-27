@@ -113,21 +113,26 @@ exports.deleteUser = (req, res, next) => {
           ))}
 
 
-/* MODIFICATION DU PROFIL UTILISATEUR
-exports.modifyUser = (req, res, next) => {
+//MODIFICATION DU PROFIL UTILISATEUR
+exports.editUser = (req, res, next) => {
 
-  const firstName = req.body.firstName;
-  const lastName =  req.body.lastName;
+  const token = req.headers.authorization; // On extrait le token du header Authorization de la requête entrante. 
+  console.log(req.headers)
+  const decodedToken = jwt.verify(token, TokenKey); // On utilise la fonction verify de jsonwebtoken pour décoder notre token
+  const id = decodedToken.id; // on extrait le user id de notre token
 
   // vérification que tous les champs sont remplis
-  if(firstName === null || firstName === '' || lastName === null ||lastName === '') {
-      return res.status(400).json({'error': "Les champs 'nom' et 'prénom' doivent être remplis "});
-  } else {
+  //if(firstName === null || firstName === '' || lastName === null ||lastName === '') {
+  //    return res.status(400).json({'error': "Les champs 'nom' et 'prénom' doivent être remplis "});
+  //} else {
 
-User.update({
-   ...userObject, id:  req.params.id}, { where: {id: req.params.id} })
+User.update(
+   {firstName : req.body.firstName,
+    lastName : req.body.lastName
+    }, { where: {id: id} })
 .then(() => res.status(200).json({ message: 'Utilisateur modifié !'}))
 .catch(error => res.status(400).json({ error }));
-}}
-*/
+}
+
+
 

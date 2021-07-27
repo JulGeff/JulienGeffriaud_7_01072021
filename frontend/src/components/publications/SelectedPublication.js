@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
-import Api from './Api'
-import '../styles/style.css'
+import Api from '../utils/Api'
+import '../../styles/style.css'
 import { Redirect, Link, useHistory } from 'react-router-dom';
 
 
@@ -164,7 +164,7 @@ function SelectedPublication({loggedIn}) {
         <p className='publication__subtitle'>Publié par <strong>{selectedPublication.user.firstName} {selectedPublication.user.lastName}</strong> le {selectedPublication.createdAt.substring(9,10).padStart(2, '0')}/{selectedPublication.createdAt.substring(6,7).padStart(2, '0')}/{selectedPublication.createdAt.substring(0,4)} à {selectedPublication.createdAt.substring(11,16)}</p>)
         :( <p className='publication__subtitle'>Publié par ---</p>)}
         <Link to={"./userpublications?id=" + selectedPublication.userId} className='publication__link'>
-          <p className='publication__link__user'> Voir toutes ses publications </p>
+          <p className='publication__link__user'> Voir toutes les publications de {selectedPublication.user.firstName} </p>
         </Link>
         <p className = 'publication__content'>{ selectedPublication.content }</p>
         {selectedPublication.userId===userId || isAdmin

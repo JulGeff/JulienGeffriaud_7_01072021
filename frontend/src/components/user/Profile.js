@@ -1,8 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { Redirect, useHistory, Link } from 'react-router-dom';
-import Api from './Api'
-import '../styles/style.css'
+import Api from '../utils/Api'
+import '../../styles/style.css'
 
 function Profile({loggedIn})  {
 
@@ -45,8 +45,6 @@ function Profile({loggedIn})  {
           history.push("/signup")
           localStorage.clear();
           
-             
-            
         })
         .catch(function (response) { // Si erreur
         console.log("Erreur", response.data);
@@ -78,15 +76,21 @@ function Profile({loggedIn})  {
               <li>Nom : {profileInfo.lastName}</li>
               <li>email : {profileInfo.email}</li>
               <li>Profil créé le {profileInfo.createdAt.substring(9,10).padStart(2, '0')}/{profileInfo.createdAt.substring(6,7).padStart(2, '0')}/{profileInfo.createdAt.substring(1,4).padStart(2, '0')}</li>
-              
-             
+            
             </ul>
 
             <div className = "profile__buttons">
+            <Link to="/editprofile">
+                    <p className = "profile__buttons__edit">Modifier mon profil</p>
+            </Link>
+            <Link to="/changepassword">
+                    <p className = "profile__buttons__password">Modifier mon mot de passe</p>
+            </Link>
             {!isAdmin
                 ? ( <p className = "profile__buttons__delete" onClick = {e => handleDelete(e, profileInfo.id)}>Supprimer mon profil</p>) 
                 : (' ')} 
             </div>
+            
         </div>
     );
     }

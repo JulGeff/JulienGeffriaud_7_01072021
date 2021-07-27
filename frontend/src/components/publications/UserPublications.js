@@ -1,18 +1,19 @@
 
 import React, { useEffect, useState } from 'react';
-import Api from './Api'
-import '../styles/style.css'
+import Api from '../utils/Api'
+import '../../styles/style.css'
 import { Redirect, Link } from 'react-router-dom';
 
 
 let token = localStorage.getItem('token')
 
 function UserPublications({loggedIn}) {
-
+  
   const userId = window.location.href.split('=')[1];
   const [userPublications, setUserPublications] = useState([]); //initialisation du state vide   
-  let isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
   const [firstName, setFirstName] = useState("")
+  let isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
+ 
 
 
 // RECUPERATION DES PUBLICATIONS DU USER STOCKEES DANS LA BDD
@@ -32,7 +33,7 @@ function UserPublications({loggedIn}) {
             const userPublications = response.data;
             setUserPublications(userPublications);
             setFirstName(userPublications[0].user.firstName)
-
+            
           })
           .catch(function (response) { // Si erreur
             console.log("pb frontend", response.data);
@@ -53,6 +54,7 @@ function UserPublications({loggedIn}) {
           }) 
      
           .then(function (response) {
+            window.location.reload(false) 
             alert ('Votre publication a bien été supprimée')
             console.log("Publication supprimée", response)  
            // setUserPublications(RemovebyAttr.removeByAttr(userPublications, 'id', id))      
@@ -68,7 +70,8 @@ function UserPublications({loggedIn}) {
       if (!loggedIn) {
         return <Redirect to="/"/>
         }
-
+      
+    
 
     return (
       <div className = "userpublications">

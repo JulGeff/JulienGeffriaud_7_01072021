@@ -2,7 +2,7 @@
 import loginpic from "../../assets/login-image.png";
 import '../../styles/style.css'
 import React, { useState } from "react";
-import Api from '../Api'
+import Api from '../utils/Api'
 import {
   useHistory,
   Link,
@@ -41,10 +41,7 @@ function Login() {
                 
                         history.push("/forum")   
                         console.log(response);
-                
-              
-               
-                
+     
                
         })
                 

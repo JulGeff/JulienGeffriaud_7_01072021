@@ -1,11 +1,12 @@
 import Banner from "./Banner";
 import Signup from './auth/Signup'
 import Home from './Home'
-import Profile from './Profile'
+import Profile from './user/Profile'
+import EditProfile from './user/EditProfile'
 import Directory from './Directory'
-import Forum from './Forum'
-import SelectedPublication from './SelectedPublication'
-import UserPublications from './UserPublications'
+import Forum from './publications/Forum'
+import SelectedPublication from './publications/SelectedPublication'
+import UserPublications from './publications/UserPublications'
 import React from 'react';
 // 
 
@@ -65,6 +66,11 @@ let loggedIn=true;
                   <Route exact path={"/profile"} >
                       <Profile loggedIn={loggedIn}/>
                   </Route>
+
+                  <Route exact path={"/editprofile"} >
+                      <EditProfile loggedIn={loggedIn}/>
+                  </Route>
+
 
                   <Route exact path={"/directory"} >
                       <Directory loggedIn={loggedIn}/>

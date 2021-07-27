@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
-import Api from './Api'
-import '../styles/style.css'
+import Api from '../utils/Api'
+import '../../styles/style.css'
 import { Redirect, Link } from 'react-router-dom';
 
 

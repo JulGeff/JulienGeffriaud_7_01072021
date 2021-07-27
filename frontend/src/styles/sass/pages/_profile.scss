@@ -7,8 +7,6 @@
         margin: 2rem 4%;
     }
 
-   
-
     h1 {
         text-align: center;
         font-size: 1.5rem;
@@ -26,11 +24,21 @@
         text-align: center;
 
         &__publications,
-        &__delete {
+        &__delete,
+        &__edit,
+        &__password {
             @include button;
-            font-size: .8rem;
+            font-size: 0.8rem;
             margin: 0 1rem;
             cursor: pointer;
         }
+        &__delete,
+        &__edit,
+        &__password {
+            margin: 1rem 1rem;
+            cursor: pointer;
+        }
+
+        &__delete {background-color : red}
     }
 }
