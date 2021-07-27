@@ -7,6 +7,7 @@ import Directory from './Directory'
 import Forum from './publications/Forum'
 import SelectedPublication from './publications/SelectedPublication'
 import UserPublications from './publications/UserPublications'
+import EditPublication from './publications/EditPublication'
 import React from 'react';
 // 
 
@@ -61,6 +62,10 @@ let loggedIn=true;
 
                   <Route path={"/forum/userpublications"} >
                       <UserPublications loggedIn={loggedIn}/>
+                  </Route>
+
+                  <Route path={"/forum/editpublication"} >
+                      <EditPublication loggedIn={loggedIn}/>
                   </Route>
                 
                   <Route exact path={"/profile"} >

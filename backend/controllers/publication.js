@@ -112,25 +112,19 @@ const userId = req.query.userId
 
 
 
-/*
 
 // MODIFICATION D'UNE PUBLICATION
-exports.modifyPublication = (req, res, next) => {
-    // éléments de la requète
-    const title = req.body.title;
-    const content =  req.body.content;
+exports.editPublication = (req, res, next) => {
+
+    Publication.update(
+        {title : req.body.title,
+        content :  req.body.content
+         }, { where: {id: req.body.id} })
+     .then(() => res.status(200).json({ message: 'Publication modifiée !'}))
+     .catch(error => res.status(400).json({ error }));
+     }
+     
+
+
   
-    // vérification que tous les champs sont remplis
-    if(title === null || title === '' || content === null || content === '') {
-        return res.status(400).json({'error': "Les champs 'Titre' et 'texte' sont obligatoires"});
-    }
-    
-  const publicationObject = req.body;
-    
-  Publication.update({ ...publicationObject, id:  req.params.id}, { where: {id: req.params.id} })
-  .then(() => res.status(200).json({ message: 'Publication modifiée !'}))
-  .catch(error => res.status(400).json({ error }));
-};
-
-
-*/
+  

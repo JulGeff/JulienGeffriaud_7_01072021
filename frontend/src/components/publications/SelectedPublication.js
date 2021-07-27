@@ -158,7 +158,8 @@ function SelectedPublication({loggedIn}) {
 
 
     return (
-      <div className='publication'>          
+      <div className='publication'>     
+      <div className='publication__container'>     
         <h1 >{ selectedPublication.title }</h1>
         {selectedPublication? (
         <p className='publication__subtitle'>Publié par <strong>{selectedPublication.user.firstName} {selectedPublication.user.lastName}</strong> le {selectedPublication.createdAt.substring(9,10).padStart(2, '0')}/{selectedPublication.createdAt.substring(6,7).padStart(2, '0')}/{selectedPublication.createdAt.substring(0,4)} à {selectedPublication.createdAt.substring(11,16)}</p>)
@@ -179,6 +180,7 @@ function SelectedPublication({loggedIn}) {
                       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#E02F04" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg>
                     </div>) 
                   : ('')}
+        </div>
         </div>    
         <div className = "publication__comments"> 
           <form className = "publication__comments__form" onSubmit={handleSubmit}>

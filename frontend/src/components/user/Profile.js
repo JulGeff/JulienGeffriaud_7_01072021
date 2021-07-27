@@ -33,6 +33,7 @@ function Profile({loggedIn})  {
       , [])
 
       const handleDelete = (event,id) => { //Quand on clique sur "Supprimer"
+        
         event.preventDefault();
         Api.delete('/auth/user', {          
           headers: {

@@ -1,7 +1,15 @@
 .publication {
     margin: 5rem 25%;
+
     @media screen and (max-width: map-get($breakpoints, tablet)) {
         margin: 2rem 4%;
+    }
+
+    &__container {
+        border-radius: $radius;
+        border: 1px solid black;
+        margin-bottom : 2rem;
+        padding: 0 2rem;
     }
 
     h1 {
@@ -39,7 +47,6 @@
                 width: 1rem;
                 cursor: pointer;
                 padding: 2rem;
-                
             }
         }
     }
