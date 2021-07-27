@@ -56,8 +56,7 @@ function UserPublications({loggedIn}) {
           .then(function (response) {
             window.location.reload(false) 
             alert ('Votre publication a bien été supprimée')
-            console.log("Publication supprimée", response)  
-           // setUserPublications(RemovebyAttr.removeByAttr(userPublications, 'id', id))      
+            console.log("Publication supprimée", response)    
             console.log(userPublications)    
             
       
@@ -76,7 +75,6 @@ function UserPublications({loggedIn}) {
     return (
       <div className = "userpublications">
          
-
           {userPublications.length? (
             <div >
                <h1>Dernières publications de {firstName}</h1>

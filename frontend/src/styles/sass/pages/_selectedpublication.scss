@@ -19,7 +19,7 @@
         &__user {
             @include button;
             font-size: 0.8rem;
-            padding : .3rem
+            padding: 0.3rem;
         }
     }
     &__content {
@@ -29,13 +29,18 @@
         white-space: pre-wrap;
     }
 
-    &__delete {
-
-        svg {
-            width : 1rem;
-            cursor: pointer;
-            padding-bottom: 2rem;
-            
+    &__icons {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        &__delete,
+        &__edit {
+            svg {
+                width: 1rem;
+                cursor: pointer;
+                padding: 2rem;
+                
+            }
         }
     }
 
@@ -54,8 +59,7 @@
 
             &__button {
                 @include button;
-                padding : .2rem;
-           
+                padding: 0.2rem;
             }
         }
     }
@@ -89,7 +93,6 @@
                     width: 0.8rem;
                     padding-right: 1rem;
                     padding-top: 1.3rem;
-                  
                 }
 
                 h3 {
@@ -98,11 +101,9 @@
             }
 
             &__info {
-
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-
             }
             &__delete {
                 width: 0.8rem;
