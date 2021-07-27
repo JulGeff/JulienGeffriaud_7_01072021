@@ -1,9 +1,7 @@
 'use strict'
-
-const models = require('../models');        // importation des modèles sequelize
-const Publication = models.publication;
-const User = models.user;
-const Comment = models.comment;
+const User = require('../models/user');     // importation des modèles sequelize
+const Publication = require('../models/publication');
+const Comment = require('../models/comment');
 const fs = require('fs'); // importation du package file system de node, qui donne notamment accès aux fonctions permettant de supprimer les fichiers.
 const jwt = require('jsonwebtoken');  // importation package pour création et vérification des tokens
 require('dotenv').config()            // importation dotenv pour sécuriser passwords
@@ -37,6 +35,10 @@ exports.createPublication = (req, res, next) => {
 // RECUPERATION DE TOUTES LES PUBLICATIONS
 exports.getAllPublications = (req, res, next) => {
     Publication.findAll({
+        include: {
+            model: User,
+       
+          },
         order: [['createdAt', 'DESC']],
        
     })
@@ -59,12 +61,22 @@ exports.getAllPublications = (req, res, next) => {
 // RECUPERATION D'UNE PUBLICATION DONNEE
 
 
-    exports.getOnePublication = (req, res, next) => {
-    Publication.findByPk( req.query.publicationId)
-    .then(publication => res.status(200).json(publication))
-    .catch(error => res.status(500).json(error))
-    
-};
+// RECUPERATION D'UNE PUBLICATION DONNEE
+exports.getOnePublication = (req, res, next) => {
+
+   const publicationId = req.query.publicationId;
+      Publication.findOne ({ 
+     
+          where: {  id: publicationId },   
+        
+         // include: {
+         //   model: User,
+          //  attributes: ["lastName", "firstName"]}
+      })
+          .then(publication => res.status(200).json(publication))
+          .catch(error => res.status(500).json(error))
+    };
+
 
 // RECUPERATION DES PUBLICATIONS D'UN USER DONNE
 exports.getUserPublications = (req, res, next) => {

@@ -1,30 +1,15 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class Publication extends Model {
-    static associate(models) {
-      models.Publication.belongsTo(models.User, 
-        { foreignKey: 'userId',
-        onDelete: 'CASCADE', });
+const Sequelize = require('sequelize');
+const sequelize = require('../database');
 
-      models.Publication.hasMany(models.Comment, {
-          foreignKey: 'publicationId',
-       
-        });   
-    }
-
+const Publication = sequelize.define('publication', {
+      id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
+      },
+      title: Sequelize.STRING,
+      content: Sequelize.STRING
+    });
     
-  };
-  
-  Publication.init({
-    userId: DataTypes.INTEGER,
-    title: DataTypes.STRING,
-    content: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Publication',
-  });
-  return Publication;
-};
+    module.exports = Publication;

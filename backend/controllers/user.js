@@ -1,10 +1,10 @@
 'use strict'
 
 const bcrypt = require('bcrypt');        // importation du package de cryptage de mdp bcrypt
-const models = require('../models');     // importation des modèles sequelize
-const User = models.user;
-const Publication = models.publication;
-const Comment = models.comment;
+const User = require('../models/user');     // importation des modèles sequelize
+const Publication = require('../models/publication');
+
+const Comment = require('../models/comment');
 const jwt = require('jsonwebtoken');     // importation package pour création et vérification des tokens
 require('dotenv').config()               // importation dotenv pour sécuriser passwords
 const TokenKey = process.env.TOKENKEY;   // Récupération de la clé de cryptage des tokens via dotenv

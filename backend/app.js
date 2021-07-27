@@ -1,16 +1,12 @@
 'use strict'
 
 const express = require('express');         // importation application Express
-require('dotenv').config()                  // importation dotenv pour sécuriser passwords
-const mysqlTable = process.env.MYSQLTABLE;
-const mysqlUsername = process.env.MYSQLUSERNAME;     
-const mysqlPassword = process.env.MYSQLPASSWORD; 
 const rateLimit = require("express-rate-limit");
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100 // limit each IP to 100 requests per windowMs
 });
-
+const sequelize = require('./database');
 const bodyParser = require('body-parser');  // importation fonction body parser pour extraction objet json de la demande
 const cors = require('cors');               // module CORS
 const { Sequelize } = require('sequelize'); // importation application Sequelize pour communiquer avec MySQL
@@ -19,11 +15,11 @@ const userRoutes = require('./routes/user');   // Importation routeur users
 const publicationRoutes = require('./routes/publication');   // Importation routeur posts
 const commentRoutes = require('./routes/comment');   // Importation routeur posts
 
-const sequelize = new Sequelize(mysqlTable, mysqlUsername, mysqlPassword, { // Connexion à la base de données mySQL
-  host : 'localhost',
-  dialect: 'mysql'
-  })
+const User = require('./models/user');
+const Publication = require('./models/publication');
 
+Publication.belongsTo(User, { Constraints: true, onDelete: 'CASCADE'});
+User.hasMany(Publication);
 
 const app = express();      // application Express
 app.use(bodyParser.json()); // Enregistrement body parser
@@ -37,6 +33,11 @@ app.use((req, res, next) => {  // Ajout headers pour résoudre les erreurs CORS
     next();
   });
 
+  sequelize
+  .sync(false) // run it just in the first time after changing the database, this command will re-draw the database
+  // .sync()
+  .then(() => app.listen(8080))
+  .catch(err => console.log(err));
 
 app.use('/api/auth', userRoutes)      // Enregistrement routeur users
 app.use('/api/publication', publicationRoutes)    // Enregistrement routeur publications

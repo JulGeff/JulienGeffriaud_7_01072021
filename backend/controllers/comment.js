@@ -1,7 +1,9 @@
 'use strict'
 
-const models = require('../models');        // importation des modèles sequelize
-const Comment = models.comment;
+const User = require('../models/user');     // importation des modèles sequelize
+const Publication = require('../models/publication');
+
+const Comment = require('../models/comment');
 const fs = require('fs'); // importation du package file system de node, qui donne notamment accès aux fonctions permettant de supprimer les fichiers.
 const jwt = require('jsonwebtoken');  // importation package pour création et vérification des tokens
 require('dotenv').config()            // importation dotenv pour sécuriser passwords
