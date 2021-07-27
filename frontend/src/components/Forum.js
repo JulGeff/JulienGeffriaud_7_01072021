@@ -52,7 +52,7 @@ function Forum({loggedIn}) {
    
         .then(function (response) {
           console.log("Publication supprimée", response)  
-         
+          window.location.reload(false)
     
         })
         .catch(function (response) { // Si erreur
@@ -96,6 +96,7 @@ function Forum({loggedIn}) {
                   setTitle('');
                   setContent('');
                   alert("Votre publication a bien été postée !")
+                  window.location.reload(false)
                   })
                   .catch(function (response) { // Si erreur
                   console.log("pb frontend", response.data);

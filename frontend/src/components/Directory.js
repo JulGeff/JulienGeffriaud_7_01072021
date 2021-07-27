@@ -45,7 +45,7 @@ function Directory({loggedIn}) {
    
         .then(function (response) {
           console.log("Utilisateur supprimé", response)
-             
+          window.location.reload(false)   
             
         })
         .catch(function (response) { // Si erreur

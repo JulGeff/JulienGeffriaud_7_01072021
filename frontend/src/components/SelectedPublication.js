@@ -142,7 +142,7 @@ function SelectedPublication({loggedIn}) {
       }) 
  
       .then(function (response) {
-      
+        window.location.reload(false)
         alert ('Votre commentaire a bien été supprimé')
       })
       .catch(function (response) { // Si erreur

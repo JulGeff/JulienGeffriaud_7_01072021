@@ -15,6 +15,11 @@ exports.createPublication = (req, res, next) => {
     const token = req.headers.authorization; // On extrait le token du header Authorization de la requête entrante. 
     const decodedToken = jwt.verify(token, TokenKey); // On utilise la fonction verify de jsonwebtoken pour décoder notre token
     const id = decodedToken.id; // on extrait le user id de notre token
+    models.User.findOne({
+        attributes: ['id', 'firstName', 'lastName'],
+        where: { id: id }
+    })
+
     const newPublication = 
         Publication.create({
             userId : id,
