@@ -2,20 +2,20 @@
 import React, { useEffect, useState } from 'react';
 import Api from '../utils/Api'
 import '../../styles/style.css'
-import { Redirect, Link, useHistory } from 'react-router-dom';
-
-
+import { Link, useHistory } from 'react-router-dom';
 
 
 function EditPublication({loggedIn}) {
 
 
+    //DECALARATION DES VARIABLES ET INITIALISATION DU STATE
+    let history = useHistory();
+    let token = localStorage.getItem('token')
+    const publicationId = window.location.href.split('=')[1];
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
 
-  let history = useHistory();
-let token = localStorage.getItem('token')
-const publicationId = window.location.href.split('=')[1];
-const [title, setTitle] = useState('');
-const [content, setContent] = useState('');
+
     // RECUPERATION DE LA PUBLICATION SELECTIONNEE DEPUIS LA BDD
     useEffect(() => {
         const PublicationId = window.location.href.split('=')[1];
