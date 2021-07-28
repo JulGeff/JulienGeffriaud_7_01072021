@@ -9,13 +9,13 @@ Clonez ce repository.
 Création de la base de données groupomania
 A la racine du dossier backend créez un fichier .env et copiez-y le contenu ci-dessous
 
->DB_NAME='nom de la base de donnée'
->DB_USER='user mysql'
->DB_PASSWORD='mot de passe mysql'
->DB_HOST= 'localhost' -> laisser tel quel
->DB_DIALECT='mysql' -> laisser tel quel
+DB_NAME='nom de la base de donnée'
+DB_USER='user mysql'
+DB_PASSWORD='mot de passe mysql'
+DB_HOST= 'localhost' -> laisser tel quel
+DB_DIALECT='mysql' -> laisser tel quel
 
->TOKENKEY='clé de codage pour les tokens'
+TOKENKEY='clé de codage pour les tokens'
 
 ## Backend
 
