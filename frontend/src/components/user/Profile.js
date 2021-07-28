@@ -1,10 +1,10 @@
 
 import React, { useEffect, useState } from 'react';
-import { Redirect, useHistory, Link } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import Api from '../utils/Api'
 import '../../styles/style.css'
 
-function Profile({loggedIn})  {
+function Profile()  {
 
 
       //DECALARATION DES VARIABLES ET INITIALISATION DU STATE    
@@ -56,11 +56,6 @@ function Profile({loggedIn})  {
         console.log(response);
         });
         }
-
-  //redirection vers pages de login si quelqu'un essaie d'accéder directement à la page Profil          
-        if (!loggedIn) {
-          return <Redirect to="/"/>
-          }
 
    //Message d'attente en attendnat la fin de la requête axios    
         if (isLoading) {

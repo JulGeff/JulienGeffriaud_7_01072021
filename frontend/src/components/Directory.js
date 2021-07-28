@@ -2,10 +2,10 @@
 import React, { useEffect, } from 'react';
 import Api from './utils/Api'
 import '../styles/style.css'
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
-function Directory({loggedIn}) {
+function Directory() {
 
     const [directory, setDirectory] = React.useState([]); //initialisation du state vide
     let token = localStorage.getItem('token')
@@ -50,10 +50,7 @@ function Directory({loggedIn}) {
         });
         }
 
-        
-      if (!loggedIn) {
-        return <Redirect to="/"/>
-        }
+
 
     return (
         <div className="directory">

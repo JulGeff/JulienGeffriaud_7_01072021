@@ -2,11 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import Api from '../utils/Api'
 import '../../styles/style.css'
-import { Redirect, Link, useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 
-function SelectedPublication({loggedIn}) {
-
+function SelectedPublication() {
 
 
     //DECALARATION DES VARIABLES ET INITIALISATION DU STATE
@@ -91,9 +90,6 @@ function SelectedPublication({loggedIn}) {
           });
           }
 
-      if (!loggedIn) {
-        return <Redirect to="/"/>
-        }
 
        //Message d'attente en attendnat la fin de la requête axios    
        if (isLoading1 || isLoading2) {

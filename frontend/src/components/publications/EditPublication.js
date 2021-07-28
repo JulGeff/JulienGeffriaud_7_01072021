@@ -5,7 +5,7 @@ import '../../styles/style.css'
 import { Link, useHistory } from 'react-router-dom';
 
 
-function EditPublication({loggedIn}) {
+function EditPublication() {
 
 
     //DECALARATION DES VARIABLES ET INITIALISATION DU STATE

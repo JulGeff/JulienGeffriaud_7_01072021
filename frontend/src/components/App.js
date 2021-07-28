@@ -1,6 +1,6 @@
 import Banner from "./Banner";
+import Login from './auth/Login'
 import Signup from './auth/Signup'
-import Home from './Home'
 import Profile from './user/Profile'
 import EditProfile from './user/EditProfile'
 import Directory from './Directory'
@@ -9,9 +9,6 @@ import SelectedPublication from './publications/SelectedPublication'
 import UserPublications from './publications/UserPublications'
 import EditPublication from './publications/EditPublication'
 import React from 'react';
-// 
-
-
 import {
   BrowserRouter as Router,
   Route,
@@ -20,66 +17,86 @@ import {
 } from "react-router-dom";
 
 
+
 function App() {
   
-
-/*let loggedIn = localStorage.getItem('loggedIn')
-const [loggedIn, setLoggedIn] = React.useState([]);
-useEffect(() => {
-
-
-setLoggedIn(localStorage.getItem('loggedIn'))
-return loggedIn
-
-}
-, [])
-*/
-
 let loggedIn=true;
 
-
         return (
-          <div>
-             
+          <div> 
             <Router>
-            <Banner />
+                <Banner />
                 <Switch>
-                <Route exact path={"/signup"} loggedIn={loggedIn} >            
-                      <Signup />
-                  </Route>
+                    <Route exact path={"/signup"}>            
+                        <Signup />
+                    </Route>
 
-                  <Route exact path={"/"} >            
-                      <Home />
-                  </Route>
+                    <Route exact path={"/"} >            
+                        <Login />
+                    </Route>
 
-                  <Route exact path={"/forum"} >
-                      <Forum loggedIn={loggedIn} />
-                  </Route>
+                    <Route exact path="/forum" render={function () {
+                        //  let users = isLoggedIn();
+                        if (loggedIn) {
+                            return <Forum />
+                        } else {
+                            return <Login />
+                        }
+                    }}/>
 
-                  <Route path={"/forum/publication"} >
-                      <SelectedPublication loggedIn={loggedIn}/>
-                  </Route>
+                    <Route path="/forum/publication" render={function () {
+                    //  let users = isLoggedIn();
+                        if (loggedIn) {
+                            return <SelectedPublication />
+                        } else {
+                            return <Login />
+                        }
+                    }}/>
 
-                  <Route path={"/forum/userpublications"} >
-                      <UserPublications loggedIn={loggedIn}/>
-                  </Route>
+                    <Route path="/forum/userpublications" render={function () {
+                    //  let users = isLoggedIn();
+                        if (loggedIn) {
+                            return <UserPublications />
+                        } else {
+                            return <Login />
+                        }
+                    }}/>
 
-                  <Route path={"/forum/editpublication"} >
-                      <EditPublication loggedIn={loggedIn}/>
-                  </Route>
-                
-                  <Route exact path={"/profile"} >
-                      <Profile loggedIn={loggedIn}/>
-                  </Route>
+                    <Route path="/forum/editpublication" render={function () {
+                    //  let users = isLoggedIn();
+                        if (loggedIn) {
+                            return <EditPublication />
+                        } else {
+                            return <Login />
+                        }
+                    }}/>
 
-                  <Route exact path={"/editprofile"} >
-                      <EditProfile loggedIn={loggedIn}/>
-                  </Route>
-
-
-                  <Route exact path={"/directory"} >
-                      <Directory loggedIn={loggedIn}/>
-                  </Route>
+                    <Route exact path="/profile" render={function () {
+                    //  let users = isLoggedIn();
+                        if (loggedIn) {
+                            return <Profile />
+                        } else {
+                            return <Login />
+                        }
+                    }}/>
+                    
+                    <Route exact path="/editprofile" render={function () {
+                    //  let users = isLoggedIn();
+                        if (loggedIn) {
+                            return <EditProfile />
+                        } else {
+                            return <Login />
+                        }
+                    }}/>
+                    
+                    <Route exact path="/directory" render={function () {
+                    //  let users = isLoggedIn();
+                        if (loggedIn) {
+                            return <Directory />
+                        } else {
+                            return <Login />
+                        }
+                    }}/>
                 </Switch>
             </Router>
           </div>
@@ -87,3 +104,5 @@ let loggedIn=true;
     } 
   
   export default App;
+
+

@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import Api from '../utils/Api'
 import '../../styles/style.css'
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
-function Forum({loggedIn}) {
+function Forum() {
 
   
     //DECALARATION DES VARIABLES ET INITIALISATION DU STATE
@@ -60,9 +60,6 @@ function Forum({loggedIn}) {
         });
         }
 
-      if (!loggedIn) {
-        return <Redirect to="/"/>
-        }
 
         // PUBLICATION DES ARTICLES
         const handleSubmit = (event) => {  // Au clic sur le bouton "Publier !"
