@@ -5,12 +5,12 @@ Pour utiliser correctement l'API, veuillez suivre ces instructions :
 Clonez ce repository.
 
 ## Configuration backend
-Dans MySQL créez une base de données groupomania  
+Dans MySQL créez une base de données du nom de votre choix.
 
 **Fichier dotenv**  
 A la racine du dossier backend créez un fichier nommé '.env' et copiez-y le contenu ci-dessous :
 
->DB_NAME='nom de la base de donnée'  
+>DB_NAME='nom de la base de données'  
 >DB_USER='user mysql'  
 >DB_PASSWORD='mot de passe mysql'  
 >DB_HOST= 'localhost' -> laisser tel quel  
@@ -27,7 +27,7 @@ Dans le terminal, installez nodemons erver en tapant les commandes suivantes :
 Puis lancez le serveur en tapant la commande :  
 >nodemon server  
 
-## Démarrage Frontend
+## Démarrage frontend
 
 **Lancement de sass**  
 Dans le terminal, démarrez sass avec la commande 'npm run sass'
