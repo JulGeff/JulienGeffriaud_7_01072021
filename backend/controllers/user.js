@@ -72,7 +72,7 @@ exports.login = (req, res, next) => {
 // RECUPERATION DE TOUS LES PROFILS UTILSATEURS
 exports.getAllUsers = (req, res, next) => {
   User.findAll({
-    attributes: ['firstName', 'lastName', 'email', 'createdAt','id'],
+    attributes: ['firstName', 'lastName', 'email', 'updatedAt','id'],
     order: [['lastName', 'ASC']]
 })
   .then(users => {

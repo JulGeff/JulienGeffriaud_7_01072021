@@ -35,12 +35,12 @@ exports.createPublication = (req, res, next) => {
 // RECUPERATION DE TOUTES LES PUBLICATIONS
 exports.getAllPublications = (req, res, next) => {
     Publication.findAll({
-        attributes: ['title', 'content', 'createdAt','id','userId'],
+        attributes: ['title', 'content', 'updatedAt','id','userId'],
         include: {
             model: User,
             attributes:['firstName', 'lastName']
         },
-        order: [['createdAt', 'DESC']],
+        order: [['updatedAt', 'DESC']],
         
     })
     .then(       // renvoie un tableau contenant toutes les publications dans notre base de données
@@ -83,7 +83,7 @@ const userId = req.query.userId
         model: User,
    
       },
-      order: [['createdAt', 'DESC']]
+      order: [['updatedAt', 'DESC']]
     })
 
     .then(publications => {

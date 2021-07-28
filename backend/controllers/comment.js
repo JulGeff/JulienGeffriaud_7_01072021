@@ -36,7 +36,7 @@ exports.createComment = (req, res, next) => {
 exports.getAllComments = (req, res, next) => {
     const publicationId = req.query.publicationId
     Comment.findAll({
-        attributes: ['comment', 'createdAt','userId','id'],
+        attributes: ['comment', 'updatedAt','userId','id'],
         where: {
             publicationId: publicationId
           },
@@ -44,7 +44,7 @@ exports.getAllComments = (req, res, next) => {
             model: User,
             attributes:['firstName', 'lastName']
         },
-        order: [['createdAt', 'DESC']]
+        order: [['updatedAt', 'DESC']]
     })
 
     .then(        // renvoie un tableau contenant toutes les publications dans notre base de données

@@ -164,7 +164,7 @@ function SelectedPublication({loggedIn}) {
       <div className='publication__container'>     
         <h1 >{ selectedPublication.title }</h1>
      
-        <p className='publication__subtitle'>Publié par <strong>{selectedPublication.user.firstName} {selectedPublication.user.lastName}</strong> le {selectedPublication.createdAt.substring(9,10).padStart(2, '0')}/{selectedPublication.createdAt.substring(6,7).padStart(2, '0')}/{selectedPublication.createdAt.substring(0,4)} à {selectedPublication.createdAt.substring(11,16)}</p>
+        <p className='publication__subtitle'>Publié par <strong>{selectedPublication.user.firstName} {selectedPublication.user.lastName}</strong> le {selectedPublication.updatedAt.substring(9,10).padStart(2, '0')}/{selectedPublication.updatedAt.substring(6,7).padStart(2, '0')}/{selectedPublication.updatedAt.substring(0,4)} à {selectedPublication.updatedAt.substring(11,16)}</p>
         <Link to={"./userpublications?id=" + selectedPublication.userId} className='publication__link'>
           <p className='publication__link__user'> Voir toutes les publications de {selectedPublication.user.firstName} </p>
         </Link>
@@ -216,7 +216,7 @@ function SelectedPublication({loggedIn}) {
               <h3>{item.comment}</h3>
             </div>  
             <div className="publication__displaycomments__list__info" >
-              <p>publié  le {item.createdAt.substring(9,10).padStart(2, '0')}/{item.createdAt.substring(6,7).padStart(2, '0')}/{item.createdAt.substring(0,4)} à {item.createdAt.substring(11,16)}</p>
+              <p>publié  le {item.updatedAt.substring(9,10).padStart(2, '0')}/{item.updatedAt.substring(6,7).padStart(2, '0')}/{item.updatedAt.substring(0,4)} à {item.updatedAt.substring(11,16)}</p>
               
               {/* si user connecté est l'auteur du commentaire ou admin, on affiche un lien pour le supprimer*/} 
                {item.userId===userId || isAdmin

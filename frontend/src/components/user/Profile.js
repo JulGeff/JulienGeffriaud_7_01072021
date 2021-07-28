@@ -81,13 +81,18 @@ function Profile({loggedIn})  {
               <li>Nom : {profileInfo.lastName}</li>
               <li>email : {profileInfo.email}</li>
               <li>Profil créé le {profileInfo.createdAt.substring(9,10).padStart(2, '0')}/{profileInfo.createdAt.substring(6,7).padStart(2, '0')}/{profileInfo.createdAt.substring(1,4).padStart(2, '0')}</li>
-            
+              {isAdmin
+                ? ( <li>Administrateur·rice</li>) 
+                : (' ')} 
+           
             </ul>
 
             <div className = "profile__buttons">
             <Link to="/editprofile">
                     <p className = "profile__buttons__edit">Modifier mon profil</p>
             </Link>
+
+          
 
             {!isAdmin
                 ? ( <p className = "profile__buttons__delete" onClick = {e => handleDelete(e, profileInfo.id)}>Supprimer mon profil</p>) 
