@@ -19,8 +19,18 @@ import {
 
 
 function App() {
-  
-let loggedIn=true;
+
+    var jwt = require('jsonwebtoken');
+
+
+    function isLoggedIn() {
+        let loggedIn = null;
+        if (localStorage.getItem('user')) {
+            loggedIn = jwt.decode(localStorage.getItem('user'))
+        }
+        return loggedIn
+    }
+    
 
         return (
           <div> 
@@ -36,7 +46,7 @@ let loggedIn=true;
                     </Route>
 
                     <Route exact path="/forum" render={function () {
-                        //  let users = isLoggedIn();
+                        let loggedIn = isLoggedIn();
                         if (loggedIn) {
                             return <Forum />
                         } else {
@@ -45,7 +55,7 @@ let loggedIn=true;
                     }}/>
 
                     <Route path="/forum/publication" render={function () {
-                    //  let users = isLoggedIn();
+                        let loggedIn = isLoggedIn();
                         if (loggedIn) {
                             return <SelectedPublication />
                         } else {
@@ -54,7 +64,7 @@ let loggedIn=true;
                     }}/>
 
                     <Route path="/forum/userpublications" render={function () {
-                    //  let users = isLoggedIn();
+                        let loggedIn = isLoggedIn();
                         if (loggedIn) {
                             return <UserPublications />
                         } else {
@@ -63,7 +73,7 @@ let loggedIn=true;
                     }}/>
 
                     <Route path="/forum/editpublication" render={function () {
-                    //  let users = isLoggedIn();
+                        let loggedIn = isLoggedIn();
                         if (loggedIn) {
                             return <EditPublication />
                         } else {
@@ -72,7 +82,7 @@ let loggedIn=true;
                     }}/>
 
                     <Route exact path="/profile" render={function () {
-                    //  let users = isLoggedIn();
+                        let loggedIn = isLoggedIn();
                         if (loggedIn) {
                             return <Profile />
                         } else {
@@ -81,7 +91,7 @@ let loggedIn=true;
                     }}/>
                     
                     <Route exact path="/editprofile" render={function () {
-                    //  let users = isLoggedIn();
+                        let loggedIn = isLoggedIn();
                         if (loggedIn) {
                             return <EditProfile />
                         } else {
@@ -90,7 +100,7 @@ let loggedIn=true;
                     }}/>
                     
                     <Route exact path="/directory" render={function () {
-                    //  let users = isLoggedIn();
+                        let loggedIn = isLoggedIn();
                         if (loggedIn) {
                             return <Directory />
                         } else {

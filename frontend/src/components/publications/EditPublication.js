@@ -10,16 +10,19 @@ function EditPublication() {
 
     //DECALARATION DES VARIABLES ET INITIALISATION DU STATE
     let history = useHistory();
-    let token = localStorage.getItem('token')
     const publicationId = window.location.href.split('=')[1];
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
+    var jwt = require('jsonwebtoken');
+    let token = localStorage.getItem('user')
+    let userInfo = jwt.decode(token)
+    const [user, setUser] = useState(userInfo)
 
     // RECUPERATION DE LA PUBLICATION SELECTIONNEE DEPUIS LA BDD
     useEffect(() => {
         const PublicationId = window.location.href.split('=')[1];
-        let token = localStorage.getItem('token')
+        let token = localStorage.getItem('user')
       
           Api.get('/publication/selected',    //requête GET via Axios
           {   headers: {

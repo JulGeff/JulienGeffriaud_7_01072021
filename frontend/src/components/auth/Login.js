@@ -34,10 +34,8 @@ function Login() {
          Api.post('/auth/login', loginFormData) //requête POST via Axios
 
                 .then(function (response) {  //Si Ok
-                        localStorage.setItem('token', response.data.token);
-                        localStorage.setItem('id', response.data.id)
-                        localStorage.setItem('isAdmin', response.data.isAdmin)
-                        localStorage.setItem('loggedIn', response.data.loggedIn)
+                   
+                        localStorage.setItem('user', response.data.token);
                 
                         history.push("/forum")   
                         console.log(response);

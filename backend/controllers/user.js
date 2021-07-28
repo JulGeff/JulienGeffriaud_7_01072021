@@ -51,10 +51,12 @@ exports.login = (req, res, next) => {
               return res.status(401).json({ error: 'Mot de passe incorrect !' }); // Unauthorized
             }
             res.status(200).json({ // Requête traitée avec succès / Renvoie le token au frontend
-              id : user.id,           // On renvoie l'id
-              email: user.email,   
-              token: jwt.sign(      // On utilise la fonction sign de jsonwebtoken pour encoder un nouveau token
-                { id: user.id },
+              token: jwt.sign(
+                { 
+                    id: user.id, 
+                    email: user.email,
+                    isAdmin : user.isAdmin
+                },
                 TokenKey,            // récupère la chaîne secrète d'encodage de notre token via dotenv
                 { expiresIn: '24h' }    // A MODIFIER EXPIRATION QUAND LOGOUT ??
               ),

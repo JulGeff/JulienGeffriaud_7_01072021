@@ -1,19 +1,23 @@
 
-import React, { useEffect, } from 'react';
+import React, { useEffect, useState } from 'react';
 import Api from './utils/Api'
 import '../styles/style.css'
 import { Link } from 'react-router-dom';
 
 
 function Directory() {
-
-    const [directory, setDirectory] = React.useState([]); //initialisation du state vide
-    let token = localStorage.getItem('token')
-    let isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
   
 
+    const [directory, setDirectory] = React.useState([]); //initialisation du state vide
+  
+   
+  var jwt = require('jsonwebtoken');
+  let token = localStorage.getItem('user')
+  let userInfo = jwt.decode(token)
+  const [user, setUser] = useState(userInfo)
+
     useEffect(() => {
-      let token = localStorage.getItem('token')
+      let token = localStorage.getItem('user')
 
         Api.get('/auth/users',
         {   headers: {
@@ -75,7 +79,7 @@ function Directory() {
                             </Link>  
                             </td>  
                             <td>
-                            {isAdmin && !item.isAdmin
+                            {user.isAdmin && !item.isAdmin
                               ? (<svg onClick = {e => handleDelete(e, item.id)} className="directory__userdelete" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#E02F04" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg>) 
                               : (' ')}           
                             </td>

@@ -11,13 +11,14 @@ function Profile()  {
       const [isLoading, setIsLoading] = useState(true); 
       const [profileInfo, setProfileInfo] = useState([]);
       let history = useHistory(); 
-      let token = localStorage.getItem('token')
-      let isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
-      
+      var jwt = require('jsonwebtoken');
+      let token = localStorage.getItem('user')
+      let userInfo = jwt.decode(token)
+      const [user, setUser] = useState(userInfo)
       
       //RECUPERATION DES DONNEES DU PROFIL DEPUIS LA BDD
       useEffect(() => {
-      let token = localStorage.getItem('token')
+      let token = localStorage.getItem('user')
       Api.get('/auth/user', {          
             headers: {
                 'Authorization': `${token}`
@@ -77,7 +78,7 @@ function Profile()  {
               <li>Nom : {profileInfo.lastName}</li>
               <li>email : {profileInfo.email}</li>
               <li>Profil créé le {profileInfo.createdAt.substring(9,10).padStart(2, '0')}/{profileInfo.createdAt.substring(6,7).padStart(2, '0')}/{profileInfo.createdAt.substring(1,4).padStart(2, '0')}</li>
-              {isAdmin
+              {user.isAdmin
                 ? ( <li>Administrateur·rice</li>) 
                 : (' ')} 
            
@@ -90,7 +91,7 @@ function Profile()  {
 
           
 
-            {!isAdmin
+            {!user.isAdmin
                 ? ( <p className = "profile__buttons__delete" onClick = {e => handleDelete(e, profileInfo.id)}>Supprimer mon profil</p>) 
                 : (' ')} 
             </div>
