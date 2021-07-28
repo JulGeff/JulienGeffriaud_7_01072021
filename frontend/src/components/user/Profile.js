@@ -6,12 +6,16 @@ import '../../styles/style.css'
 
 function Profile({loggedIn})  {
 
+
+      //DECALARATION DES VARIABLES ET INITIALISATION DU STATE    
       const [isLoading, setIsLoading] = useState(true); 
       const [profileInfo, setProfileInfo] = useState([]);
       let history = useHistory(); 
       let token = localStorage.getItem('token')
       let isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
       
+      
+      //RECUPERATION DES DONNEES DU PROFIL DEPUIS LA BDD
       useEffect(() => {
       let token = localStorage.getItem('token')
       Api.get('/auth/user', {          
@@ -84,9 +88,7 @@ function Profile({loggedIn})  {
             <Link to="/editprofile">
                     <p className = "profile__buttons__edit">Modifier mon profil</p>
             </Link>
-            <Link to="/changepassword">
-                    <p className = "profile__buttons__password">Modifier mon mot de passe</p>
-            </Link>
+
             {!isAdmin
                 ? ( <p className = "profile__buttons__delete" onClick = {e => handleDelete(e, profileInfo.id)}>Supprimer mon profil</p>) 
                 : (' ')} 

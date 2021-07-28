@@ -34,7 +34,7 @@ function Signup() {
                 .then(function (response) {  //Si Ok
                 console.log(response);
                 history.push("/")
-                alert("Votre compte à bien été créé !\n- Connectez-vous pour accéder aux dernières publications de vos collègues.")
+                alert("Votre compte à bien été créé !\nConnectez-vous pour accéder aux dernières publications de vos collègues.")
               
                 
                 })

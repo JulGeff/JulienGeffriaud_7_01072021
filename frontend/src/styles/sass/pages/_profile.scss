@@ -25,20 +25,26 @@
 
         &__publications,
         &__delete,
-        &__edit,
-        &__password {
+        &__edit {
             @include button;
             font-size: 0.8rem;
             margin: 0 1rem;
             cursor: pointer;
+            padding: 0.4rem;
         }
         &__delete,
-        &__edit,
-        &__password {
+        &__edit {
             margin: 1rem 1rem;
             cursor: pointer;
         }
 
-        &__delete {background-color : red}
+        &__delete {
+            background-color: red;
+
+            &:hover {
+                color: red;
+                border-color: red;
+            }
+        }
     }
 }

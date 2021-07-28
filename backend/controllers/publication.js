@@ -35,7 +35,7 @@ exports.createPublication = (req, res, next) => {
 // RECUPERATION DE TOUTES LES PUBLICATIONS
 exports.getAllPublications = (req, res, next) => {
     Publication.findAll({
-        attributes: ['title', 'content', 'createdAt','id'],
+        attributes: ['title', 'content', 'createdAt','id','userId'],
         include: {
             model: User,
             attributes:['firstName', 'lastName']

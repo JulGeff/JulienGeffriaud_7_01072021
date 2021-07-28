@@ -6,13 +6,15 @@ import '../../styles/style.css'
 
 function EditProfile({loggedIn})  {
 
+
+  //DECALARATION DES VARIABLES ET INITIALISATION DU STATE     
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   let history = useHistory(); 
   let token = localStorage.getItem('token')
  
 
-  //RECUPERATION DES DONNEES DU PROFIL
+  //RECUPERATION DES DONNEES DU PROFIL DEPUIS LA BDD
   useEffect(() => {
   let token = localStorage.getItem('token')
   Api.get('/auth/user', {          
@@ -34,8 +36,8 @@ function EditProfile({loggedIn})  {
   , [])
     
 
-  // VALIDATION DES MODIFICATIONS
-  const handleSubmit = (event) => { //Quand on clique sur "Supprimer"
+  // VALIDATION DES MODIFICATIONS AU CLIC SUR 'PUBLIER'
+  const handleSubmit = (event) => { 
     event.preventDefault();
     console.log(firstName, lastName)
    
@@ -51,7 +53,7 @@ function EditProfile({loggedIn})  {
       {headers: {
         'Authorization': `${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
       }}
- ) //requête POST via Axios
+ ) 
 
       .then(function (response) {  //Si Ok
       console.log(response);
@@ -64,7 +66,7 @@ function EditProfile({loggedIn})  {
       });
     }
 
-  //redirection vers pages de login si quelqu'un essaie d'accéder directement à la page Profil          
+  //redirection vers pages de login si quelqu'un essaie d'accéder directement à la page Profil sans être connecté          
         if (!loggedIn) {
           return <Redirect to="/"/>
           }

@@ -67,12 +67,13 @@
                     font-style: italic;
                 }
 
-                &__delete {
+                &__delete, &__edit {
 
                     svg {
                         width : .8rem;
                         float: right;
                         cursor: pointer;
+                        padding-right: 1rem;
                     }
                 }
             }

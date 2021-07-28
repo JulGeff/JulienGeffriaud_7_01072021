@@ -35,9 +35,8 @@ exports.createComment = (req, res, next) => {
 // RECUPERATION DE TOUS LES COMMENTAIRES LIES A UNE PUBLICATION
 exports.getAllComments = (req, res, next) => {
     const publicationId = req.query.publicationId
-    console.log(publicationId)
     Comment.findAll({
-        attributes: ['comment', 'createdAt'],
+        attributes: ['comment', 'createdAt','userId','id'],
         where: {
             publicationId: publicationId
           },
@@ -63,7 +62,7 @@ exports.getAllComments = (req, res, next) => {
 
 //SUPPRESSION D'UN COMMENTAIRE
   exports.deleteComment = (req, res, next) => { 
-     
+     console.log(req.query,req.params)
     Comment.destroy ({ where: { id: req.query.id }}) // callback : Suppression de la publication avec l'id correspondant
         
         .then(() => res.status(200).json({ message: 'Publication supprimée !'})) // Requête traitée avec succès

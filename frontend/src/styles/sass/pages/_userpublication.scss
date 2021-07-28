@@ -4,8 +4,6 @@
         margin: 2rem 4%;
     }
 
-    
-
     &__none {
         text-align: center;
 
@@ -44,10 +42,12 @@
                     text-align: center;
                 }
 
-                &__delete {
+                &__delete,
+                &__edit {
                     cursor: pointer;
                     float: right;
-                width : 1rem;
+                    width: 1rem;
+                    padding-right: 1rem;
                 }
             }
         }
