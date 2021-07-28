@@ -17,18 +17,15 @@ A la racine du dossier backend créez un fichier nommé '.env' et copiez-y le co
 >DB_DIALECT='mysql' -> laisser tel quel  
 >TOKENKEY='clé de codage pour les tokens'  
 
-**Fichier config.json**  
-Dans le fichier config/config.json, 
-
 ## Démarrage backend
 
 **Démarrage du serveur**  
 Dans le terminal, installez nodemons erver en tapant les commandes suivantes :   
->cd backend 
->npm install nodemon server
+>cd backend  
+>npm install nodemon server  
 
 Puis lancez le serveur en tapant la commande :  
->nodemon server".
+>nodemon server  
 
 ## Démarrage Frontend
 
