@@ -5,14 +5,12 @@ import '../styles/style.css'
 import { Redirect, Link } from 'react-router-dom';
 
 
-
-
-
 function Directory({loggedIn}) {
 
     const [directory, setDirectory] = React.useState([]); //initialisation du state vide
     let token = localStorage.getItem('token')
     let isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
+  
 
     useEffect(() => {
       let token = localStorage.getItem('token')
