@@ -1,12 +1,11 @@
 # Bienvenue sur le réseau social interne Groupomania  !
 
-Pour utiliser correctement l'API, veuillez suivre ces instructions :
+Pour utiliser correctement l'API, veuillez suivre ces instructions :  
 
 Clonez ce repository.
 
-
 ## Configuration
-Création de la base de données groupomania
+Création de la base de données groupomania  
 A la racine du dossier backend créez un fichier .env et copiez-y le contenu ci-dessous
 
 DB_NAME='nom de la base de donnée'  
@@ -20,9 +19,9 @@ TOKENKEY='clé de codage pour les tokens'
 ## Backend
 
 **Démarrage du serveur**
-Dans le terminal, rendez-vous sur le backend avec la commande :  cd backend
-Depuis le dossier backend : Telechargez et ouvrez Node.js. 
-Tapez la commande suivante : "npm start". 
+Dans le terminal, rendez-vous sur le backend avec la commande :  cd backend  
+Depuis le dossier backend : Telechargez et ouvrez Node.js.  
+Tapez la commande suivante : "npm start".  
 Puis lancez le serveur en tapant la commande : "nodemon server".
 
 ## Frontend
@@ -31,6 +30,6 @@ Puis lancez le serveur en tapant la commande : "nodemon server".
 Dans le terminal, démarrez sass avec la commande 'npm run sass'
 
 **Démarrage du serveur**
-Dans le terminal, rendez-vous sur le backend avec la commande :  'cd frontend'
-Puis 'npm start' pour avoir accès au serveur de développement.
-L'application s'ouvira automatiquement, sinon rendez-vous sur http://localhost:3000/
+Dans le terminal, rendez-vous sur le backend avec la commande :  'cd frontend'  
+Puis 'npm start' pour avoir accès au serveur de développement.  
+L'application s'ouvira automatiquement, sinon rendez-vous sur http://localhost:3000/  
