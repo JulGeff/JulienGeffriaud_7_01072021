@@ -15,11 +15,8 @@ function Banner() {
         e.preventDefault();
         localStorage.clear();
         history.push("/")
-       
-       
-        
-    
         }
+        
     return  (
                 <div className='banner'>
                     <div className='banner__welcome'>

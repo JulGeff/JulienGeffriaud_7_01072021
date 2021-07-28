@@ -34,12 +34,12 @@ function SelectedPublication({loggedIn}) {
 
       })
         .then(function (response)  {
-          const publi = response.data;
-          setSelectedPublication(publi);          
+          
+          setSelectedPublication(response.data);          
           setIsLoading1(false);
           })
           .catch(function (response) { // Si erreur
-            console.log("pb frontend", response.data);
+            console.log(response);
             });
             }
       , [])
@@ -60,11 +60,10 @@ function SelectedPublication({loggedIn}) {
           .then(function (response)  {
               const commentList = response.data;
               setCommentlist(commentList);
-              console.log(commentList)
               setIsLoading2(false);
             })
             .catch(function (response) { // Si erreur
-              console.log("pb frontend", response.data);
+              console.log(response);
               });
               }
         , [])
@@ -88,7 +87,7 @@ function SelectedPublication({loggedIn}) {
             history.push("/forum")
           })
           .catch(function (response) { // Si erreur
-          console.log("Erreur", response);
+          console.log(response);
           });
           }
 
@@ -117,8 +116,6 @@ function SelectedPublication({loggedIn}) {
  
           };
 
-          console.log(commentData);
-
           Api.post(
               '/comment', commentData,
               {headers: {
@@ -127,13 +124,12 @@ function SelectedPublication({loggedIn}) {
          ) //requête POST via Axios
 
               .then(function (response) {  //Si Ok
-              console.log(response);
               window.location.reload(false)  
               setComment('');
               alert("Votre commentaire a bien été posté !")
               })
               .catch(function (response) { // Si erreur
-              console.log("pb frontend", response.data);
+              console.log(response);
               });
       }
     }
@@ -154,7 +150,7 @@ function SelectedPublication({loggedIn}) {
         alert ('Votre commentaire a bien été supprimé')
       })
       .catch(function (response) { // Si erreur
-      console.log("Erreur", response);
+      console.log(response);
       });
       }
 

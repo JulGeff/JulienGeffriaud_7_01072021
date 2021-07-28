@@ -50,8 +50,6 @@ function EditPublication({loggedIn}) {
             id: publicationId
           };
 
-        console.log(publicationData);
-
           Api.put(
             '/publication', publicationData,
             {headers: {
@@ -66,7 +64,7 @@ function EditPublication({loggedIn}) {
             
             })
             .catch(function (response) { // Si erreur
-            console.log("pb frontend", response.data);
+            console.log(response);
             });
           }
 

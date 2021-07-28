@@ -25,10 +25,9 @@ function Directory({loggedIn}) {
         .then(function (response)  {
             const directory = response.data.data;
             setDirectory(directory);
-            console.log(directory)
           })
           .catch(function (response) { // Si erreur
-            console.log("pb frontend", response.data);
+            console.log(response);
             });
             }
       , [])
@@ -44,12 +43,12 @@ function Directory({loggedIn}) {
         }) 
    
         .then(function (response) {
-          console.log("Utilisateur supprimé", response)
+          alert ('Le profil a bien été supprimé') 
           window.location.reload(false)   
             
         })
         .catch(function (response) { // Si erreur
-        console.log("Erreur", response.data);
+        console.log(response);
         });
         }
 

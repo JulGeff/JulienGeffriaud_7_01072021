@@ -33,7 +33,7 @@ function UserPublications({loggedIn}) {
             
           })
           .catch(function (response) { // Si erreur
-            console.log("pb frontend", response.data);
+            console.log(response);
             });
             }
       , [])
@@ -52,14 +52,11 @@ function UserPublications({loggedIn}) {
      
           .then(function (response) {
             window.location.reload(false) 
-            alert ('Votre publication a bien été supprimée')
-            console.log("Publication supprimée", response)    
-            console.log(userPublications)    
-            
+            alert ('Votre publication a bien été supprimée')              
       
           })
           .catch(function (response) { // Si erreur
-          console.log("Erreur", response);
+          console.log(response);
           });
           }
 

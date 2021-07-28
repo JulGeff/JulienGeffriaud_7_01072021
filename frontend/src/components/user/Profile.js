@@ -25,17 +25,17 @@ function Profile({loggedIn})  {
           )
          
         .then(function (response) {
-          console.log(response.data)
           setProfileInfo(response.data);
           setIsLoading(false);
         })
         .catch(function (response) { // Si erreur
-        console.log("Erreur", response.data);
+        console.log(response);
         });
         
       }
       , [])
 
+      //SUPPRESSION DU PROFIL UTILISATEUR
       const handleDelete = (event,id) => { //Quand on clique sur "Supprimer"
         
         event.preventDefault();
@@ -47,12 +47,13 @@ function Profile({loggedIn})  {
         }) 
    
         .then(function (response) {
+          alert ('Votre profil a bien été supprimé') 
           history.push("/signup")
           localStorage.clear();
           
         })
         .catch(function (response) { // Si erreur
-        console.log("Erreur", response.data);
+        console.log(response);
         });
         }
 

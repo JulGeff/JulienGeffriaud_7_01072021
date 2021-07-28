@@ -27,13 +27,11 @@ function Forum({loggedIn}) {
           'Authorization': `${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
         }}) //requête GET via Axios
         .then(function (response)  {
-            const forum = response.data;
-            setForum(forum);
-            console.log(response)
-            console.log(forum);
+            setForum(response.data);
+  
           })
           .catch(function (response) { // Si erreur
-            console.log("pb frontend", response.data);
+            console.log(response);
             });
             }
       , [])
@@ -57,7 +55,7 @@ function Forum({loggedIn}) {
     
         })
         .catch(function (response) { // Si erreur
-        console.log("Erreur", response);
+        console.log(response);
        
         });
         }
@@ -82,8 +80,6 @@ function Forum({loggedIn}) {
                   content : content,
               };
     
-              console.log(publicationData);
-    
               Api.post(
                   '/publication', publicationData,
                   {headers: {
@@ -92,15 +88,13 @@ function Forum({loggedIn}) {
              ) //requête POST via Axios
     
                   .then(function (response) {  //Si Ok
-                  console.log(response);
-                  //setForum(forum.push(publicationData));
                   setTitle('');
                   setContent('');
                   alert("Votre publication a bien été postée !")
                   window.location.reload(false)
                   })
                   .catch(function (response) { // Si erreur
-                  console.log("pb frontend", response.data);
+                  console.log(response);
                   });
     
           }

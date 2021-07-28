@@ -24,12 +24,11 @@ function EditProfile({loggedIn})  {
       )
      
     .then(function (response) {
-      console.log(response.data)
       setFirstName(response.data.firstName);
       setLastName(response.data.lastName);
     })
     .catch(function (response) { // Si erreur
-    console.log("Erreur", response.data);
+    console.log(response);
     });
     
   }
@@ -39,14 +38,11 @@ function EditProfile({loggedIn})  {
   // VALIDATION DES MODIFICATIONS AU CLIC SUR 'PUBLIER'
   const handleSubmit = (event) => { 
     event.preventDefault();
-    console.log(firstName, lastName)
-   
+
     let userData = { 
       firstName : firstName,
       lastName: lastName
     };
-
-  console.log(userData, token);
 
     Api.put(
       '/auth/user', userData,
@@ -56,13 +52,12 @@ function EditProfile({loggedIn})  {
  ) 
 
       .then(function (response) {  //Si Ok
-      console.log(response);
       alert("Votre profil a bien été mis à jour !")
       history.push("/profile")
       
       })
       .catch(function (response) { // Si erreur
-      console.log("pb frontend", response.data);
+      console.log(response);
       });
     }
 
