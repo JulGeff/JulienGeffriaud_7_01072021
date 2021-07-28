@@ -16,7 +16,7 @@ function Forum({loggedIn}) {
     let token = localStorage.getItem('token')
     let isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
 
-    
+
     // RECUPERATION DES PUBLICATIONS STOCKEES DANS LA BDD
     useEffect(() => {
       
@@ -52,7 +52,7 @@ function Forum({loggedIn}) {
         }) 
    
         .then(function (response) {
-          console.log("Publication supprimée", response)  
+          alert ('Votre publication a bien été supprimée')  
           window.location.reload(false)
     
         })

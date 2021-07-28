@@ -8,8 +8,18 @@ const Publication = sequelize.define('publication', {
         allowNull: false,
         primaryKey: true
       },
-      title: Sequelize.STRING,
-      content: Sequelize.STRING
+
+      title: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        len: [2,50]
+      },
+      
+      content: {
+        allowNull: false,
+        type: Sequelize.STRING(1234),
+        len: [2,1000]
+      }
     });
     
     module.exports = Publication;

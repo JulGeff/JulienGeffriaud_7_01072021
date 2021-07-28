@@ -8,7 +8,12 @@ const Comment = sequelize.define('comment', {
         allowNull: false,
         primaryKey: true
       },
-      comment: Sequelize.STRING,
+      
+      comment: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        len: [2,200]
+      }
     
     });
     
