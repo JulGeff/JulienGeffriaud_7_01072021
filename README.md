@@ -20,7 +20,7 @@ A la racine du dossier backend créez un fichier nommé '.env' et copiez-y le co
 ## Démarrage backend
 
 **Démarrage du serveur**  
-Dans le terminal, installez nodemons erver en tapant les commandes suivantes :   
+Dans le terminal, installez nodemon server en tapant les commandes suivantes :   
 >cd backend  
 >npm install nodemon server  
 
@@ -30,11 +30,13 @@ Puis lancez le serveur en tapant la commande :
 ## Démarrage frontend
 
 **Lancement de sass**  
-Dans le terminal, démarrez sass avec la commande 'npm run sass'
+Dans le terminal, démarrez sass avec la commande  
+>npm run sass
 
 **Démarrage du serveur**  
-Dans le terminal, rendez-vous sur le backend avec la commande :  'cd frontend'  
-Puis 'npm start' pour avoir accès au serveur de développement.  
+Dans le terminal, lancez le serveur en tapant les commandes :  
+>cd frontend  
+>npm start  
 L'application s'ouvira automatiquement, sinon rendez-vous sur http://localhost:3000/  
 
 **Droits administrateur**  
