@@ -92,7 +92,7 @@ function Profile()  {
           
 
             {!user.isAdmin
-                ? ( <p className = "profile__buttons__delete" onClick = {e => handleDelete(e, profileInfo.id)}>Supprimer mon profil</p>) 
+                ? ( <p className = "profile__buttons__delete" onClick = {e => {if (window.confirm('Etes-vous vraiment sûr·e de vouloir supprimer votre profil ?')) handleDelete(e, profileInfo.id)}}>Supprimer mon profil</p>) 
                 : (' ')} 
             </div>
             
@@ -101,3 +101,5 @@ function Profile()  {
     }
  
 export default Profile
+
+
