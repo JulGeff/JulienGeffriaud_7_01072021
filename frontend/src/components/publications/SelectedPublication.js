@@ -36,7 +36,7 @@ function SelectedPublication() {
       })
         .then(function (response)  {
           
-          setSelectedPublication(response.data);          
+          setSelectedPublication(response.data); // On met le state à jour avec le contenu de la réponse du serveur          
           setIsLoading1(false);
           })
           .catch(function (response) { // Si erreur
@@ -60,7 +60,7 @@ function SelectedPublication() {
         }) //requête GET via Axios
           .then(function (response)  {
               const commentList = response.data;
-              setCommentlist(commentList);
+              setCommentlist(commentList); // On met le state à jour avec le contenu de la réponse du serveur
               setIsLoading2(false);
             })
             .catch(function (response) { // Si erreur

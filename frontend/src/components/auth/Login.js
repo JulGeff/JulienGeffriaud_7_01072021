@@ -35,9 +35,8 @@ function Login() {
 
                 .then(function (response) {  //Si Ok
                    
-                        localStorage.setItem('user', response.data.token);
-                
-                        history.push("/forum")   
+                        localStorage.setItem('user', response.data.token); //On stocke le token dans le local storage
+                        history.push("/forum")   // On redirige le user connecté vers le forum
                         console.log(response);
      
                

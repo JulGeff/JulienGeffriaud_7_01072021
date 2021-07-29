@@ -32,8 +32,8 @@ function UserPublications() {
         }) //requête GET via Axios
         .then(function (response)  {
             const userPublications = response.data;
-            setUserPublications(userPublications);
-            setFirstName(userPublications[0].user.firstName)
+            setUserPublications(userPublications); // On met le state à jour avec le contenu de la réponse du serveur
+            setFirstName(userPublications[0].user.firstName) // On met le state à jour avec le contenu de la réponse du serveur
             setIsLoading(false);
             
           })

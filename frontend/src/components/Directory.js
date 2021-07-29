@@ -7,10 +7,7 @@ import { Link } from 'react-router-dom';
 
 function Directory() {
   
-
-    const [directory, setDirectory] = React.useState([]); //initialisation du state vide
-  
-   
+  const [directory, setDirectory] = React.useState([]); //initialisation du state vide
   var jwt = require('jsonwebtoken');
   let token = localStorage.getItem('user')
   let userInfo = jwt.decode(token)
@@ -29,19 +26,20 @@ function Directory() {
         ) //requête GET via Axios
         .then(function (response)  {
             const directory = response.data.data;
-            setDirectory(directory);
+            setDirectory(directory); // On met le state à jour avec le contenu de la réponse du serveur
             setIsLoading(false);
           })
-          .catch(function (response) { // Si erreur
+          .catch(function (response) { 
             console.log(response);
             });
             }
       , [])
 
-      //Message d'attente en attendnat la fin de la requête axios    
+      //Message d'attente en attendant la fin de la requête axios    
       if (isLoading) {
         return <div className="App">Loading...</div>;
       }
+
 
       //SUPPRESSION D'UN PROFIL PAR ADMINISTRATEUR·RICE
       const handleDelete = (event,id) => { //Quand on clique sur "Supprimer"
@@ -62,7 +60,6 @@ function Directory() {
         console.log(response);
         });
         }
-
 
 
     return (
