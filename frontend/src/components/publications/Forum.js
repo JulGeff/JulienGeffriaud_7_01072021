@@ -55,14 +55,20 @@ function Forum() {
             id : id
            },
         }) 
-   
-        .then(function (response) {
-          window.location.reload(false)
-    
-        })
-        .catch(function (response) { // Si erreur
-        console.log(response);
-       
+          //On remet à jour le state avec le contenu de la base de données
+          .then(function (response) {
+            Api.get('/publication', 
+            {   headers: {
+              'Authorization': `Bearer ${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
+            }}) //requête GET via Axios
+          .then(function (response)  {
+              setForum(response.data); // On met le state à jour avec le contenu de la réponse du serveur
+          })
+
+          })
+          .catch(function (response) { // Si erreur
+          console.log(response);
+        
         });
         }
 
@@ -88,20 +94,25 @@ function Forum() {
                   {headers: {
                     'Authorization': `Bearer ${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
                   }}
-             ) //requête POST via Axios
-    
+             )    
+                    //On remet à jour le state avec le contenu de la base de données mis à jour
                   .then(function (response) {  //Si Ok
-                  setTitle('');
-                  setContent('');
-                  alert("Votre publication a bien été postée !")
-                  window.location.reload(false)
+                    Api.get('/publication', 
+                    {   headers: {
+                      'Authorization': `Bearer ${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
+                    }}) //requête GET via Axios
+                  .then(function (response)  {
+                      setForum(response.data); // On met le state à jour avec le contenu de la réponse du serveur
+                      setTitle("");
+                      setContent("")
+
                   })
                   .catch(function (response) { // Si erreur
                   console.log(response);
                   });
-    
+                })
           }
-    }
+        }
 
 
     return (

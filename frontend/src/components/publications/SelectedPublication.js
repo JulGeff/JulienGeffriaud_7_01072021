@@ -59,8 +59,7 @@ function SelectedPublication() {
           params : {publicationId : PublicationId,
                     id :user.id} 
         
-        
-        }) //requête GET via Axios
+        }) 
           .then(function (response)  {
               const commentList = response.data;
               setCommentlist(commentList); // On met le state à jour avec le contenu de la réponse du serveur
@@ -101,7 +100,7 @@ function SelectedPublication() {
         return <div className="App">Loading...</div>;
       } 
       
-  // PUBLICATION DES COMMENTAIRES
+  // PUBLICATION D'UN COMMENTAIRE
     const handleSubmit = (event) => {  // Au clic sur le bouton "Publier !"
       event.preventDefault();
       let token = localStorage.getItem('user')
@@ -126,9 +125,21 @@ function SelectedPublication() {
          ) //requête POST via Axios
 
               .then(function (response) {  //Si Ok
-              window.location.reload(false)  
               setComment('');
-              alert("Votre commentaire a bien été posté !")
+              Api.get('/comment', 
+              {   headers: {
+                'Authorization': `Bearer ${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
+              },
+              params : {publicationId : PublicationId,
+                        id :user.id} 
+            
+            }) //requête GET via Axios
+              .then(function (response)  {
+                  const commentList = response.data;
+                  setCommentlist(commentList); // On met le state à jour avec le contenu de la réponse du serveur
+                  setIsLoading2(false);
+                })
+
               })
               .catch(function (response) { // Si erreur
               console.log(response);
@@ -147,15 +158,28 @@ function SelectedPublication() {
           id : user.id
          },
       }) 
- 
-      .then(function (response) {
-        window.location.reload(false)
-        alert ('Votre commentaire a bien été supprimé')
-      })
-      .catch(function (response) { // Si erreur
-      console.log(response);
-      });
-      }
+          //On remet à jour le state avec le contenu de la base de données
+        .then(function (response) {  //Si Ok
+          setComment('');
+          Api.get('/comment', 
+          {   headers: {
+            'Authorization': `Bearer ${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
+          },
+          params : {publicationId : PublicationId,
+                    id :user.id} 
+        
+        }) 
+          .then(function (response)  {
+              const commentList = response.data;
+              setCommentlist(commentList); // On met le state à jour avec le contenu de la réponse du serveur
+              setIsLoading2(false);
+            })
+
+          })
+          .catch(function (response) { // Si erreur
+          console.log(response);
+          })
+    }
 
 
     return (

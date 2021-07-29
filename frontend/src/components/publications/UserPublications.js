@@ -44,6 +44,7 @@ function UserPublications() {
             }
       , [])
    
+        //SUPPRESSION D'UNE PUBLICATION
         const handleDelete = (e, id) => { //Quand on clique sur "Supprimer ma publication"
           e.preventDefault();
  
@@ -55,15 +56,24 @@ function UserPublications() {
               id : id
              },
           }) 
-     
+          //On remet à jour le state avec le contenu mis à jour de la base de données
           .then(function (response) {
-            window.location.reload(false) 
-            alert ('Votre publication a bien été supprimée')              
-      
-          })
+            Api.get('/publication/user', 
+            {   headers: {
+              'Authorization': `Bearer ${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
+            },
+                params : {id : userId}
+            }) 
+          .then(function (response)  {
+              const userPublications = response.data;
+              setUserPublications(userPublications); // On met le state à jour avec le contenu de la réponse du serveur
+              setFirstName(userPublications[0].user.firstName) // On met le state à jour avec le contenu de la réponse du serveur 
+            })
           .catch(function (response) { // Si erreur
-          console.log(response);
-          });
+            console.log(response);
+           
+            });
+            })
           }
 
 

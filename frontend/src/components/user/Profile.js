@@ -50,7 +50,6 @@ function Profile()  {
         }) 
    
         .then(function (response) {
-          alert ('Votre profil a bien été supprimé') 
           history.push("/signup")
           localStorage.clear();
           
