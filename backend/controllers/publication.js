@@ -61,7 +61,7 @@ exports.getUserPublications = (req, res, next) => {
     const userId = req.query.userId
     Publication.findAll({
       where: {userId: req.query.id},
-      include: {model: User},
+      include: {model: User}, //on inclue les données de la table MySQL users associée
       order: [['updatedAt', 'DESC']] //Tri des données sur le champ udpatedAt par ordre décroissant
     })
 

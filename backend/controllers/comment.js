@@ -33,26 +33,19 @@ exports.createComment = (req, res, next) => {
 exports.getAllComments = (req, res, next) => {
     const publicationId = req.query.publicationId
     Comment.findAll({
-        attributes: ['comment', 'updatedAt','userId','id'],
+        attributes: ['comment', 'updatedAt','userId','id'], //on ne remonte que certains attibuts de la table publications
         where: {
-            publicationId: publicationId
+            publicationId: publicationId //On filtre sur l'id de la publication
           },
-        include: {
+        include: { //on inclue les données firstName et lastName de la table MySQL users associée
             model: User,
             attributes:['firstName', 'lastName']
         },
-        order: [['updatedAt', 'DESC']]
+        order: [['updatedAt', 'DESC']] //Tri des données sur le champ udpatedAt par ordre décroissant
     })
 
-    .then(        // renvoie un tableau contenant toutes les publications dans notre base de données
-        (comments) => {        
-            res.status(200).json(comments); // publications retournées dans une promise et envoyée au frontend
-        }
-    ).catch(
-        (error) => {
-            res.status(400).json({      // Bad request
-                error: error
-            });
+    .then((comments) => {res.status(200).json(comments);})  // renvoie un tableau contenant toutes les publications dans notre base de données
+    .catch((error) => {res.status(400).json({error: error });
         }
     );
 };
