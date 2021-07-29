@@ -9,7 +9,7 @@ function UserPublications() {
   
     //DECALARATION DES VARIABLES ET INITIALISATION DU STATE    
     const userId = JSON.parse(window.location.href.split('=')[1]);
-      
+    const [isLoading, setIsLoading] = useState(true);  
     const [userPublications, setUserPublications] = useState([]); //initialisation du state vide   
     const [firstName, setFirstName] = useState("")
     var jwt = require('jsonwebtoken');
@@ -34,6 +34,7 @@ function UserPublications() {
             const userPublications = response.data;
             setUserPublications(userPublications);
             setFirstName(userPublications[0].user.firstName)
+            setIsLoading(false);
             
           })
           .catch(function (response) { // Si erreur
@@ -64,6 +65,11 @@ function UserPublications() {
           });
           }
 
+
+        //Message d'attente en attendant la fin de la requête axios    
+        if (isLoading) {
+          return <div className="App">Loading...</div>;
+        }
  
 
     return (

@@ -11,6 +11,7 @@ function EditPublication() {
     //DECALARATION DES VARIABLES ET INITIALISATION DU STATE
     let history = useHistory();
     const publicationId = window.location.href.split('=')[1];
+    const [isLoading, setIsLoading] = useState(true);  
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
@@ -33,7 +34,8 @@ function EditPublication() {
         })
           .then(function (response)  {
             setTitle(response.data.title);
-            setContent(response.data.content)  
+            setContent(response.data.content);
+            setIsLoading(false);
             
             })
             .catch(function (response) { // Si erreur
@@ -42,6 +44,11 @@ function EditPublication() {
               }
         , [])
 
+
+        //Message d'attente en attendant la fin de la requête axios    
+        if (isLoading) {
+          return <div className="App">Loading...</div>;
+        }
 
         // VALIDATION DES MODIFICATIONS
         const handleSubmit = (event) => { //Quand on clique sur "Supprimer"

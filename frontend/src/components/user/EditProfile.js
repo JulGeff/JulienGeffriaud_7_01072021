@@ -8,6 +8,7 @@ function EditProfile()  {
 
 
   //DECALARATION DES VARIABLES ET INITIALISATION DU STATE     
+  const [isLoading, setIsLoading] = useState(true); 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   let history = useHistory(); 
@@ -26,6 +27,7 @@ function EditProfile()  {
     .then(function (response) {
       setFirstName(response.data.firstName);
       setLastName(response.data.lastName);
+      setIsLoading(false);
     })
     .catch(function (response) { // Si erreur
     console.log(response);
@@ -61,6 +63,10 @@ function EditProfile()  {
       });
     }
 
+    //Message d'attente en attendnat la fin de la requête axios    
+    if (isLoading) {
+      return <div className="App">Loading...</div>;
+    }
   
     return (
         <div className='editprofile'>

@@ -9,6 +9,7 @@ function Forum() {
 
   
     //DECALARATION DES VARIABLES ET INITIALISATION DU STATE
+    const [isLoading, setIsLoading] = useState(true);  
     const [forum, setForum] = useState([]); //initialisation du state vide   
     const [title, setTitle] = useState(""); //initialisation du state vide
     const [content, setContent] = useState(""); //initialisation du state vide
@@ -28,6 +29,7 @@ function Forum() {
         }}) //requête GET via Axios
         .then(function (response)  {
             setForum(response.data);
+            setIsLoading(false);
   
           })
           .catch(function (response) { // Si erreur
@@ -36,7 +38,13 @@ function Forum() {
             }
       , [])
 
+       //Message d'attente en attendant la fin de la requête axios    
+       if (isLoading) {
+        return <div className="App">Loading...</div>;
+      }
 
+
+      // SUPPRESSION D'UNE PUBLICATION
       const handleDelete = (e, id) => { //Quand on clique sur "Supprimer ma publication"
         e.preventDefault();
 
@@ -50,7 +58,6 @@ function Forum() {
         }) 
    
         .then(function (response) {
-          alert ('Votre publication a bien été supprimée')  
           window.location.reload(false)
     
         })
@@ -61,7 +68,7 @@ function Forum() {
         }
 
 
-        // PUBLICATION DES ARTICLES
+        // PUBLICATION D'UN ARTICLE
         const handleSubmit = (event) => {  // Au clic sur le bouton "Publier !"
           event.preventDefault();
             let token = localStorage.getItem('user')

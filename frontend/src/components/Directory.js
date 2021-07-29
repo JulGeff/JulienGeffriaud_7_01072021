@@ -15,7 +15,10 @@ function Directory() {
   let token = localStorage.getItem('user')
   let userInfo = jwt.decode(token)
   const [user, setUser] = useState(userInfo)
+  const [isLoading, setIsLoading] = useState(true); 
 
+
+  //RECUPERATION DES DONNEES UTILISATEURS
     useEffect(() => {
       let token = localStorage.getItem('user')
 
@@ -27,12 +30,18 @@ function Directory() {
         .then(function (response)  {
             const directory = response.data.data;
             setDirectory(directory);
+            setIsLoading(false);
           })
           .catch(function (response) { // Si erreur
             console.log(response);
             });
             }
       , [])
+
+      //Message d'attente en attendnat la fin de la requête axios    
+      if (isLoading) {
+        return <div className="App">Loading...</div>;
+      }
 
       //SUPPRESSION D'UN PROFIL PAR ADMINISTRATEUR·RICE
       const handleDelete = (event,id) => { //Quand on clique sur "Supprimer"
