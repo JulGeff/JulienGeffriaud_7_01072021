@@ -26,7 +26,7 @@ function Profile()  {
           )
          
         .then(function (response) {
-          setProfileInfo(response.data);
+          setProfileInfo(response.data); // On met le state à jour avec le contenu de la réponse du serveur
           setIsLoading(false);
         })
         .catch(function (response) { // Si erreur

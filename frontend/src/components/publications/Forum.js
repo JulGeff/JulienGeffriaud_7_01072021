@@ -28,7 +28,7 @@ function Forum() {
           'Authorization': `${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
         }}) //requête GET via Axios
         .then(function (response)  {
-            setForum(response.data);
+            setForum(response.data); // On met le state à jour avec le contenu de la réponse du serveur
             setIsLoading(false);
   
           })

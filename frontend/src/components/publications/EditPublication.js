@@ -33,9 +33,9 @@ function EditPublication() {
   
         })
           .then(function (response)  {
-            setTitle(response.data.title);
-            setContent(response.data.content);
-            setIsLoading(false);
+            setTitle(response.data.title); // On met le state à jour avec le contenu de la réponse du serveur
+            setContent(response.data.content); // On met le state à jour avec le contenu de la réponse du serveur
+            setIsLoading(false); 
             
             })
             .catch(function (response) { // Si erreur
