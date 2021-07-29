@@ -59,7 +59,7 @@ exports.getAllComments = (req, res, next) => {
 
 //SUPPRESSION D'UN COMMENTAIRE
   exports.deleteComment = (req, res, next) => { 
-     console.log(req.query,req.params)
+     
     Comment.destroy ({ where: { id: req.query.commentId }}) // callback : Suppression de la publication avec l'id correspondant
         
         .then(() => res.status(200).json({ message: 'Publication supprimée !'})) // Requête traitée avec succès
