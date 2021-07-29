@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 
 function Forum() {
 
-  
     //DECALARATION DES VARIABLES ET INITIALISATION DU STATE
     const [isLoading, setIsLoading] = useState(true);  
     const [forum, setForum] = useState([]);     //initialisation du state vide   
