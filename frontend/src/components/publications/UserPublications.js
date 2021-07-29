@@ -8,17 +8,19 @@ import { Link } from 'react-router-dom';
 function UserPublications() {
   
     //DECALARATION DES VARIABLES ET INITIALISATION DU STATE    
-    const userId = window.location.href.split('=')[1];
+    const userId = JSON.parse(window.location.href.split('=')[1]);
+      
     const [userPublications, setUserPublications] = useState([]); //initialisation du state vide   
     const [firstName, setFirstName] = useState("")
     var jwt = require('jsonwebtoken');
     let token = localStorage.getItem('user')
     let userInfo = jwt.decode(token)
     const [user, setUser] = useState(userInfo)
+  
 
     // RECUPERATION DES PUBLICATIONS DU USER STOCKEES DANS LA BDD
     useEffect(() => {
-      const userId = user.id
+      const userId = JSON.parse(window.location.href.split('=')[1]);
       let token = localStorage.getItem('user')
      
         Api.get('/publication/user', 

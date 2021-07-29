@@ -36,14 +36,24 @@ function App() {
           <div> 
             <Router>
                 <Banner />
-                <Switch>
-                    <Route exact path={"/signup"}>            
-                        <Signup />
-                    </Route>
+                <Switch>                  
+                    <Route exact path="/signup" render={function () {
+                        let loggedIn = isLoggedIn();
+                        if (loggedIn) {
+                            return <Forum />
+                        } else {
+                            return <Signup />
+                        }
+                    }}/>
 
-                    <Route exact path={"/"} >            
-                        <Login />
-                    </Route>
+                    <Route exact path="/" render={function () {
+                        let loggedIn = isLoggedIn();
+                        if (loggedIn) {
+                            return <Forum />
+                        } else {
+                            return <Login />
+                        }
+                    }}/>
 
                     <Route exact path="/forum" render={function () {
                         let loggedIn = isLoggedIn();
