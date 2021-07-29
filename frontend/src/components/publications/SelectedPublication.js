@@ -29,15 +29,17 @@ function SelectedPublication() {
     
         Api.get('/publication/selected',    //requête GET via Axios
         {   headers: {
-          'Authorization': `${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
+          'Authorization': `Bearer ${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
         },
-            params : {publicationId : PublicationId} //
+            params : {publicationId : PublicationId,
+            id: user.id} //
 
       })
         .then(function (response)  {
           
           setSelectedPublication(response.data); // On met le state à jour avec le contenu de la réponse du serveur          
           setIsLoading1(false);
+          console.log(response.data)
           })
           .catch(function (response) { // Si erreur
             console.log(response);
@@ -52,9 +54,10 @@ function SelectedPublication() {
        
           Api.get('/comment', 
           {   headers: {
-            'Authorization': `${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
+            'Authorization': `Bearer ${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
           },
-          params : {publicationId : PublicationId} 
+          params : {publicationId : PublicationId,
+                    id :user.id} 
         
         
         }) //requête GET via Axios
@@ -75,7 +78,7 @@ function SelectedPublication() {
  
           Api.delete('/publication', {                  
             headers: {
-                'Authorization': `${token}` //On sécurise la requête avec le token
+              'Authorization': `Bearer ${token}` //On sécurise la requête avec le token
             },
             params: { // On envoie l'id de la publication dans les paramètres de la requête
               id : id
@@ -110,14 +113,15 @@ function SelectedPublication() {
         
           let commentData = { 
               comment : comment,
-              publicationId : PublicationId
+              publicationId : PublicationId,
+              id : user.id
  
           };
 
           Api.post(
               '/comment', commentData,
               {headers: {
-                'Authorization': `${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
+                'Authorization': `Bearer ${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
               }}
          ) //requête POST via Axios
 
@@ -136,10 +140,11 @@ function SelectedPublication() {
       e.preventDefault();
       Api.delete('comment', {                  
         headers: {
-            'Authorization': `${token}` //On sécurise la requête avec le token
+          'Authorization': `Bearer ${token}` //On sécurise la requête avec le token
         },
         params: { // On envoie l'id du comment dans les paramètres de la requête
-          id : id
+          commentId : id,
+          id : user.id
          },
       }) 
  
@@ -158,7 +163,7 @@ function SelectedPublication() {
       <div className='publication__container'>     
         <h1 >{ selectedPublication.title }</h1>
      
-        <p className='publication__subtitle'>Publié par <strong>{selectedPublication.user.firstName} {selectedPublication.user.lastName}</strong> le {selectedPublication.updatedAt.substring(9,10).padStart(2, '0')}/{selectedPublication.updatedAt.substring(6,7).padStart(2, '0')}/{selectedPublication.updatedAt.substring(0,4)} à {selectedPublication.updatedAt.substring(11,16)}</p>
+      <p className='publication__subtitle'>Publié par <strong>{selectedPublication.user.firstName} {selectedPublication.user.lastName}</strong> le {selectedPublication.updatedAt.substring(9,10).padStart(2, '0')}/{selectedPublication.updatedAt.substring(6,7).padStart(2, '0')}/{selectedPublication.updatedAt.substring(0,4)} à {selectedPublication.updatedAt.substring(11,16)}</p>
         <Link to={"./userpublications?id=" + selectedPublication.userId} className='publication__link'>
           <p className='publication__link__user'> Voir toutes les publications de {selectedPublication.user.firstName} </p>
         </Link>

@@ -12,16 +12,20 @@ function EditProfile()  {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   let history = useHistory(); 
+  var jwt = require('jsonwebtoken');
   let token = localStorage.getItem('user')
- 
+  let userInfo = jwt.decode(token)
+  const [user, setUser] = useState(userInfo)
+
 
   //RECUPERATION DES DONNEES DU PROFIL DEPUIS LA BDD
   useEffect(() => {
     let token = localStorage.getItem('user')
-  Api.get('/auth/user', {          
+    Api.get('/auth/user', {          
         headers: {
-            'Authorization': `${token}`
-        },}
+          'Authorization': `Bearer ${token}`
+        },
+        params : {id: user.id} }
       )
      
     .then(function (response) {
@@ -49,8 +53,9 @@ function EditProfile()  {
     Api.put(
       '/auth/user', userData,
       {headers: {
-        'Authorization': `${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
-      }}
+        'Authorization': `Bearer ${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
+      },
+      params : {id: user.id} }
  ) 
 
       .then(function (response) {  //Si Ok

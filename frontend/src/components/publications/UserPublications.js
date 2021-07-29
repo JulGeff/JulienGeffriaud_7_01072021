@@ -25,9 +25,9 @@ function UserPublications() {
      
         Api.get('/publication/user', 
         {   headers: {
-            'Authorization': `${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
+          'Authorization': `Bearer ${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
         },
-            params : {userId : userId}
+            params : {id : userId}
       
         }) //requête GET via Axios
         .then(function (response)  {
@@ -49,7 +49,7 @@ function UserPublications() {
  
           Api.delete('/publication', {                  
             headers: {
-                'Authorization': `${token}` //On sécurise la requête avec le token
+              'Authorization': `Bearer ${token}` //On sécurise la requête avec le token
             },
             params: { // On envoie l'id de la publication dans les paramètres de la requête
               id : id

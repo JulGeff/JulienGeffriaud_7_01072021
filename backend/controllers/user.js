@@ -88,12 +88,9 @@ exports.getAllUsers = (req, res, next) => {
 // RECUPERATION DU PROFIL D'UN UTILISATEUR
 exports.getOneUser = (req, res, next) => {
 
-  const token = req.headers.authorization; // On extrait le token du header Authorization de la requête entrante. 
-  const decodedToken = jwt.verify(token, TokenKey); // On utilise la fonction verify de jsonwebtoken pour décoder notre token
-  const id = decodedToken.id; // on extrait le user id de notre token
     User.findOne ({ 
         attributes: ['firstName', 'lastName', 'email', 'createdAt', 'id'],
-        where: {  id: id }   
+        where: {  id: req.query.id }   
     })
         .then(user => res.status(200).json(user))
         .catch(error => res.status(500).json(error))
@@ -102,13 +99,12 @@ exports.getOneUser = (req, res, next) => {
 //SUPPRESSION D'UN PROFIL UTILSATEUR
 exports.deleteUser = (req, res, next) => {
    
-    const userId = req.query.id; 
-          Comment.destroy({where: {userId: userId}})
+      Comment.destroy({where: {userId: req.query.id}})
       .then(() => 
-        Publication.destroy({where: {userId: userId}})
+        Publication.destroy({where: {userId: req.query.id}})
             .then(() =>
                 User.destroy ({ 
-                  where: {  id: userId }   
+                  where: {  id: req.query.id }   
               })
             .then(user => res.status(200).json(user))
             .catch(error => res.status(500).json(error))
@@ -118,23 +114,13 @@ exports.deleteUser = (req, res, next) => {
 //MODIFICATION DU PROFIL UTILISATEUR
 exports.editUser = (req, res, next) => {
 
-  const token = req.headers.authorization; // On extrait le token du header Authorization de la requête entrante. 
-  console.log(req.headers)
-  const decodedToken = jwt.verify(token, TokenKey); // On utilise la fonction verify de jsonwebtoken pour décoder notre token
-  const id = decodedToken.id; // on extrait le user id de notre token
-
-  // vérification que tous les champs sont remplis
-  //if(firstName === null || firstName === '' || lastName === null ||lastName === '') {
-  //    return res.status(400).json({'error': "Les champs 'nom' et 'prénom' doivent être remplis "});
-  //} else {
-
-User.update(
-   {firstName : req.body.firstName,
-    lastName : req.body.lastName
-    }, { where: {id: id} })
-.then(() => res.status(200).json({ message: 'Utilisateur modifié !'}))
-.catch(error => res.status(400).json({ error }));
-}
+    User.update(
+    {firstName : req.body.firstName,
+      lastName : req.body.lastName
+      }, { where: {id: req.query.id} })
+  .then(() => res.status(200).json({ message: 'Utilisateur modifié !'}))
+  .catch(error => res.status(400).json({ error }));
+  }
 
 
 

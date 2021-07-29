@@ -9,16 +9,10 @@ const TokenKey = process.env.TOKENKEY;// Récupération de la clé de cryptage d
 
 //CREATION D'UNE PUBLICATION
 exports.createPublication = (req, res, next) => { 
-
-    const token = req.headers.authorization; // On extrait le token du header Authorization de la requête entrante. 
-    const decodedToken = jwt.verify(token, TokenKey); // On utilise la fonction verify de jsonwebtoken pour décoder notre token
-    const id = decodedToken.id; // on extrait le user id de notre token
-    console.log(id);
-  
-
+console.log (req.body.id)
     const newPublication = 
         Publication.create({
-            userId : id,
+            userId : req.body.id,
             title : req.body.title,
             content : req.body.content
             
@@ -78,7 +72,7 @@ exports.getOnePublication = (req, res, next) => {
 exports.getUserPublications = (req, res, next) => {
 const userId = req.query.userId
     Publication.findAll({
-      where: {userId: userId},
+      where: {userId: req.query.id},
       include: {
         model: User,
    
@@ -119,7 +113,7 @@ exports.editPublication = (req, res, next) => {
     Publication.update(
         {title : req.body.title,
         content :  req.body.content
-         }, { where: {id: req.body.id} })
+         }, { where: {id: req.body.publicationId} })
      .then(() => res.status(200).json({ message: 'Publication modifiée !'}))
      .catch(error => res.status(400).json({ error }));
      }

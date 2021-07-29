@@ -27,7 +27,7 @@ function EditPublication() {
       
           Api.get('/publication/selected',    //requête GET via Axios
           {   headers: {
-            'Authorization': `${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
+            'Authorization': `Bearer ${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
           },
               params : {publicationId : PublicationId} //
   
@@ -57,13 +57,14 @@ function EditPublication() {
           let publicationData = { 
             title : title,
             content: content,
-            id: publicationId
+            publicationId: publicationId,
+            id : user.id
           };
 
           Api.put(
             '/publication', publicationData,
             {headers: {
-              'Authorization': `${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
+              'Authorization': `Bearer ${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
             }}
         ) //requête POST via Axios
 

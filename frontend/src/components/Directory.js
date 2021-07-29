@@ -21,8 +21,9 @@ function Directory() {
 
         Api.get('/auth/users',
         {   headers: {
-            'Authorization': `${token}` // On sécurise la requête en incluant le token dnas les headers (cf middleware "auth")
-        }}
+          'Authorization': `Bearer ${token}` // On sécurise la requête en incluant le token dnas les headers (cf middleware "auth")
+        },
+        params : {id: user.id} }
         ) //requête GET via Axios
         .then(function (response)  {
             const directory = response.data.data;
@@ -46,7 +47,7 @@ function Directory() {
         event.preventDefault();
         Api.delete('/auth/user', {          
           headers: {
-              'Authorization': `${token}` //On sécurise la requêyte avec le token
+            'Authorization': `Bearer ${token}` //On sécurise la requêyte avec le token
           },
           params: {id : id}
         }) 

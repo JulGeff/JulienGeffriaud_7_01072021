@@ -12,12 +12,9 @@ const TokenKey = process.env.TOKENKEY;// Récupération de la clé de cryptage d
 //CREATION D'UN COMMENTAIRE
 exports.createComment = (req, res, next) => { 
 
-    const token = req.headers.authorization; // On extrait le token du header Authorization de la requête entrante. 
-    const decodedToken = jwt.verify(token, TokenKey); // On utilise la fonction verify de jsonwebtoken pour décoder notre token
-    const id = decodedToken.id; // on extrait le user id de notre token
     const newComment = 
         Comment.create({
-            userId : id,
+            userId : req.body.id,
             publicationId : req.body.publicationId,
             comment : req.body.comment
                 
@@ -63,7 +60,7 @@ exports.getAllComments = (req, res, next) => {
 //SUPPRESSION D'UN COMMENTAIRE
   exports.deleteComment = (req, res, next) => { 
      console.log(req.query,req.params)
-    Comment.destroy ({ where: { id: req.query.id }}) // callback : Suppression de la publication avec l'id correspondant
+    Comment.destroy ({ where: { id: req.query.commentId }}) // callback : Suppression de la publication avec l'id correspondant
         
         .then(() => res.status(200).json({ message: 'Publication supprimée !'})) // Requête traitée avec succès
         .catch(error => res.status(500).json({ error })); // Internal Server Error	

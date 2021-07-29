@@ -21,8 +21,10 @@ function Profile()  {
       let token = localStorage.getItem('user')
       Api.get('/auth/user', {          
             headers: {
-                'Authorization': `${token}`
-            },}
+              'Authorization': `Bearer ${token}`
+            },
+            params : {id: user.id} 
+          }
           )
          
         .then(function (response) {
@@ -42,7 +44,7 @@ function Profile()  {
         event.preventDefault();
         Api.delete('/auth/user', {          
           headers: {
-              'Authorization': `${token}` //On sécurise la requêyte avec le token
+            'Authorization': `Bearer ${token}` //On sécurise la requêyte avec le token
           },
           params: {id : id}
         }) 

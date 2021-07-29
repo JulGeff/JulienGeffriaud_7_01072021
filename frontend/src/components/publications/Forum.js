@@ -25,7 +25,7 @@ function Forum() {
      
         Api.get('/publication', 
         {   headers: {
-          'Authorization': `${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
+          'Authorization': `Bearer ${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
         }}) //requête GET via Axios
         .then(function (response)  {
             setForum(response.data); // On met le state à jour avec le contenu de la réponse du serveur
@@ -50,7 +50,7 @@ function Forum() {
 
         Api.delete('/publication', {                  
           headers: {
-              'Authorization': `${token}` //On sécurise la requête avec le token
+            'Authorization': `Bearer ${token}` //On sécurise la requête avec le token
           },
           params: { // On envoie l'id de la publication dans les paramètres de la requête
             id : id
@@ -78,10 +78,10 @@ function Forum() {
     
           } else {
             
-                 
               let publicationData = { 
                   title : title,
                   content : content,
+                  id : user.id
               };
     
               Api.post(
@@ -157,7 +157,7 @@ function Forum() {
                         <Link to={"/forum/publication?id=" + item.id}  className = "forum__displayposts__content__link">
                             <div>
                                 <h2>{item.title}</h2>
-                                <p className='forum__displayposts__content__link__subtitle'> Publié par <strong>{item.user.firstName} {item.user.lastName}</strong> le {item.updatedAt.substring(9,10).padStart(2, '0')}/{item.updatedAt.substring(6,7).padStart(2, '0')}/{item.updatedAt.substring(0,4)} à {item.updatedAt.substring(11,16)}   </p>
+                                <p className='forum__displayposts__content__link__subtitle'> Publié par <strong>{item.user.firstName} {item.user.lastName}</strong> le {item.updatedAt.substring(9,10).padStart(2, '0')}/{item.updatedAt.substring(6,7).padStart(2, '0')}/{item.updatedAt.substring(0,4)} à {item.updatedAt.substring(11,16)}</p>
                                 <p className='forum__displayposts__content__link__text'>{item.content}</p>
                             </div>                     
                         </Link>
