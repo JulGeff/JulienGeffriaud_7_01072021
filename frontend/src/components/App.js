@@ -40,7 +40,7 @@ function App() {
                     <Route exact path="/signup" render={function () {
                         let loggedIn = isLoggedIn();
                         if (loggedIn) {
-                            return <Forum />
+                            return <Signup />
                         } else {
                             return <Signup />
                         }

@@ -39,6 +39,7 @@ function UserPublications() {
           })
           .catch(function (response) { // Si erreur
             console.log(response);
+            setIsLoading(false);
             });
             }
       , [])

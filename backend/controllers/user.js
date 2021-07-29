@@ -58,7 +58,7 @@ exports.login = (req, res, next) => {
                     isAdmin : user.isAdmin
                 },
                 TokenKey,            // récupère la chaîne secrète d'encodage de notre token via dotenv
-                { expiresIn: '24h' }    // A MODIFIER EXPIRATION QUAND LOGOUT ??
+                { expiresIn: '24h' }    
               ),
               isAdmin : user.isAdmin,
               loggedIn : true,
