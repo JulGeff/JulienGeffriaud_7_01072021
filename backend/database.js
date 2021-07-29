@@ -1,3 +1,4 @@
+//CONNEXION A LA BASE DE DONNEES MYSQL VIA SEQUELIZE
 require('dotenv').config();       
 const Sequelize = require('sequelize');
 sequelize = new Sequelize(

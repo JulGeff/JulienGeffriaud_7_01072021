@@ -1,16 +1,16 @@
 'use strict'
-const User = require('../models/user');     // importation des modèles sequelize
-const Publication = require('../models/publication');
-const Comment = require('../models/comment');
+const User = require('../models/user');     // importation du modèle sequelize User
+const Publication = require('../models/publication');// importation du modèles sequelize Publication
+const Comment = require('../models/comment');// importation du modèle sequelize Comment
 const fs = require('fs'); // importation du package file system de node, qui donne notamment accès aux fonctions permettant de supprimer les fichiers.
 const jwt = require('jsonwebtoken');  // importation package pour création et vérification des tokens
 require('dotenv').config()            // importation dotenv pour sécuriser passwords
 const TokenKey = process.env.TOKENKEY;// Récupération de la clé de cryptage des tokens via dotenv
 
+
 //CREATION D'UNE PUBLICATION
 exports.createPublication = (req, res, next) => { 
-console.log (req.body.id)
-    const newPublication = 
+    const newPublication = //On crée la publication dans la base de données avec les champs envoyés dans la requête post axios
         Publication.create({
             userId : req.body.id,
             title : req.body.title,
@@ -21,31 +21,24 @@ console.log (req.body.id)
             message: 'Publication enregistrée !' // Requête traitée avec succès et création d’un document.
 
         }))
-        .catch(error => res.status(400).json({  //Bad Request
-            error
-        }));
-}
+        .catch(error => res.status(400).json({error}));
+    }
+
 
 // RECUPERATION DE TOUTES LES PUBLICATIONS
 exports.getAllPublications = (req, res, next) => {
     Publication.findAll({
         attributes: ['title', 'content', 'updatedAt','id','userId'],
-        include: {
+        include: {                              //on inclue les données firstName et lastName de la table MySQL users associée
             model: User,
             attributes:['firstName', 'lastName']
         },
-        order: [['updatedAt', 'DESC']],
-        
+        order: [['updatedAt', 'DESC']],   //Tri des données sur le champ udpatedAt par ordre décroissant
     })
     .then(       // renvoie un tableau contenant toutes les publications dans notre base de données
-        (publications) => {        
-            res.status(200).json(publications); // publications retournées dans une promise et envoyée au frontend
-        }
-    ).catch(
-        (error) => {
-            res.status(400).json({      // Bad request
-                error: error
-            });
+        (publications) => {res.status(200).json(publications)}) // publications retournées dans une promise et envoyée au frontend
+    .catch(
+        (error) => {res.status(400).json({error: error});
         }
     );
 };
@@ -53,42 +46,28 @@ exports.getAllPublications = (req, res, next) => {
 
 // RECUPERATION D'UNE PUBLICATION DONNEE
 exports.getOnePublication = (req, res, next) => {
-
-   const publicationId = req.query.publicationId;
-      Publication.findOne ({ 
-               
-          where: {  id: publicationId },   
-          include: {
-            model: User,
-       
-          },
-      })
-          .then(publication => res.status(200).json(publication))
-          .catch(error => res.status(500).json(error))
-    };
+    const publicationId = req.query.publicationId;
+    Publication.findOne ({    
+        where: {  id: publicationId },   
+        include: {model: User},
+    })
+        .then(publication => res.status(200).json(publication))
+        .catch(error => res.status(500).json(error))
+};
 
 
 // RECUPERATION DES PUBLICATIONS D'UN USER DONNE
 exports.getUserPublications = (req, res, next) => {
-const userId = req.query.userId
+    const userId = req.query.userId
     Publication.findAll({
       where: {userId: req.query.id},
-      include: {
-        model: User,
-   
-      },
-      order: [['updatedAt', 'DESC']]
+      include: {model: User},
+      order: [['updatedAt', 'DESC']] //Tri des données sur le champ udpatedAt par ordre décroissant
     })
 
     .then(publications => {
-        res.status(200).json(publications);
-    })
-    
-    .catch(
-        (error) => {
-            res.status(400).json({      // Bad request
-                error: error
-            });
+        res.status(200).json(publications)})
+    .catch((error) => {res.status(400).json({error: error});
         }
     );
 };
@@ -96,20 +75,16 @@ const userId = req.query.userId
 
 //SUPPRESSION D'UNE PUBLICATION
  exports.deletePublication = (req, res, next) => { 
-    Comment.destroy({where: {publicationId: req.query.id}})
+    Comment.destroy({where: {publicationId: req.query.id}}) //On supprime d'abord tous les commentaires associés à la publication
     .then(() => 
-      Publication.destroy({ where: {id: req.query.id} })
-      .then(() => res.status(200).json({ message: 'Article supprimé !'}))
-    )
-  .catch(error => res.status(400).json({ error }));
+      Publication.destroy({ where: {id: req.query.id} }) // On supprime la publication
+    .then(() => res.status(200).json({ message: 'Article supprimé !'})))
+    .catch(error => res.status(400).json({ error }));
 };
-
-
 
 
 // MODIFICATION D'UNE PUBLICATION
 exports.editPublication = (req, res, next) => {
-
     Publication.update(
         {title : req.body.title,
         content :  req.body.content

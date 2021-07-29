@@ -11,44 +11,37 @@ import {
 
 function Login() {
 
+        //DECLARATION DES VARIABLES ET INITIALISATION DU STATE
         let history = useHistory();
-  
-        
         const [email, setEmail] = useState(""); //initialisation du state vide
-        const [password, setPassword] = useState(""); //initialisation du state vide
-              
+        const [password, setPassword] = useState(""); //initialisation du state vide     
         const handleSubmit = (event) => {
         event.preventDefault();
 
+
+        //CONNEXION AU COMPTE UTILISATEUR
+        
+        // La requête n'est envoyée que si l'email champs respecte la regex suivante
         if (/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(email)) { 
 
-            let loginFormData = { 
+            let loginFormData = { //On définit l'objet à envoyer dans la requête axios
                 email : email, 
                 password: password
             };
-         
-      
-            console.log(loginFormData);
+             
 
-         
          Api.post('/auth/login', loginFormData) //requête POST via Axios
 
                 .then(function (response) {  //Si Ok
-                   
                         localStorage.setItem('user', response.data.token); //On stocke le token dans le local storage
                         history.push("/forum")   // On redirige le user connecté vers le forum
-                        console.log(response);
-     
-               
-        })
+                 })
                 
                 .catch(function (response) { // Si erreur
                 console.log(response);
-                alert("Password incorrect ou email inexistant dans la base de données")
+                alert("Password incorrect ou email inexistant dans la base de données") // On affiche une alerte
                 });
                   
-   
-
         } else { // si email ne respecte pas les regex définies
                 alert("- Votre email n'est pas au bon format")
         }}
@@ -71,7 +64,7 @@ function Login() {
                         maxLength="40"
                         autoComplete="username" 
                         value={email} 
-                        onChange={e => setEmail(e.target.value)}
+                        onChange={e => setEmail(e.target.value)} //Si la valeur change on met à jour la variable email
                         required 
                 />
 
@@ -83,7 +76,7 @@ function Login() {
                         autoComplete="current-password"
                         placeholder="Mot de passe" 
                         value={password} 
-                        onChange={e => setPassword(e.target.value)}
+                        onChange={e => setPassword(e.target.value)} //Si la valeur change on met à jour la variable password
                         required
                 />
 

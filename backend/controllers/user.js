@@ -99,11 +99,11 @@ exports.getOneUser = (req, res, next) => {
 //SUPPRESSION D'UN PROFIL UTILSATEUR
 exports.deleteUser = (req, res, next) => {
    
-      Comment.destroy({where: {userId: req.query.id}})
+      Comment.destroy({where: {userId: req.query.id}}) //On supprime d'abord tous les commentaires associés aux publications du user
       .then(() => 
-        Publication.destroy({where: {userId: req.query.id}})
+        Publication.destroy({where: {userId: req.query.id}}) //On supprime les publications du user
             .then(() =>
-                User.destroy ({ 
+                User.destroy ({     //On supprime le user
                   where: {  id: req.query.id }   
               })
             .then(user => res.status(200).json(user))

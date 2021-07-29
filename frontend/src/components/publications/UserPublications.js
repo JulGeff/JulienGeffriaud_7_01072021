@@ -11,11 +11,11 @@ function UserPublications() {
     const userId = JSON.parse(window.location.href.split('=')[1]);
     const [isLoading, setIsLoading] = useState(true);  
     const [userPublications, setUserPublications] = useState([]); //initialisation du state vide   
-    const [firstName, setFirstName] = useState("")
-    var jwt = require('jsonwebtoken');
-    let token = localStorage.getItem('user')
-    let userInfo = jwt.decode(token)
-    const [user, setUser] = useState(userInfo)
+    const [firstName, setFirstName] = useState("")                //initialisation du state vide
+    var jwt = require('jsonwebtoken');          //On importe jsonwebtoken
+    let token = localStorage.getItem('user')    //On récupère le token dans le local storage
+    let userInfo = jwt.decode(token)            //On décode le token avec jsonwebtoken
+    const [user, setUser] = useState(userInfo)  //On iitialise le state avec le token décodé (contentenant email, id et isAdmin)
   
 
     // RECUPERATION DES PUBLICATIONS DU USER STOCKEES DANS LA BDD
@@ -49,7 +49,7 @@ function UserPublications() {
  
           Api.delete('/publication', {                  
             headers: {
-              'Authorization': `Bearer ${token}` //On sécurise la requête avec le token
+              'Authorization': `Bearer ${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
             },
             params: { // On envoie l'id de la publication dans les paramètres de la requête
               id : id

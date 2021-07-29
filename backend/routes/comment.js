@@ -5,7 +5,6 @@ const router = express.Router();
 const auth = require('../middleware/auth'); // importation middleware d'authentification
 const commentCtrl = require('../controllers/comment')// Appel des controllers
 
-
 router.post('/', auth, commentCtrl.createComment);               // Création d'un commentaire
 router.get('/', auth, commentCtrl.getAllComments);               // Récupération des commentaires associés à une publication
 router.delete('/', auth, commentCtrl.deleteComment);             // Suppression d'un commentaire

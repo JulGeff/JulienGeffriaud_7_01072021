@@ -12,10 +12,10 @@ function EditProfile()  {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   let history = useHistory(); 
-  var jwt = require('jsonwebtoken');
-  let token = localStorage.getItem('user')
-  let userInfo = jwt.decode(token)
-  const [user, setUser] = useState(userInfo)
+  var jwt = require('jsonwebtoken');          //On importe jsonwebtoken
+  let token = localStorage.getItem('user')    //On récupère le token dans le local storage
+  let userInfo = jwt.decode(token)            //On décode le token avec jsonwebtoken
+  const [user, setUser] = useState(userInfo)  //On iitialise le state avec le token décodé (contentenant email, id et isAdmin)
 
 
   //RECUPERATION DES DONNEES DU PROFIL DEPUIS LA BDD

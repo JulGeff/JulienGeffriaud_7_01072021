@@ -7,15 +7,18 @@ import { Link, useHistory } from "react-router-dom";
 
 function Signup() {
 
+    //DECLARATION DES VARIABLES ET INITIALISATION DU STATE
     let history = useHistory();    
     const [lastName, setLastName] = React.useState(""); //initialisation du state vide
     const [firstName, setFirstName] = React.useState(""); //initialisation du state vide
     const [email, setEmail] = React.useState(""); //initialisation du state vide
     const [password, setPassword] = React.useState(""); //initialisation du state vide
   
+    //CREATION DU COMPTE UTILISATEUR
     const handleSubmit = (event) => {
         event.preventDefault();
 
+        // La requête n'est envoyée que si les champs respectent les regex suivantes
         if ((/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(email)) //regex : email au format example@test.test
         && (/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(password))) { //regex : le mot de passe doit contenir au moins 8 caractères, 1 lettre, 1 chiffre et 1 caractère spécial
 
@@ -63,7 +66,7 @@ function Signup() {
                         placeholder="Prénom" 
                         maxLength="40" 
                         value={firstName} 
-                        onChange={e => setFirstName(e.target.value)} 
+                        onChange={e => setFirstName(e.target.value)} //Si la valeur change on met à jour la variable firstName
                         required 
                 />
 
@@ -74,7 +77,7 @@ function Signup() {
                         placeholder="Nom" 
                         maxLength="40" 
                         value={lastName} 
-                        onChange={e => setLastName(e.target.value)} 
+                        onChange={e => setLastName(e.target.value)} //Si la valeur change on met à jour la variable lastName
                         required
                 />
 
@@ -86,7 +89,7 @@ function Signup() {
                         maxLength="40"
                         autoComplete="username" 
                         value={email} 
-                        onChange={e => setEmail(e.target.value)} 
+                        onChange={e => setEmail(e.target.value)} //Si la valeur change on met à jour la variable email
                         required 
                 />
 
@@ -98,7 +101,7 @@ function Signup() {
                         autoComplete="current-password"
                         placeholder="Choisissez un mot de passe" 
                         value={password} 
-                        onChange={e => setPassword(e.target.value)} 
+                        onChange={e => setPassword(e.target.value)} //Si la valeur change on met à jour la variable password
                         required
                 />
 

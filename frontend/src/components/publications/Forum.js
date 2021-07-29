@@ -10,13 +10,13 @@ function Forum() {
   
     //DECALARATION DES VARIABLES ET INITIALISATION DU STATE
     const [isLoading, setIsLoading] = useState(true);  
-    const [forum, setForum] = useState([]); //initialisation du state vide   
-    const [title, setTitle] = useState(""); //initialisation du state vide
+    const [forum, setForum] = useState([]);     //initialisation du state vide   
+    const [title, setTitle] = useState("");     //initialisation du state vide
     const [content, setContent] = useState(""); //initialisation du state vide
-    var jwt = require('jsonwebtoken');
-    let token = localStorage.getItem('user')
-    let userInfo = jwt.decode(token)
-    const [user, setUser] = useState(userInfo)
+    var jwt = require('jsonwebtoken');          //On importe jsonwebtoken
+    let token = localStorage.getItem('user')    //On récupère le token dans le local storage
+    let userInfo = jwt.decode(token)            //On décode le token avec jsonwebtoken
+    const [user, setUser] = useState(userInfo)  //On iitialise le state avec le token décodé (contentenant email, id et isAdmin)
 
     // RECUPERATION DES PUBLICATIONS STOCKEES DANS LA BDD
     useEffect(() => {
@@ -118,7 +118,7 @@ function Forum() {
                           minLength="2"
                           maxLength="50" 
                           value={title} 
-                          onChange={e => setTitle(e.target.value)} 
+                          onChange={e => setTitle(e.target.value)} //Si la valeur change on met à jour la variable title
                           required 
                   />
 
@@ -132,7 +132,7 @@ function Forum() {
                           rows={10}
                           cols={5}
                           value={content} 
-                          onChange={e => setContent(e.target.value)} 
+                          onChange={e => setContent(e.target.value)} //Si la valeur change on met à jour la variable content
                           required
                   />
 
@@ -151,7 +151,7 @@ function Forum() {
 
                {forum.length? ( // Si array des publications non vide
                   <div >
-                    {forum.map((item,i) => 
+                    {forum.map((item,i) => // On récupère les items du array généré par la requête get (variable forum)
                    
                     <div key={i} className = "forum__displayposts__content">
                         <Link to={"/forum/publication?id=" + item.id}  className = "forum__displayposts__content__link">

@@ -15,6 +15,7 @@ const userRoutes = require('./routes/user');   // Importation routeur users
 const publicationRoutes = require('./routes/publication');   // Importation routeur posts
 const commentRoutes = require('./routes/comment');   // Importation routeur posts
 
+// Associations des tables de la base de données
 const User = require('./models/user');
 const Publication = require('./models/publication');
 const Comment = require('./models/comment');
@@ -22,7 +23,6 @@ Publication.belongsTo(User, { Constraints: true, onDelete: 'CASCADE'}); // Si on
 User.hasMany(Publication);
 Comment.belongsTo(User, { Constraints: true, onDelete: 'CASCADE'});
 Comment.belongsTo(Publication, { Constraints: true, onDelete: 'CASCADE'}); // Si on supprime un message, on supprime ses réponses //
-
 
 const app = express();      // application Express
 app.use(bodyParser.json()); // Enregistrement body parser
@@ -36,11 +36,11 @@ app.use((req, res, next) => {  // Ajout headers pour résoudre les erreurs CORS
     next();
   });
 
-  sequelize
-  .sync()  
-  // .sync (false)run it just in the first time after changing the database, this command will re-draw the database
-  .then(() => app.listen(8080))
-  .catch(err => console.log(err));
+sequelize //On synchronise l'API avec la base de données
+.sync()  
+// .sync (false)run it just in the first time after changing the database, this command will re-draw the database
+.then(() => app.listen(8080))
+.catch(err => console.log(err));
 
 app.use('/api/auth', userRoutes)      // Enregistrement routeur users
 app.use('/api/publication', publicationRoutes)    // Enregistrement routeur publications

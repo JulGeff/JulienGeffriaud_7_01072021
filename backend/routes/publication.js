@@ -12,7 +12,6 @@ router.get('/selected', auth, publicationCtrl.getOnePublication);             //
 router.get('/user', auth, publicationCtrl.getUserPublications);             // Récupération de toutes les publications d'un user donné
 router.put('/', auth, publicationCtrl.editPublication);            // Modification d'une publication
 
-
 module.exports = router; // export pour pouvoir utiliser dans app.js
 
 

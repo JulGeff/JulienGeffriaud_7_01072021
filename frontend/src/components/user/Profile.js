@@ -11,10 +11,10 @@ function Profile()  {
       const [isLoading, setIsLoading] = useState(true); 
       const [profileInfo, setProfileInfo] = useState([]);
       let history = useHistory(); 
-      var jwt = require('jsonwebtoken');
-      let token = localStorage.getItem('user')
-      let userInfo = jwt.decode(token)
-      const [user, setUser] = useState(userInfo)
+      var jwt = require('jsonwebtoken');          //On importe jsonwebtoken
+      let token = localStorage.getItem('user')    //On récupère le token dans le local storage
+      let userInfo = jwt.decode(token)            //On décode le token avec jsonwebtoken
+      const [user, setUser] = useState(userInfo)  //On iitialise le state avec le token décodé (contentenant email, id et isAdmin)
       
       //RECUPERATION DES DONNEES DU PROFIL DEPUIS LA BDD
       useEffect(() => {
@@ -44,7 +44,7 @@ function Profile()  {
         event.preventDefault();
         Api.delete('/auth/user', {          
           headers: {
-            'Authorization': `Bearer ${token}` //On sécurise la requêyte avec le token
+            'Authorization': `Bearer ${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
           },
           params: {id : id}
         }) 
@@ -80,6 +80,8 @@ function Profile()  {
               <li>Nom : {profileInfo.lastName}</li>
               <li>email : {profileInfo.email}</li>
               <li>Profil créé le {profileInfo.createdAt.substring(9,10).padStart(2, '0')}/{profileInfo.createdAt.substring(6,7).padStart(2, '0')}/{profileInfo.createdAt.substring(1,4).padStart(2, '0')}</li>
+              
+              {/*Si le user est admin on l'indique sur son profil */}
               {user.isAdmin
                 ? ( <li>Administrateur·rice</li>) 
                 : (' ')} 
@@ -92,7 +94,7 @@ function Profile()  {
             </Link>
 
           
-
+            {/* si user connecté est admin, on n'affiche pas le lien de suppression du profil*/}
             {!user.isAdmin
                 ? ( <p className = "profile__buttons__delete" onClick = {e => {if (window.confirm('Etes-vous vraiment sûr·e de vouloir supprimer votre profil ?')) handleDelete(e, profileInfo.id)}}>Supprimer mon profil</p>) 
                 : (' ')} 

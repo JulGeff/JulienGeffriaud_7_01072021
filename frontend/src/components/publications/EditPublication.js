@@ -15,10 +15,10 @@ function EditPublication() {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
-    var jwt = require('jsonwebtoken');
-    let token = localStorage.getItem('user')
-    let userInfo = jwt.decode(token)
-    const [user, setUser] = useState(userInfo)
+    var jwt = require('jsonwebtoken');          //On importe jsonwebtoken
+    let token = localStorage.getItem('user')    //On récupère le token dans le local storage
+    let userInfo = jwt.decode(token)            //On décode le token avec jsonwebtoken
+    const [user, setUser] = useState(userInfo)  //On iitialise le state avec le token décodé (contentenant email, id et isAdmin)
 
     // RECUPERATION DE LA PUBLICATION SELECTIONNEE DEPUIS LA BDD
     useEffect(() => {
@@ -51,10 +51,10 @@ function EditPublication() {
         }
 
         // VALIDATION DES MODIFICATIONS
-        const handleSubmit = (event) => { //Quand on clique sur "Supprimer"
+        const handleSubmit = (event) => { //Quand on clique sur "Modifier"
           event.preventDefault();
         
-          let publicationData = { 
+          let publicationData = { //On définit l'objet à envoyer dans la requête axios
             title : title,
             content: content,
             publicationId: publicationId,
@@ -95,7 +95,7 @@ function EditPublication() {
                           minLength="2"
                           maxLength="50" 
                           value={title} 
-                          onChange={e => setTitle(e.target.value)} 
+                          onChange={e => setTitle(e.target.value)} //Si la valeur change on met à jour la variable title
                           required 
                   />
 
@@ -108,7 +108,7 @@ function EditPublication() {
                           rows={10}
                           cols={5}
                           value={content} 
-                          onChange={e => setContent(e.target.value)} 
+                          onChange={e => setContent(e.target.value)} //Si la valeur change on met à jour la variable content
                           required
                   />
 

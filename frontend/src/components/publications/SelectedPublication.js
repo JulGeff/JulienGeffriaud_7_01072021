@@ -17,10 +17,10 @@ function SelectedPublication() {
     const [commentList, setCommentlist] = useState([]); //initialisation du state vide
     
     let history = useHistory();
-    var jwt = require('jsonwebtoken');
-    let token = localStorage.getItem('user')
-    let userInfo = jwt.decode(token)
-    const [user, setUser] = useState(userInfo)
+    var jwt = require('jsonwebtoken');          //On importe jsonwebtoken
+    let token = localStorage.getItem('user')    //On récupère le token dans le local storage
+    let userInfo = jwt.decode(token)            //On décode le token avec jsonwebtoken
+    const [user, setUser] = useState(userInfo)  //On iitialise le state avec le token décodé (contentenant email, id et isAdmin)
 
     // RECUPERATION DE LA PUBLICATION SELECTIONNEE DEPUIS LA BDD
     useEffect(() => {
@@ -140,7 +140,7 @@ function SelectedPublication() {
       e.preventDefault();
       Api.delete('comment', {                  
         headers: {
-          'Authorization': `Bearer ${token}` //On sécurise la requête avec le token
+          'Authorization': `Bearer ${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
         },
         params: { // On envoie l'id du comment dans les paramètres de la requête
           commentId : id,
