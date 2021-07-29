@@ -94,7 +94,7 @@ function Login() {
         </form>
 
         <p>C'est votre première visite ?</p>
-        <p><Link to="/signup"><strong>Créez un compte</strong></Link></p>
+        <p><Link className="login__form__redirect" to="/signup"><strong>Créez un compte</strong></Link></p>
     </div>
     );
   }
