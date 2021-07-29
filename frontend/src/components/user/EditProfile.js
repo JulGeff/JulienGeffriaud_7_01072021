@@ -11,12 +11,12 @@ function EditProfile()  {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   let history = useHistory(); 
-  let token = localStorage.getItem('token')
+  let token = localStorage.getItem('user')
  
 
   //RECUPERATION DES DONNEES DU PROFIL DEPUIS LA BDD
   useEffect(() => {
-  let token = localStorage.getItem('token')
+    let token = localStorage.getItem('user')
   Api.get('/auth/user', {          
         headers: {
             'Authorization': `${token}`
