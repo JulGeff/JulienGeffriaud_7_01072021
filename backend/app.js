@@ -37,8 +37,8 @@ app.use((req, res, next) => {  // Ajout headers pour résoudre les erreurs CORS
   });
 
   sequelize
-  .sync(false) // run it just in the first time after changing the database, this command will re-draw the database (false = activated)
-  // .sync()
+  .sync()  
+  // .sync (false)run it just in the first time after changing the database, this command will re-draw the database
   .then(() => app.listen(8080))
   .catch(err => console.log(err));
 

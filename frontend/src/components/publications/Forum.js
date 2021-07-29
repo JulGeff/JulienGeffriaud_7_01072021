@@ -87,7 +87,7 @@ function Forum() {
               Api.post(
                   '/publication', publicationData,
                   {headers: {
-                    'Authorization': `${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
+                    'Authorization': `Bearer ${token}` // On sécurise la requête en incluant le token dans les headers (cf middleware "auth")
                   }}
              ) //requête POST via Axios
     
