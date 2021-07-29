@@ -9,10 +9,24 @@ const jwt = require('jsonwebtoken');     // importation package pour création e
 require('dotenv').config()               // importation dotenv pour sécuriser passwords
 const TokenKey = process.env.TOKENKEY;   // Récupération de la clé de cryptage des tokens via dotenv
 
+//REGEX
+const regexEmail = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/ ///regex : le mot de passe doit contenir au moins 8 caractères, 1 lettre, 1 chiffre et 1 caractère spécial
+
 
 //CREATION D'UN COMPTE UTILISATEUR
 exports.signup = (req, res, next) => {
     
+  if (req.body.email == null || req.body.password == null || req.body.lastName == null || req.body.firstName == null) {
+    return res.status(400).json({ 'error': 'Ces champs ne peuvent être vides' });
+  } 
+  if (!regexEmail.test(req.body.email)) {
+      return res.status(400).json({ 'error': 'Email au mauvais format' });
+  }
+  if (!regexPassword.test(req.body.password)) {
+      return res.status(400).json({ 'error': 'Le mot de passe doit contenir au moins 8 caractères, 1 lettre, 1 chiffre et 1 caractère spécial' });
+  }   
+
   bcrypt.hash(req.body.password, 10)    // On crypte le mot de passe (algorithme exécuté 10 fois) / asynchrone
   
         .then(hash => {   
@@ -113,6 +127,9 @@ exports.deleteUser = (req, res, next) => {
 
 //MODIFICATION DU PROFIL UTILISATEUR
 exports.editUser = (req, res, next) => {
+  if (req.body.lastName == null || req.body.firstName == null) {
+    return res.status(400).json({ 'error': 'Ces champs ne peuvent être vides' });
+  }
 
     User.update(
     {firstName : req.body.firstName,

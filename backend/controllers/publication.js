@@ -10,6 +10,9 @@ const TokenKey = process.env.TOKENKEY;// Récupération de la clé de cryptage d
 
 //CREATION D'UNE PUBLICATION
 exports.createPublication = (req, res, next) => { 
+    if (req.body.title == null || req.body.content == null) {
+        return res.status(400).json({ 'error': 'Ces champs ne peuvent être vides' });
+      }
     const newPublication = //On crée la publication dans la base de données avec les champs envoyés dans la requête post axios
         Publication.create({
             userId : req.body.id,
@@ -85,6 +88,9 @@ exports.getUserPublications = (req, res, next) => {
 
 // MODIFICATION D'UNE PUBLICATION
 exports.editPublication = (req, res, next) => {
+    if (req.body.title == null || req.body.content == null) {
+        return res.status(400).json({ 'error': 'Ces champs ne peuvent être vides' });
+      }
     Publication.update(
         {title : req.body.title,
         content :  req.body.content

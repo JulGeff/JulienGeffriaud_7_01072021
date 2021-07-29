@@ -11,6 +11,9 @@ const TokenKey = process.env.TOKENKEY;// Récupération de la clé de cryptage d
 
 //CREATION D'UN COMMENTAIRE
 exports.createComment = (req, res, next) => { 
+    if (req.body.comment == null) {
+        return res.status(400).json({ 'error': 'Ce champ ne peut être vide' });
+      }
 
     const newComment = 
         Comment.create({
@@ -58,26 +61,3 @@ exports.getAllComments = (req, res, next) => {
         .then(() => res.status(200).json({ message: 'Publication supprimée !'})) // Requête traitée avec succès
         .catch(error => res.status(500).json({ error })); // Internal Server Error	
   };
-
-
-/*
-// MODIFICATION D'UN COMMENTAIRE
-exports.modifyPublication = (req, res, next) => {
-    // éléments de la requète
-    const title = req.body.title;
-    const content =  req.body.content;
-  
-    // vérification que tous les champs sont remplis
-    if(title === null || title === '' || content === null || content === '') {
-        return res.status(400).json({'error': "Les champs 'Titre' et 'texte' sont obligatoires"});
-    }
-    
-  const publicationObject = req.body;
-    
-  Publication.update({ ...publicationObject, id:  req.params.id}, { where: {id: req.params.id} })
-  .then(() => res.status(200).json({ message: 'Publication modifiée !'}))
-  .catch(error => res.status(400).json({ error }));
-};
-
-
-*/
