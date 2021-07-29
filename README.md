@@ -5,6 +5,8 @@ Pour utiliser correctement l'API, veuillez suivre ces instructions :
 Clonez ce repository.
 
 ## Configuration backend
+
+- **MySQL**  
 Dans MySQL créez une base de données du nom de votre choix.  
 Les tables seront créées automatiquement au démarrage du serveur backend.
 
@@ -12,18 +14,12 @@ Les tables seront créées automatiquement au démarrage du serveur backend.
 A la racine du dossier backend créez un fichier nommé '.env', copiez-y le contenu ci-dessous,   
 et renseignez les champs comme indiqué, en laissant bien les apostrophes :  
 
->DB_NAME='nom de la base de données'  
+>DB_NAME='nom de la base de données créée'  
 >DB_USER='user MySQL'  
 >DB_PASSWORD='mot de passe MySQL'  
 >DB_HOST= 'localhost' -> laisser tel quel  
 >DB_DIALECT='mysql' -> laisser tel quel  
 >TOKENKEY='clé de codage pour les tokens'  
-
-- **Fichier config.json**  
-Dans le fichier config/config.json, renseignez les champs suivants :  
->"username": "user MySQL",  
->"password": "mot de passe MySQL",  
->"database": "nom de la base de données",  
 
 ## Démarrage backend  
 
