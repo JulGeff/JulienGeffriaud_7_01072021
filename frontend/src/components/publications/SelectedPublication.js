@@ -71,6 +71,7 @@ function SelectedPublication() {
               }
         , [])
 
+        
         //SUPPRESSION D'UNE PUBLICATION
         const handleDelete = (e, id) => { //Quand on clique sur "Supprimer ma publication"
           e.preventDefault();
