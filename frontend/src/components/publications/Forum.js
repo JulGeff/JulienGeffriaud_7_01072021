@@ -167,7 +167,7 @@ function Forum() {
                         <Link to={"/forum/publication?id=" + item.id}  className = "forum__displayposts__content__link">
                             <div>
                                 <h2>{item.title}</h2>
-                                <p className='forum__displayposts__content__link__subtitle'> Publié par <strong>{item.user.firstName} {item.user.lastName}</strong> le {item.updatedAt.substring(9,10).padStart(2, '0')}/{item.updatedAt.substring(6,7).padStart(2, '0')}/{item.updatedAt.substring(0,4)} à {item.updatedAt.substring(11,16)}</p>
+                                <p className='forum__displayposts__content__link__subtitle'> Publié par <strong>{item.user.firstName} {item.user.lastName}</strong> le {item.updatedAt.substring(8,10).padStart(2, '0')}/{item.updatedAt.substring(5,7).padStart(2, '0')}/{item.updatedAt.substring(0,4)} à {item.updatedAt.substring(11,16)}</p>
                                 <p className='forum__displayposts__content__link__text'>{item.content}</p>
                             </div>                     
                         </Link>

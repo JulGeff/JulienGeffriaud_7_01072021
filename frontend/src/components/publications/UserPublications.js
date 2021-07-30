@@ -94,7 +94,7 @@ function UserPublications() {
                <Link to={"./publication?id=" + item.id}  className='userpublications__display__link'>
                     <div className = "userpublications__display__link__content" >
                         <h2>{item.title}</h2>
-                        <p className='userpublications__display__link__content__subtitle'>Publié le {item.updatedAt.substring(9,10).padStart(2, '0')}/{item.updatedAt.substring(6,7).padStart(2, '0')}/{item.updatedAt.substring(0,4)} à {item.updatedAt.substring(11,16)}   </p>
+                        <p className='userpublications__display__link__content__subtitle'>Publié le {item.updatedAt.substring(8,10).padStart(2, '0')}/{item.updatedAt.substring(5,7).padStart(2, '0')}/{item.updatedAt.substring(0,4)} à {item.updatedAt.substring(11,16)}   </p>
                         <p>{item.content}</p>
 
                        

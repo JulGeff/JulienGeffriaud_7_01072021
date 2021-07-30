@@ -8,7 +8,15 @@ sequelize = new Sequelize(
 
       host: process.env.DB_HOST,
     dialect: process.env.DB_DIALECT,
-    timezone: '+02:00', 
+    dialectOptions: {
+      typeCast: function (field, next) { // for reading from database
+        if (field.type === 'DATETIME') {
+          return field.string()
+        }
+          return next()
+        },
+  },
+    timezone: '+02:00', // for writing to databas
   
  
   });

@@ -78,7 +78,7 @@ function Profile()  {
               <li>Prénom : {profileInfo.firstName}</li>
               <li>Nom : {profileInfo.lastName}</li>
               <li>email : {profileInfo.email}</li>
-              <li>Profil créé le {profileInfo.createdAt.substring(9,10).padStart(2, '0')}/{profileInfo.createdAt.substring(6,7).padStart(2, '0')}/{profileInfo.createdAt.substring(1,4).padStart(2, '0')}</li>
+              <li>Profil créé le {profileInfo.createdAt.substring(8,10).padStart(2, '0')}/{profileInfo.createdAt.substring(5,7).padStart(2, '0')}/{profileInfo.createdAt.substring(1,4).padStart(2, '0')}</li>
               
               {/*Si le user est admin on l'indique sur son profil */}
               {user.isAdmin

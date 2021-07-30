@@ -87,7 +87,7 @@ function SelectedPublication() {
      
           .then(function (response) {
           
-            alert ('Votre publication a bien été supprimée')
+            alert ('La publication a bien été supprimée')
             history.push("/forum")
           })
           .catch(function (response) { // Si erreur
@@ -188,7 +188,7 @@ function SelectedPublication() {
       <div className='publication__container'>     
         <h1 >{ selectedPublication.title }</h1>
      
-      <p className='publication__subtitle'>Publié par <strong>{selectedPublication.user.firstName} {selectedPublication.user.lastName}</strong> le {selectedPublication.updatedAt.substring(9,10).padStart(2, '0')}/{selectedPublication.updatedAt.substring(6,7).padStart(2, '0')}/{selectedPublication.updatedAt.substring(0,4)} à {selectedPublication.updatedAt.substring(11,16)}</p>
+      <p className='publication__subtitle'>Publié par <strong>{selectedPublication.user.firstName} {selectedPublication.user.lastName}</strong> le {selectedPublication.updatedAt.substring(8,10).padStart(2, '0')}/{selectedPublication.updatedAt.substring(5,7).padStart(2, '0')}/{selectedPublication.updatedAt.substring(0,4)} à {selectedPublication.updatedAt.substring(11,16)}</p>
         <Link to={"./userpublications?id=" + selectedPublication.userId} className='publication__link'>
           <p className='publication__link__user'> Voir toutes les publications de {selectedPublication.user.firstName} </p>
         </Link>
@@ -240,7 +240,7 @@ function SelectedPublication() {
               <h3>{item.comment}</h3>
             </div>  
             <div className="publication__displaycomments__list__info" >
-              <p>publié  le {item.updatedAt.substring(9,10).padStart(2, '0')}/{item.updatedAt.substring(6,7).padStart(2, '0')}/{item.updatedAt.substring(0,4)} à {item.updatedAt.substring(11,16)}</p>
+              <p>publié  le {item.updatedAt.slice(8,10)}/{item.updatedAt.substring(5,7)}/{item.updatedAt.substring(0,4)} à {item.updatedAt.substring(11,16)}</p>
               
               {/* si user connecté est l'auteur du commentaire ou admin, on affiche un lien pour le supprimer*/} 
                {item.userId===user.id || user.isAdmin
