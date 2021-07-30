@@ -41,13 +41,16 @@
                     font-style: italic;
                     text-align: center;
                 }
-
-                &__delete,
-                &__edit {
-                    cursor: pointer;
-                    float: right;
-                    width: 1rem;
-                    padding-right: 1rem;
+                &__buttons {
+                    display: flex;
+                    justify-content: flex-end;
+                    &__delete,
+                    &__edit {
+                        cursor: pointer;
+                        float: right;
+                        width: 1rem;
+                        padding-right: 1rem;
+                    }
                 }
             }
         }

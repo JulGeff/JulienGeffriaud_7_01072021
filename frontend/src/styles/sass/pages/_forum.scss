@@ -66,14 +66,18 @@
                 &__subtitle {
                     font-style: italic;
                 }
+                &__buttons {
+                    display: flex;
+                    justify-content: flex-end;
 
-                &__delete, &__edit {
-
-                    svg {
-                        width : .8rem;
-                        float: right;
-                        cursor: pointer;
-                        padding-right: 1rem;
+                    &__delete,
+                    &__edit {
+                        svg {
+                            width: 0.8rem;
+                            float: right;
+                            cursor: pointer;
+                            padding-right: 1rem;
+                        }
                     }
                 }
             }
