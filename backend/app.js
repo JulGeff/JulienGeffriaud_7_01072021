@@ -14,6 +14,7 @@ const commentRoutes = require('./routes/comment');   // Importation routeur post
 const User = require('./models/user');
 const Publication = require('./models/publication');
 const Comment = require('./models/comment');
+const { options } = require('./routes/user');
 Publication.belongsTo(User, { Constraints: true, onDelete: 'CASCADE'}); // Si on supprime un user, on supprime ses message //
 User.hasMany(Publication);
 Comment.belongsTo(User, { Constraints: true, onDelete: 'CASCADE'});
