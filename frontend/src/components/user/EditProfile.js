@@ -31,7 +31,7 @@ function EditProfile()  {
     .then(function (response) {
       setFirstName(response.data.firstName);
       setLastName(response.data.lastName);
-      setIsLoading(false);
+      setIsLoading(false); //On passe la valeur de isLoading à false
     })
     .catch(function (response) { // Si erreur
     console.log(response);

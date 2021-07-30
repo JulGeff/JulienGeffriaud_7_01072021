@@ -22,7 +22,7 @@ function App() {
 
     var jwt = require('jsonwebtoken');
 
-
+    //Si token présent dans local storage, loggedIn = true
     function isLoggedIn() {
         let loggedIn = null;
         if (localStorage.getItem('user')) {
@@ -36,6 +36,9 @@ function App() {
           <div> 
             <Router>
                 <Banner />
+
+
+                {/*Si loggedIn = false, tous les liens redirigent vers le composant login*/}
                 <Switch>                  
                     <Route exact path="/signup" render={function () {
                         let loggedIn = isLoggedIn();

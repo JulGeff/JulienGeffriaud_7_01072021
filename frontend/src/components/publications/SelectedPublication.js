@@ -138,7 +138,7 @@ function SelectedPublication() {
               .then(function (response)  {
                   const commentList = response.data;
                   setCommentlist(commentList); // On met le state à jour avec le contenu de la réponse du serveur
-                  setIsLoading2(false);
+                  setIsLoading2(false);//On passe la valeur de isLoading à false
                 })
 
               })
@@ -173,7 +173,6 @@ function SelectedPublication() {
           .then(function (response)  {
               const commentList = response.data;
               setCommentlist(commentList); // On met le state à jour avec le contenu de la réponse du serveur
-              setIsLoading2(false);
             })
 
           })

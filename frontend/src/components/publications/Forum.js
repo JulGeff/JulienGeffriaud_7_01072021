@@ -28,7 +28,7 @@ function Forum() {
         }}) //requête GET via Axios
         .then(function (response)  {
             setForum(response.data); // On met le state à jour avec le contenu de la réponse du serveur
-            setIsLoading(false);
+            setIsLoading(false);//On passe la valeur de isLoading à false
   
           })
           .catch(function (response) { // Si erreur

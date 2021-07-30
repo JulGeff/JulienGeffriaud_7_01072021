@@ -15,37 +15,35 @@ function Login() {
         let history = useHistory();
         const [email, setEmail] = useState(""); //initialisation du state vide
         const [password, setPassword] = useState(""); //initialisation du state vide     
-        const handleSubmit = (event) => {
-        event.preventDefault();
-
-
-        //CONNEXION AU COMPTE UTILISATEUR
         
-        // La requête n'est envoyée que si l'email champs respecte la regex suivante
-        if (/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(email)) { 
-
-            let loginFormData = { //On définit l'objet à envoyer dans la requête axios
-                email : email, 
-                password: password
-            };
-             
-
-         Api.post('/auth/login', loginFormData) //requête POST via Axios
-
-                .then(function (response) {  //Si Ok
-                        localStorage.setItem('user', response.data.token); //On stocke le token dans le local storage
-                        history.push("/forum")   // On redirige le user connecté vers le forum
-                 })
+        
+        //CONNEXION AU COMPTE UTILISATEUR
+        const handleSubmit = (event) => {
+                event.preventDefault();
                 
-                .catch(function (response) { // Si erreur
-                console.log(response);
-                alert("Password incorrect ou email inexistant dans la base de données") // On affiche une alerte
-                });
-                  
-        } else { // si email ne respecte pas les regex définies
-                alert("- Votre email n'est pas au bon format")
-        }}
+                // La requête n'est envoyée que si l'email champs respecte la regex suivante
+                if (/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(email)) { 
 
+                let loginFormData = { //On définit l'objet à envoyer dans la requête axios
+                        email : email, 
+                        password: password
+                };
+                
+                Api.post('/auth/login', loginFormData) //requête POST via Axios
+
+                        .then(function (response) {  //Si Ok
+                                localStorage.setItem('user', response.data.token); //On stocke le token dans le local storage
+                                history.push("/forum")   // On redirige le user connecté vers le forum
+                        })
+                        
+                        .catch(function (response) { // Si erreur
+                        console.log(response);
+                        alert("Password incorrect ou email inexistant dans la base de données") // On affiche une alerte
+                        });
+                        
+                } else { // si email ne respecte pas les regex définies
+                        alert("- Votre email n'est pas au bon format")
+        }}
 
 
     return (
@@ -54,7 +52,7 @@ function Login() {
             
         <img src={loginpic} alt='Groupomania' className='login__pic' />
         <h1>Connectez-vous</h1>
-        <form className="login__form" onSubmit={handleSubmit}>
+        <form className="login__form" onSubmit={handleSubmit}> {/*au clic sur "Je me connecte" on appelle la fonction handleSubmit */}
                 
                 <input  
                         className="login__form__input" 

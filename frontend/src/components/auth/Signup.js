@@ -30,13 +30,10 @@ function Signup() {
                 password: password
             };
 
-            console.log(signupFormData);
-
             Api.post('/auth/signup', signupFormData) //requête POST via Axios
 
                 .then(function (response) {  //Si Ok
-                console.log(response);
-                history.push("/")
+                history.push("/") //On redirige vers le login
                 alert("Votre compte à bien été créé !\nConnectez-vous pour accéder aux dernières publications de vos collègues.")
               
                 
@@ -57,7 +54,7 @@ function Signup() {
         <div className='signup'> 
         <img src={loginpic} alt='Groupomania' className='signup__pic' />
         <h1>Créez un compte</h1>
-        <form className="signup__form" onSubmit={handleSubmit}>
+        <form className="signup__form" onSubmit={handleSubmit}> {/*au clic sur "Je crée mon compte" on appelle la fonction handleSubmit*/}
        
                 <input  id='firstName' 
                         className="signup__form__input" 

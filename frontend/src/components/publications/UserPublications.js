@@ -34,7 +34,7 @@ function UserPublications() {
             const userPublications = response.data;
             setUserPublications(userPublications); // On met le state à jour avec le contenu de la réponse du serveur
             setFirstName(userPublications[0].user.firstName) // On met le state à jour avec le contenu de la réponse du serveur
-            setIsLoading(false);
+            setIsLoading(false);//On passe la valeur de isLoading à false
             
           })
           .catch(function (response) { // Si erreur
